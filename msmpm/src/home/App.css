@@ -1,0 +1,19 @@
+.navbar {
+  font-family: monospace;
+  justify-content: left;
+  background-color: darkolivegreen;
+}
+
+.propertylist_heading {
+  width: max-content;
+  font-family: monospace;
+}
+
+.propertylist {
+  width: 25%;
+  float: left;
+  padding-top: 10px;
+  font-size: small;
+  font-family: monospace;
+}
+
