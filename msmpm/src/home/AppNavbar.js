@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import {
   Collapse,
   Navbar,
@@ -12,31 +11,29 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  ListGroup,
-  ListGroupItem
 } from 'reactstrap';
 
-function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+function AppNavbar() {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(!isOpen);
 
-  return (
-    <div>
-      <div className = 'navbar'>
+    return (
+        <div className = 'navbar'>
+
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">MSMPM</NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+                <NavLink href="/properties/">Properties</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                <NavLink href="https://google.com">Search</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Options
+                  My Account
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
@@ -53,21 +50,8 @@ function App() {
               </UncontrolledDropdown>
             </Nav>
           </Collapse>
-        </Navbar>  
-      </div>
-      <div className = 'propertylist'>
-        <ListGroup>
-          <ListGroupItem>Cras justo odio</ListGroupItem>
-          <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-          <ListGroupItem>Morbi leo risus</ListGroupItem>
-          <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-          <ListGroupItem>Vestibulum at eros</ListGroupItem>
-        </ListGroup>
-      </div>
-      <div>
-      </div>
-    </div>
-  );
-}
+        </Navbar>
 
-export default App;
+      </div>
+    );
+}
