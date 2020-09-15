@@ -10,6 +10,7 @@ function App() {
       <div>
         <AppNavbar/>
       </div>
+
       <div>
         <Leaderboard/>
         <EditHistory/>
@@ -17,5 +18,4 @@ function App() {
     </div>
   );
 }
-
-export default App;
+export default App
