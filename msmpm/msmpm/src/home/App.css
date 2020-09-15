@@ -1,19 +1,29 @@
 .navbar {
-  font-family: monospace;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   justify-content: left;
-  background-color: darkolivegreen;
+  background-color: olivedrab;
+  box-shadow: 0em .25em darkolivegreen;
 }
 
 .propertylist_heading {
+  padding-top: 1%;
+  padding-left: 1%;
+  background-color: darkolivegreen;
   width: max-content;
-  font-family: monospace;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.propertylist {
-  width: 25%;
+.leaderboard {
+  width: 40%;
+  padding: 1%;
   float: left;
-  padding-top: 10px;
   font-size: small;
-  font-family: monospace;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.edithistory {
+  width: 60%;
+  padding: 1%;
+  float: right;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

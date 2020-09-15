@@ -13,7 +13,7 @@ import {
   DropdownItem,
 } from 'reactstrap';
 
-function AppNavbar() {
+export default function AppNavbar() {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
@@ -26,25 +26,21 @@ function AppNavbar() {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/properties/">Properties</NavLink>
+                <NavLink href="/properties/">properties</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://google.com">Search</NavLink>
+                <NavLink href="https://google.com">search</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  My Account
+                  account
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    Option 1
+                    view
                   </DropdownItem>
                   <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
+                    edit
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -54,4 +50,5 @@ function AppNavbar() {
 
       </div>
     );
+
 }
