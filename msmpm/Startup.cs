@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using MSMBackend.Models;
 
 namespace MSMBackend
 {
@@ -25,6 +27,9 @@ namespace MSMBackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PropertyContext>(opt =>
+               opt.UseInMemoryDatabase("Properties"));
+
             services.AddControllers();
         }
 
