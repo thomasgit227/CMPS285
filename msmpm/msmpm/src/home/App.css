@@ -5,11 +5,11 @@
   box-shadow: 0em .25em darkolivegreen;
 }
 
-.propertylist_heading {
+.leaderboard_heading {
   padding-top: 1%;
   padding-left: 1%;
-  background-color: darkolivegreen;
   width: max-content;
+  color: black;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
