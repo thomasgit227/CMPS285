@@ -12,12 +12,18 @@ function App() {
         <Switch>
 
           <Route path="/home">
-              <AppNavbar/>
-              <Leaderboard/>
-              <EditHistory/>
+            <AppNavbar/>
+            <Leaderboard/>
+            <EditHistory/>
           </Route>
 
-          <Route path="/properties/"></Route>
+          <Route path="/properties/">
+            <AppNavbar/>
+          </Route>
+
+          <Route path="/search/">
+            <AppNavbar/>
+          </Route>
 
           <Route>
             <Redirect to = "/home"></Redirect>

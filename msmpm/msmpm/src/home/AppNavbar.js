@@ -29,7 +29,7 @@ export default function AppNavbar() {
                 <NavLink href="/properties/">properties</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://google.com">search</NavLink>
+                <NavLink href="/search/">search</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
