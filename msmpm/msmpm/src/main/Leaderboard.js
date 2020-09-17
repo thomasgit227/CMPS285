@@ -5,7 +5,6 @@ import {
   } from 'reactstrap';
 import {
     Link,
-    BrowserRouter,
 } from 'react-router-dom';
 
 
