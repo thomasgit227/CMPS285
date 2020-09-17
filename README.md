@@ -7,13 +7,6 @@
 ## The Project ##
 A property management tool for Matilda Stream Management Inc.
 
-## The TODO ##
-
-- [ ] Learn Respective Technologies
-- [ ] Get The Repo Setup
-- [ ] Install Tech on Repo
-- [ ] . . .
-
 ## The Team ##
 
 Position | Team Member
