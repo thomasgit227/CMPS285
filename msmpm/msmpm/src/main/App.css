@@ -27,3 +27,11 @@
   float: right;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.propertyimage {
+  float: left;
+  display: flex;
+  padding: 2%;
+  width: 20%;
+  height: 20%;
+}
