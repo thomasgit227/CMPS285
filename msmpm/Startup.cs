@@ -28,7 +28,7 @@ namespace MSMBackend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PropertyContext>(opt =>
-               opt.UseInMemoryDatabase("Properties"));
+               opt.UseSqlServer(Configuration.GetConnectionString("Context")));
 
             services.AddControllers();
         }

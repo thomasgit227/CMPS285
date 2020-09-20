@@ -24,14 +24,14 @@ namespace MSMBackend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Property>>> GetProperty()
         {
-            return await _context.Property.ToListAsync();
+            return await _context.Properties.ToListAsync();
         }
 
         // GET: api/Properties/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Property>> GetProperty(long id)
         {
-            var @property = await _context.Property.FindAsync(id);
+            var @property = await _context.Properties.FindAsync(id);
 
             if (@property == null)
             {
@@ -79,7 +79,7 @@ namespace MSMBackend.Controllers
         [HttpPost]
         public async Task<ActionResult<Property>> PostProperty(Property @property)
         {
-            _context.Property.Add(@property);
+            _context.Properties.Add(@property);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProperty", new { id = @property.Id }, @property);
@@ -89,13 +89,13 @@ namespace MSMBackend.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Property>> DeleteProperty(long id)
         {
-            var @property = await _context.Property.FindAsync(id);
+            var @property = await _context.Properties.FindAsync(id);
             if (@property == null)
             {
                 return NotFound();
             }
 
-            _context.Property.Remove(@property);
+            _context.Properties.Remove(@property);
             await _context.SaveChangesAsync();
 
             return @property;
@@ -103,7 +103,7 @@ namespace MSMBackend.Controllers
 
         private bool PropertyExists(long id)
         {
-            return _context.Property.Any(e => e.Id == id);
+            return _context.Properties.Any(e => e.Id == id);
         }
     }
 }
