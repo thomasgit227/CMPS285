@@ -5,7 +5,7 @@ namespace FireFerrets.Data
 {
     public class MockFireFerretsRepo : IFireFerretsRepo
     {
-        public IEnumerable<Command> GetAppCommands()
+        public IEnumerable<Command> GetAllCommands()
         {
             var commands = new List<Command>
             {

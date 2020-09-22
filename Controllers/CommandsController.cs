@@ -10,9 +10,9 @@ namespace Commander.Controllers
     [ApiController]
     public class CommandsController : ControllerBase
     {
-        private readonly IFireFerretsRepo _repository;
+        private readonly IFireFerretsRepo _repository;      //Instantiation? 
 
-        public CommandsController(IFireFerretsRepo repository)
+        public CommandsController(IFireFerretsRepo repository)  //dependency injection of mock repo
         {
             _repository = repository;
         }
@@ -26,7 +26,7 @@ namespace Commander.Controllers
                                                                     //commands in fireferrets repo in a JSON format to postman
 
         {
-            var commandItems = _repository.GetAppCommands();    
+            var commandItems = _repository.GetAllCommands();    
 
             return Ok(commandItems);
         }
