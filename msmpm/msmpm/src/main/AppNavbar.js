@@ -10,7 +10,8 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
+  DropdownItem, 
+  Button
 } from 'reactstrap';
 
 export default function AppNavbar() {
@@ -29,18 +30,23 @@ export default function AppNavbar() {
                 <NavLink href="/properties/">properties</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://google.com">search</NavLink>
+                <NavLink href="/search/">search</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   account
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
+                  <DropdownItem href="/account/">
                     view
                   </DropdownItem>
-                  <DropdownItem>
+                  <DropdownItem href="/account/edit">
                     edit
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Button>
+                      sign out
+                    </Button>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
