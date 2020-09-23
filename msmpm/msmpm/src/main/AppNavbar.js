@@ -10,7 +10,8 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
+  DropdownItem, 
+  Button
 } from 'reactstrap';
 
 export default function AppNavbar() {
@@ -36,11 +37,16 @@ export default function AppNavbar() {
                   account
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
+                  <DropdownItem href="/account/">
                     view
                   </DropdownItem>
-                  <DropdownItem>
+                  <DropdownItem href="/account/edit">
                     edit
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Button>
+                      sign out
+                    </Button>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

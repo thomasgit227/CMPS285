@@ -19,37 +19,37 @@ export default function Leadership() {
                 <ListGroup className = 'leaderboard'>
 
                     <ListGroupItem>
-                        <Link to="/properties/1">
+                        <Link to="/properties/myproperty/1/">
                             property 1
                         </Link>
                     </ListGroupItem>
 
                     <ListGroupItem>
-                        <Link to="/properties/2">
+                        <Link to="/properties/myproperty/2/">
                             property 2
                         </Link>
                     </ListGroupItem>
 
                     <ListGroupItem>
-                        <Link to="/properties/3">
+                        <Link to="/properties/myproperty/3/">
                             property 3
                         </Link>
                     </ListGroupItem>
 
                     <ListGroupItem>
-                        <Link to="/properties/4">
+                        <Link to="/properties/myproperty/4/">
                             property 4
                         </Link>
                     </ListGroupItem>
 
                     <ListGroupItem>
-                        <Link to="/properties/5">
+                        <Link to="/properties/myproperty/5/">
                             property 5
                         </Link>
                     </ListGroupItem>
 
                     <ListGroupItem>
-                        <Link to="/properties/6">
+                        <Link to="/properties/myproperty/6/">
                             property 6
                         </Link>
                     </ListGroupItem>

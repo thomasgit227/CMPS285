@@ -16,9 +16,9 @@ function App() {
             
           <Route exact path="/properties/"> <Properties/> </Route>
 
-          <Route path="/properties/myproperty/"> <MyProperty/> </Route>
+          <Route exact path="/properties/myproperty/"> <MyProperty/> </Route>
 
-          <Route path="/search/"> <Template/> </Route>
+          <Route exact path="/search/"> <Template/> </Route>
 
           <Route> <Redirect to = "/home"></Redirect> </Route>
             
