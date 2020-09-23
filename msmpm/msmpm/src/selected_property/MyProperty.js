@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import AppNavbar from './AppNavbar';
+import '../App.css';
+import AppNavbar from '../main_components/AppNavbar';
 import PropertyImage from './PropertyImage';
 import MyPropertyForm from './MyPropertyForm';
 
