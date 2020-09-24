@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Commander.Data;
 using FireFerrets.Data;
 using Microsoft.AspNetCore.Builder;
@@ -33,6 +34,7 @@ namespace FireFerrets
 
             services.AddControllers();
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IFireFerretsRepo, SqlFireFerretsRepo>();
           //***Swapping Mock Implementation for
