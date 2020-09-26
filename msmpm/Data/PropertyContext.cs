@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MSMBackend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MSMBackend.Models
@@ -11,8 +8,10 @@ namespace MSMBackend.Models
         public PropertyContext(DbContextOptions<PropertyContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<Property> Properties { get; set; }
+
     }
 }

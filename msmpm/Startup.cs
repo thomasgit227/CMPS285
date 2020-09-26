@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using MSMBackend.Models;
+using MSMBackend.Data;
+using AutoMapper;
 
 namespace MSMBackend
 {
@@ -27,10 +29,17 @@ namespace MSMBackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PropertyContext>(opt =>
-               opt.UseSqlServer(Configuration.GetConnectionString("Context")));
+            services.AddDbContext<PropertyContext>(opt => opt.UseSqlServer
+                (Configuration.GetConnectionString("MSMConnection")));
 
             services.AddControllers();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+           // services.AddScoped<IPropertyRepo, TestRepo>();      //The power of dependency injection babayy
+
+            services.AddScoped<IPropertyRepo, SqlPropertyRepo>();  //Created new implementation using sql server
+                                                                   //Here is being injected
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
