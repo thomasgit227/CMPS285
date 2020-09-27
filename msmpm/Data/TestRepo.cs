@@ -24,6 +24,7 @@ namespace MSMBackend.Data
                             ,Flooring=4, Electrical=2
                             ,Plumbing=2, Sewer=1
                             ,HVAC=5},
+                          
                 };
             return properties;
         }

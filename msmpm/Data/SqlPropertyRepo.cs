@@ -29,7 +29,7 @@ namespace MSMBackend.Data
 
         public IEnumerable<Property> GetAllProperties()
         {
-            return _context.Properties.ToList();
+            return _context.Properties.ToList();    
         }
 
         public Property GetPropertyById(int id)
