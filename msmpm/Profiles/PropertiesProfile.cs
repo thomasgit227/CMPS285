@@ -13,6 +13,7 @@ namespace MSMBackend.Profiles
         public PropertiesProfile()
         {
             CreateMap<Property, PropertyReadDto>();
+            //need to create propertyCreateDto
         }
 
     }
