@@ -14,6 +14,9 @@ using Microsoft.EntityFrameworkCore;
 using MSMBackend.Models;
 using MSMBackend.Data;
 using AutoMapper;
+using System.Reflection;
+using System.IO;
+using Microsoft.OpenApi.Models;
 
 namespace MSMBackend
 {
@@ -34,6 +37,31 @@ namespace MSMBackend
 
             services.AddControllers();
 
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "ToDo API",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Shayne Boyer",
+                        Email = string.Empty,
+                        Url = new Uri("https://twitter.com/spboyer"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
+                });
+            });
+
+            services.AddSwaggerGen();
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
            // services.AddScoped<IPropertyRepo, TestRepo>();      //The power of dependency injection babayy
@@ -49,6 +77,20 @@ namespace MSMBackend
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
+
+            app.UsesSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+
+                c.SwaggerEndPoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 
