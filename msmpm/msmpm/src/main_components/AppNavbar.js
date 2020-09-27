@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Main_Components.css';
 import {
   Collapse,
   Navbar,

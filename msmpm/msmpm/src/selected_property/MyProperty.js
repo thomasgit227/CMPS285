@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import './Selected_Property.css';
 import AppNavbar from '../main_components/AppNavbar';
 import PropertyImage from './PropertyImage';
 import MyPropertyForm from './MyPropertyForm';

@@ -1,0 +1,13 @@
+.propertyimage {
+    float: left;
+    display: flex;
+    padding: 2%;
+    width: 20%;
+    height: 20%;
+  }
+  
+  .propertyform {
+    float: right;
+    padding: 2%;
+    width: 75%;
+  }

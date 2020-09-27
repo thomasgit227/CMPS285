@@ -1,11 +1,9 @@
 import React, {useState } from 'react';
-import '../App.css';
+import './Selected_Property.css';
 import { 
     Button, 
     Form, 
     FormGroup, 
-    Label, 
-    Input,
     Collapse,
     ButtonGroup
 } from 'reactstrap';
@@ -184,7 +182,7 @@ export default function MyPropertyForm() {
                         </div>
                     </FormGroup>
 
-                    <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>Utility Only</Button>
+                    <Button color="primary" onClick={toggle} style={{ marginBottom: '2em' },{marginTop: '2em'}}>Utility Only</Button>
 
                     <Collapse isOpen={isOpen}>
                         <Form>
@@ -245,7 +243,7 @@ export default function MyPropertyForm() {
                     </Collapse>
                     <br/>
   
-                    <Button>Submit</Button>
+                    <Button style={{ marginBottom: '2em' },{marginTop: '2em'}}>Submit</Button>
 
                 </Form>
             </div>
