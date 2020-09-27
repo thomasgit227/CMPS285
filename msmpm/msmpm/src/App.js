@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import './App.css';
 import Home from './home_page/Home';
 import MyProperty from './selected_property/MyProperty';
 import Properties from './all_properties/Properties';
