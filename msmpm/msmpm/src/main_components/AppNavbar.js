@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Main_Components.css';
 import {
   Collapse,
   Navbar,
@@ -38,7 +37,7 @@ export default function AppNavbar() {
                   account
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem href="/login/">
+                  <DropdownItem href="/account/">
                     view
                   </DropdownItem>
                   <DropdownItem href="/account/edit">

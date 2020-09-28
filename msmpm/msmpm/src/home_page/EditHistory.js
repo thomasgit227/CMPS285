@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import './home_page.css';
 
 export default function EditHistory() {
     return (

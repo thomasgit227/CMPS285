@@ -1,5 +1,5 @@
 import React from 'react';
-import './Selected_Property.css';
+import '../App.css';
 import{
     Media,
 } from 'reactstrap'
