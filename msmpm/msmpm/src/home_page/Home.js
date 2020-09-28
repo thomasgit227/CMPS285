@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import './home_page.css';
 import AppNavbar from '../main_components/AppNavbar';
 import EditHistory from './EditHistory';
 import Leaderboard from './Leaderboard';

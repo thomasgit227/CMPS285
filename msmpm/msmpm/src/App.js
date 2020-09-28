@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './home_page/Home';
 import MyProperty from './selected_property/MyProperty';
 import Properties from './all_properties/Properties';
 import Template from './main_components/Template';
+import Login from './login/Login';
 
 function App() {
+
+  const [isLoggedin, setLoggedIn] = useState(false);
+
   return (
     <div>
       <BrowserRouter>
@@ -19,6 +23,8 @@ function App() {
           <Route path="/properties/myproperty/"> <MyProperty/> </Route>
 
           <Route exact path="/search/"> <Template/> </Route>
+
+          <Route exact path="/login/"> <Login/> </Route>
 
           <Route> <Redirect to = "/home"> </Redirect> </Route>
             
