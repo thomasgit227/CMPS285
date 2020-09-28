@@ -1,4 +1,6 @@
-import React, {useState } from 'react';
+import React, {
+    useState 
+} from 'react';
 import './Selected_Property.css';
 import { 
     Button, 
@@ -10,42 +12,45 @@ import {
 
 
 export default function MyPropertyForm() {
-        const [isOpen, setIsOpen] = useState(false);
-        const toggle = () => setIsOpen(!isOpen);
-        
-        //All
-        var [roofSelected, roofSetSelected] = useState(null);
-        var [extSelected, extSetSelected] = useState(null);
-        var [opnsSelected, opnsSetSelected] = useState(null);
-        var [fwSelected, fwSetSelected] = useState(null);
-        var [paintSelected, paintSetSelected] = useState(null);
-        var [pfSelected, pfSetSelected] = useState(null);
-        var [chimSelected, chimSetSelected] = useState(null);
-        var [doorSelected, doorSetSelected] = useState(null);
-        var [windSelected, windSetSelected] = useState(null);
-        var [shutSelected, shutSetSelected] = useState(null);
-        var [floorSelected, floorSetSelected] = useState(null);
-        //Utility Only
-        var [elecSelected, elecSetSelected] = useState(null);
-        var [plumbSelected, plumbSetSelected] = useState(null);
-        var [sewSelected, sewSetSelected] = useState(null);
-        var [hvacSelected, hvacSetSelected] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const [utlState, setUtilState] = useState('No Utilities');
+    const toggle = () => {
+        setIsOpen(!isOpen);
+        setUtilState(isOpen ? 'No Utilities' : 'Has Utilities');
+    }
 
-        return (
-            <div className = 'propertyform'>
+    //All
+    const [roofSelected, roofSetSelected] = useState(null);
+    const [extSelected, extSetSelected] = useState(null);
+    const [opnsSelected, opnsSetSelected] = useState(null);
+    const [fwSelected, fwSetSelected] = useState(null);
+    const [paintSelected, paintSetSelected] = useState(null);
+    const [pfSelected, pfSetSelected] = useState(null);
+    const [chimSelected, chimSetSelected] = useState(null);
+    const [doorSelected, doorSetSelected] = useState(null);
+    const [windSelected, windSetSelected] = useState(null);
+    const [shutSelected, shutSetSelected] = useState(null);
+    const [floorSelected, floorSetSelected] = useState(null);
+    //Utility Only
+    const [elecSelected, elecSetSelected] = useState(null);
+    const [plumbSelected, plumbSetSelected] = useState(null);
+    const [sewSelected, sewSetSelected] = useState(null);
+    const [hvacSelected, hvacSetSelected] = useState(null);
 
-                <Form>
-                    <FormGroup>
+    return (
+
+            <Form>
+                <FormGroup>
+                    <div className = 'propertyform_one'>
                         <div>
-                            <br/>
                             <h6>
                                 Roof
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => roofSetSelected(1)} active={roofSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => roofSetSelected(3)} active={roofSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => roofSetSelected(5)} active={roofSelected === 5}>5</Button>
-                                <Button color="primary" onClick={() => roofSetSelected(7)} active={roofSelected === 7}>7</Button>
+                                <Button color="info" onClick={() => roofSetSelected(1)} active={roofSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => roofSetSelected(3)} active={roofSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => roofSetSelected(5)} active={roofSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => roofSetSelected(7)} active={roofSelected === 7}>7</Button>
                             </ButtonGroup>
                             <br/>
                         </div>
@@ -56,9 +61,9 @@ export default function MyPropertyForm() {
                                 Exterior Walls
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => extSetSelected(1)} active={extSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => extSetSelected(3)} active={extSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => extSetSelected(5)} active={extSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => extSetSelected(1)} active={extSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => extSetSelected(3)} active={extSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => extSetSelected(5)} active={extSelected === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div>
@@ -70,9 +75,9 @@ export default function MyPropertyForm() {
                                 Openings
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => opnsSetSelected(1)} active={opnsSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => opnsSetSelected(3)} active={opnsSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => opnsSetSelected(5)} active={opnsSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => opnsSetSelected(1)} active={opnsSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => opnsSetSelected(3)} active={opnsSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => opnsSetSelected(5)} active={opnsSelected === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div>
@@ -83,22 +88,23 @@ export default function MyPropertyForm() {
                                 Framework
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => fwSetSelected(1)} active={fwSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => fwSetSelected(3)} active={fwSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => fwSetSelected(5)} active={fwSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => fwSetSelected(1)} active={fwSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => fwSetSelected(3)} active={fwSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => fwSetSelected(5)} active={fwSelected === 5}>5</Button>
                             </ButtonGroup>
-                            <br/>
                         </div>
 
+                    </div>
+                    <div className = 'propertyform_two'>
+
                         <div>
-                            <br/>
                             <h6>
                                 Paint
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => paintSetSelected(1)} active={paintSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => paintSetSelected(3)} active={paintSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => paintSetSelected(5)} active={paintSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => paintSetSelected(1)} active={paintSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => paintSetSelected(3)} active={paintSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => paintSetSelected(5)} active={paintSelected === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div>
@@ -109,9 +115,9 @@ export default function MyPropertyForm() {
                                 Piers & Footlings
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => pfSetSelected(1)} active={pfSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => pfSetSelected(3)} active={pfSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => pfSetSelected(5)} active={pfSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => pfSetSelected(1)} active={pfSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => pfSetSelected(3)} active={pfSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => pfSetSelected(5)} active={pfSelected === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div> 
@@ -122,9 +128,9 @@ export default function MyPropertyForm() {
                                 Chimneys
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => chimSetSelected(1)} active={chimSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => chimSetSelected(3)} active={chimSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => chimSetSelected(5)} active={chimSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => chimSetSelected(1)} active={chimSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => chimSetSelected(3)} active={chimSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => chimSetSelected(5)} active={chimSelected === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div> 
@@ -135,22 +141,23 @@ export default function MyPropertyForm() {
                                 Doors
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => doorSetSelected(1)} active={doorSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => doorSetSelected(3)} active={doorSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => doorSetSelected(5)} active={doorSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => doorSetSelected(1)} active={doorSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => doorSetSelected(3)} active={doorSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => doorSetSelected(5)} active={doorSelected === 5}>5</Button>
                             </ButtonGroup>
-                            <br/>
                         </div> 
 
+                    </div>
+                    <div className = 'propertyform_three'>
+
                         <div>
-                            <br/>
                             <h6>
                                 Windows
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => windSetSelected(1)} active={windSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => windSetSelected(3)} active={windSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => windSetSelected(5)} active={windSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => windSetSelected(1)} active={windSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => windSetSelected(3)} active={windSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => windSetSelected(5)} active={windSelected === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div> 
@@ -161,9 +168,9 @@ export default function MyPropertyForm() {
                                 Shutters
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => shutSetSelected(1)} active={shutSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => shutSetSelected(3)} active={shutSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => shutSetSelected(5)} active={shutSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => shutSetSelected(1)} active={shutSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => shutSetSelected(3)} active={shutSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => shutSetSelected(5)} active={shutSelected === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div> 
@@ -174,78 +181,89 @@ export default function MyPropertyForm() {
                                 Flooring
                             </h6>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => floorSetSelected(1)} active={floorSelected === 1}>1</Button>
-                                <Button color="primary" onClick={() => floorSetSelected(3)} active={floorSelected === 3}>3</Button>
-                                <Button color="primary" onClick={() => floorSetSelected(5)} active={floorSelected === 5}>5</Button>
+                                <Button color="info" onClick={() => floorSetSelected(1)} active={floorSelected === 1}>1</Button>
+                                <Button color="info" onClick={() => floorSetSelected(3)} active={floorSelected === 3}>3</Button>
+                                <Button color="info" onClick={() => floorSetSelected(5)} active={floorSelected === 5}>5</Button>
                             </ButtonGroup>
-                            <br/>
                         </div>
-                    </FormGroup>
+                    </div>
+                </FormGroup>
 
-                    <Button color="primary" onClick={toggle} style={{ marginBottom: '2em' },{marginTop: '2em'}}>Utility Only</Button>
+            <div className = 'propertyform_util'>
+                <Button color="info" onClick={toggle}>{utlState}</Button>
 
-                    <Collapse isOpen={isOpen}>
-                        <Form>
-                            <FormGroup>
-                                <div>
-                                    <br/>
-                                    <h6>
-                                        Electrical
-                                    </h6>
-                                    <ButtonGroup>
-                                        <Button color="primary" onClick={() => elecSetSelected(1)} active={elecSelected === 1}>1</Button>
-                                        <Button color="primary" onClick={() => elecSetSelected(3)} active={elecSelected === 3}>3</Button>
-                                        <Button color="primary" onClick={() => elecSetSelected(5)} active={elecSelected === 5}>5</Button>
-                                    </ButtonGroup>
-                                    <br/>
-                                </div>
+                <Collapse isOpen={isOpen}>
+                    <Form>
+                        <FormGroup>
+                            <div>
+                                <br/>
+                                <h6>
+                                    Electrical
+                                </h6>
+                                <ButtonGroup>
+                                    <Button color="info" onClick={() => elecSetSelected(1)} active={elecSelected === 1}>1</Button>
+                                    <Button color="info" onClick={() => elecSetSelected(3)} active={elecSelected === 3}>3</Button>
+                                    <Button color="info" onClick={() => elecSetSelected(5)} active={elecSelected === 5}>5</Button>
+                                </ButtonGroup>
+                                <br/>
+                            </div>
 
-                                <div>
-                                    <br/>
-                                    <h6>
-                                        Plumbing
-                                    </h6>
-                                    <ButtonGroup>
-                                        <Button color="primary" onClick={() => plumbSetSelected(1)} active={plumbSelected === 1}>1</Button>
-                                        <Button color="primary" onClick={() => plumbSetSelected(3)} active={plumbSelected === 3}>3</Button>
-                                        <Button color="primary" onClick={() => plumbSetSelected(5)} active={plumbSelected === 5}>5</Button>
-                                    </ButtonGroup>
-                                    <br/>
-                                </div>
+                            <div>
+                                <br/>
+                                <h6>
+                                    Plumbing
+                                </h6>
+                                <ButtonGroup>
+                                    <Button color="info" onClick={() => plumbSetSelected(1)} active={plumbSelected === 1}>1</Button>
+                                    <Button color="info" onClick={() => plumbSetSelected(3)} active={plumbSelected === 3}>3</Button>
+                                    <Button color="info" onClick={() => plumbSetSelected(5)} active={plumbSelected === 5}>5</Button>
+                                </ButtonGroup>
+                                <br/>
+                            </div>
 
-                                <div>
-                                    <br/>
-                                    <h6>
-                                        Sewage
-                                    </h6>
-                                    <ButtonGroup>
-                                        <Button color="primary" onClick={() => sewSetSelected(1)} active={sewSelected === 1}>1</Button>
-                                        <Button color="primary" onClick={() => sewSetSelected(3)} active={sewSelected === 3}>3</Button>
-                                        <Button color="primary" onClick={() => sewSetSelected(5)} active={sewSelected === 5}>5</Button>
-                                    </ButtonGroup>
-                                    <br/>
-                                </div>
+                            <div>
+                                <br/>
+                                <h6>
+                                    Sewage
+                                </h6>
+                                <ButtonGroup>
+                                    <Button color="info" onClick={() => sewSetSelected(1)} active={sewSelected === 1}>1</Button>
+                                    <Button color="info" onClick={() => sewSetSelected(3)} active={sewSelected === 3}>3</Button>
+                                    <Button color="info" onClick={() => sewSetSelected(5)} active={sewSelected === 5}>5</Button>
+                                </ButtonGroup>
+                                <br/>
+                            </div>
 
-                                <div>
-                                    <br/>
-                                    <h6>
-                                        HVAC
-                                    </h6>
-                                    <ButtonGroup>
-                                        <Button color="primary" onClick={() => hvacSetSelected(1)} active={hvacSelected === 1}>1</Button>
-                                        <Button color="primary" onClick={() => hvacSetSelected(3)} active={hvacSelected === 3}>3</Button>
-                                        <Button color="primary" onClick={() => hvacSetSelected(5)} active={hvacSelected === 5}>5</Button>
-                                    </ButtonGroup>
-                                    <br/>
-                                </div>
-                            </FormGroup>
-                        </Form>
-                    </Collapse>
-                    <br/>
-  
-                    <Button style={{ marginBottom: '2em' },{marginTop: '2em'}}>Submit</Button>
-
-                </Form>
+                            <div>
+                                <br/>
+                                <h6>
+                                    HVAC
+                                </h6>
+                                <ButtonGroup>
+                                    <Button color="info" onClick={() => hvacSetSelected(1)} active={hvacSelected === 1}>1</Button>
+                                    <Button color="info" onClick={() => hvacSetSelected(3)} active={hvacSelected === 3}>3</Button>
+                                    <Button color="info" onClick={() => hvacSetSelected(5)} active={hvacSelected === 5}>5</Button>
+                                </ButtonGroup>
+                            </div>
+                        </FormGroup>
+                    </Form>
+                </Collapse>
             </div>
-        );
-    }
+
+            <div className = 'submitbutton'>
+                <Button>Submit</Button>
+
+            </div>
+        </Form>
+    );
+}
+
+//Note to Self:
+// {
+//     state === 'new' ? 
+//     (
+//     <h1> New Button Saying </h1>
+//     ) : (
+//     <h1> Old Button Saying </h1>
+//     )
+// };

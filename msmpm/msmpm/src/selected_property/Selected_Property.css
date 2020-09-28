@@ -1,13 +1,68 @@
 .propertyimage {
     float: left;
     display: flex;
-    padding: 2%;
-    width: 20%;
-    height: 20%;
-  }
+    margin: 2em;
+    width: 25%;
+    height: 25%;
+    background-color: darkgrey;
+    box-shadow: .25em .25em darkolivegreen;
+}
+
+.name {
+  margin-top: 2em;
+  text-align: left;
+}
   
-  .propertyform {
-    float: right;
-    padding: 2%;
-    width: 75%;
-  }
+.propertyform_one {
+  float: left;
+  margin-top: 1em;
+  padding: 2%;
+  background-color: darkgrey;
+  box-shadow: .25em .25em darkolivegreen;
+  margin-bottom: 2em;
+  width: fit-content;
+  height: fit-content;
+}
+
+.propertyform_two {
+  float: left;
+  margin-top: 1em;
+  padding: 2%;
+  background-color: darkgrey;
+  box-shadow: .25em .25em darkolivegreen;
+  margin-bottom: 2em;
+  width: fit-content;
+  height: fit-content;
+}
+
+.propertyform_three {
+  float: left;
+  margin-top: 1em;
+  padding: 2%;
+  background-color: darkgrey;
+  box-shadow: .25em .25em darkolivegreen;
+  margin-bottom: 2em;
+  width: fit-content;
+  height: fit-content;
+}
+
+.propertyform_util {
+  float: left;
+  margin-left: 2%;
+  margin-top: 1em;
+  padding: 2%;
+  background-color: darkgrey;
+  box-shadow: .25em .25em darkolivegreen;
+  margin-bottom: 2em;
+}
+
+.submitbutton {
+  float: left;
+  margin-top: 1em;
+  padding: 2%;
+  background-color: darkolivegreen;
+  box-shadow: .25em .25em darkgrey;
+  margin-bottom: 2em;
+  width: fit-content;
+  height: fit-content;
+}
