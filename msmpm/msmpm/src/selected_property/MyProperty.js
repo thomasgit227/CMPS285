@@ -9,8 +9,8 @@ export default function MyProperty() {
     return (
         <div className = 'myproperty'>
             <AppNavbar/>
-            <PropertyImage/>
             <MyPropertyName/>
+            <PropertyImage/>
             <MyPropertyForm/> 
         </div>
     );

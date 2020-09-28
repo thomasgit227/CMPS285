@@ -1,22 +1,24 @@
 .leaderboard_heading {
-    padding-top: 1%;
-    padding-left: 1%;
-    width: max-content;
-    color: black;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .leaderboard {
-    width: 40%;
-    padding: 1%;
-    float: left;
-    font-size: small;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .edithistory {
-    width: 60%;
-    padding: 1%;
-    float: right;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 1%;
+  margin-left: 1%;
+  margin-bottom: 1%;
+  width: max-content;
+  color: black;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.leaderboard {
+  width: 40%;
+  padding-left: 1%;
+  float: left;
+  font-size: medium;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.edithistory {
+  width: 60%;
+  padding: 1%;
+  float: right;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: small;
 }

@@ -6,8 +6,11 @@ export default function MyPropertyName() {
     return (
         <div className = 'name'>
             <h3>
-                CSTB Building
+                Generic Building
             </h3>
+            <h6>
+                0000-00
+            </h6>
         </div>
     );
 }

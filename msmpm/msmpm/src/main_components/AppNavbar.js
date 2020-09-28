@@ -38,7 +38,7 @@ export default function AppNavbar() {
                   account
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem href="/account/">
+                  <DropdownItem href="/login/">
                     view
                   </DropdownItem>
                   <DropdownItem href="/account/edit">
