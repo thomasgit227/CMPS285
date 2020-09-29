@@ -1,4 +1,5 @@
 import React from 'react';
+import './All_Properties.css';
 import { 
     Table,
 } from 'reactstrap';

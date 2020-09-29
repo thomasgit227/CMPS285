@@ -5,6 +5,7 @@ import Home from './home_page/Home';
 import MyProperty from './selected_property/MyProperty';
 import Properties from './all_properties/Properties';
 import Template from './main_components/Template';
+import Login from './login/Login';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           <Route path="/properties/myproperty/"> <MyProperty/> </Route>
 
           <Route exact path="/search/"> <Template/> </Route>
+
+          <Route exact path="/login/"> <Login/> </Route>
 
           <Route> <Redirect to = "/home"> </Redirect> </Route>
             
