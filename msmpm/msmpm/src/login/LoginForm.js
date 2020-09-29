@@ -6,9 +6,6 @@ import {
     Label,
     Input,
     Button,
-    Container, 
-    Row, 
-    Col
 } from 'reactstrap';
 
 export default function LoginForm() {

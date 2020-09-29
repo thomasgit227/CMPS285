@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './home_page/Home';
@@ -8,9 +8,6 @@ import Template from './main_components/Template';
 import Login from './login/Login';
 
 function App() {
-
-  const [isLoggedin, setLoggedIn] = useState(false);
-
   return (
     <div>
       <BrowserRouter>
