@@ -26,20 +26,9 @@ namespace MSMBackend.Controllers
             _mapper = mapper;
         }
 
-
-      //  private readonly PropertyContext _context;
-        
-
-      //  public PropertiesController(PropertyContext context)
-     ///   {
-      //      _context = context;
-      //  }
-
-       // private readonly TestRepo _repository = new TestRepo();
-
         // GET: api/Properties
         [HttpGet]
-        public ActionResult <IEnumerable<PropertyReadDto>> GetAllProperties()
+        public ActionResult<IEnumerable<PropertyReadDto>> GetAllProperties()
         {
             var propertyItems = _repository.GetAllProperties();
 
@@ -47,102 +36,59 @@ namespace MSMBackend.Controllers
         }
 
         // GET: api/Properties/{id}
-        [HttpGet("{id}")]
-        public ActionResult <PropertyReadDto> GetPropertyById(int id)
+        [HttpGet("{id}", Name = "GetPropertyById")]
+        public ActionResult<PropertyReadDto> GetPropertyById(int id)
         {
             var propertyItem = _repository.GetPropertyById(id);
-            if(propertyItem != null)
+            if (propertyItem != null)
             {
                 return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
-            } 
-            
+            }
+
             return NotFound();
         }
 
-        //  // GET: api/Properties
-        ////*  [HttpGet]
-        //  public async Task<ActionResult<IEnumerable<Property>>> GetProperty()
-        //  {
-        //      return await _context.Properties.ToListAsync();
-        //  }
 
-        //  // GET: api/Properties/5
-        //  [HttpGet("{id}")]
-        //  public async Task<ActionResult<Property>> GetProperty(int id)
-        //  {
-        //      var @property = await _context.Properties.FindAsync(id);
+        //Returning Back a PropertyReadDto called CreateProperty(weird ik but will make sense) which 
+        //takes as an input a PropertyCreateDto
+        //POST api/Properties
+        [HttpPost]
+        public ActionResult<PropertyReadDto> CreateProperty(PropertyCreateDto propertyCreateDto)
+        //Returning a representation of the model we're returning 
+        //Weird b/c we need a ReadDto to return but we're creating a type createDto
+        {
+            //we want to convert whatever we get in our API request body to a model so we can get it to the repo
+            var propertyModel = _mapper.Map<Property>(propertyCreateDto); //this will throw bc we need to map
+                                                                          //<Mapping to Property Object>(source is propertyCreateDto arg ) //currently our mapping is reading a property from our DB and passing it
+            _repository.CreateProperty(propertyModel);//Back to client;
+            _repository.SaveChanges();
 
-        //      if (@property == null)
-        //      {
-        //          return NotFound();
-        //      }
+            var propertyReadDto = _mapper.Map<PropertyReadDto>(propertyModel);
 
-        //      return @property;
-        //  }
 
-        //  // PUT: api/Properties/5
-        //  // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //  // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //  [HttpPut("{id}")]
-        //  public async Task<IActionResult> PutProperty(int id, Property @property)
-        //  {
-        //      if (id != @property.Id)
-        //      {
-        //          return BadRequest();
-        //      }
+            //But we want a CreateDto so we make a map
+            return CreatedAtRoute(nameof(GetPropertyById), new { Id = propertyReadDto.Id }, propertyReadDto);
+        }
 
-        //      _context.Entry(@property).State = EntityState.Modified;
+        //PUT api/commands/{id}
+        [HttpPut("{id}")]
+        public ActionResult UpdateProperty(int id, PropertyUpdateDto propertyUpdateDto)
+        {
+            var propertyModelFromRepo = _repository.GetPropertyById(id);
+            if(propertyModelFromRepo ==  null)
+            {
+                return NotFound();
+            }
 
-        //      try
-        //      {
-        //          await _context.SaveChangesAsync();
-        //      }
-        //      catch (DbUpdateConcurrencyException)
-        //      {
-        //          if (!PropertyExists(id))
-        //          {
-        //              return NotFound();
-        //          }
-        //          else
-        //          {
-        //              throw;
-        //          }
-        //      }
+            _mapper.Map(propertyUpdateDto, propertyModelFromRepo);
 
-        //      return NoContent();
-        //  }
+            //This isnt doing anything rn but if we update the repo implementation later its here
+            _repository.UpdateProperty(propertyModelFromRepo);
 
-        //  // POST: api/Properties
-        //  // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //  // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //  [HttpPost]
-        //  public async Task<ActionResult<Property>> PostProperty(Property @property)
-        //  {
-        //      _context.Properties.Add(@property);
-        //      await _context.SaveChangesAsync();
+            _repository.SaveChanges();
 
-        //      return CreatedAtAction("GetProperty", new { id = @property.Id }, @property);
-        //  }
+            return NoContent();
+        }
 
-        //  // DELETE: api/Properties/5
-        //  [HttpDelete("{id}")]
-        //  public async Task<ActionResult<Property>> DeleteProperty(int id)
-        //  {
-        //      var @property = await _context.Properties.FindAsync(id);
-        //      if (@property == null)
-        //      {
-        //          return NotFound();
-        //      }
-
-        //      _context.Properties.Remove(@property);
-        //      await _context.SaveChangesAsync();
-
-        //      return @property;
-        //  }
-
-        //  private bool PropertyExists(int id)
-        //  {
-        //      return _context.Properties.Any(e => e.Id == id);
-        //  }       *//
     }
 }

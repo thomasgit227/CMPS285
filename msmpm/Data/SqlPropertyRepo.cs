@@ -38,12 +38,17 @@ namespace MSMBackend.Data
 
             // p = that property id its calling from DB Table.
             // => is checking if THAT p's Id is equal to the ID being
-            //passed into the arguement
+            //passed into the arguement 
         }
 
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
+        }
+
+        public void UpdateProperty(Property property)
+        {
+            //Nothing
         }
     }
 }

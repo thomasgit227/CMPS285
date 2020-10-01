@@ -60,6 +60,11 @@ namespace MSMBackend.Data
         {
             throw new System.NotImplementedException();
         }
+
+        public void UpdateProperty(Property property)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
          

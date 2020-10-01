@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MSMBackend.Dtos
 {
-    public class PropertyReadDto
+    public class PropertyUpdateDto
     {
-        [Required]
-        public int Id { get; set; }
-
         [Required]
         public string Name { get; set; }
         [Required]
@@ -48,12 +44,7 @@ namespace MSMBackend.Dtos
         public int Plumbing { get; set; }
         [Required]
         public int Sewer { get; set; }
-        
-        //REMOVING HVAC IN READ DTO FOR TESTING PURPOSES
-        //[Required]
-        //public int HVAC { get; set; }
+        [Required]
+        public int HVAC { get; set; }
     }
 }
-
-
-

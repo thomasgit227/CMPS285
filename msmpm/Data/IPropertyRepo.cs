@@ -15,6 +15,8 @@ namespace MSMBackend.Data
 
         void CreateProperty(Property property);
 
+        void UpdateProperty(Property property);
+
         
 
     }

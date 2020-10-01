@@ -11,9 +11,12 @@ namespace MSMBackend.Profiles
     public class PropertiesProfile : Profile
     {
         public PropertiesProfile()
-        {
+        {               //Source Object ---> Destination Object
             CreateMap<Property, PropertyReadDto>();
+            //CreateDTO mapped to ---> Property Domain Object (Property)
+            CreateMap<PropertyCreateDto, Property>();
             //need to create propertyCreateDto
+            CreateMap<PropertyUpdateDto, Property>();
         }
 
     }
