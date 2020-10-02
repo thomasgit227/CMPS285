@@ -12,7 +12,6 @@ namespace MSMBackend.Models
         [Key]
         public int Id { get; set; }
 
-        
         [Required]
         [MaxLength(250)]
         public string Name { get; set; }
@@ -26,6 +25,7 @@ namespace MSMBackend.Models
 
         [Required]
         public Boolean Utilities { get; set; }
+        
         //public int SteveID { get; set; }
 
         [Required]

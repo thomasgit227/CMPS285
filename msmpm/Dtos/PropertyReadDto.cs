@@ -22,6 +22,7 @@ namespace MSMBackend.Dtos
         public Boolean Utilities { get; set; }
 
         //public int SteveID { get; set; }
+
         [Required]
         public int Roof { get; set; }
         [Required]

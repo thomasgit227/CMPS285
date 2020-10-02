@@ -10,6 +10,11 @@ namespace MSMBackend.Data
             throw new System.NotImplementedException();
         }
 
+        public void DeleteProperty(Property property)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Property> GetAllProperties()
         {
             var properties = new List<Property>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MSMBackend.Data;
@@ -32,7 +33,7 @@ namespace MSMBackend.Controllers
         {
             var propertyItems = _repository.GetAllProperties();
 
-            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));        //200 HTTP Success
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
 
         // GET: api/Properties/{id}
@@ -49,24 +50,18 @@ namespace MSMBackend.Controllers
         }
 
 
-        //Returning Back a PropertyReadDto called CreateProperty(weird ik but will make sense) which 
-        //takes as an input a PropertyCreateDto
+        
         //POST api/Properties
         [HttpPost]
         public ActionResult<PropertyReadDto> CreateProperty(PropertyCreateDto propertyCreateDto)
-        //Returning a representation of the model we're returning 
-        //Weird b/c we need a ReadDto to return but we're creating a type createDto
         {
-            //we want to convert whatever we get in our API request body to a model so we can get it to the repo
-            var propertyModel = _mapper.Map<Property>(propertyCreateDto); //this will throw bc we need to map
-                                                                          //<Mapping to Property Object>(source is propertyCreateDto arg ) //currently our mapping is reading a property from our DB and passing it
-            _repository.CreateProperty(propertyModel);//Back to client;
+            var propertyModel = _mapper.Map<Property>(propertyCreateDto); 
+                                                                          
+            _repository.CreateProperty(propertyModel);
             _repository.SaveChanges();
 
             var propertyReadDto = _mapper.Map<PropertyReadDto>(propertyModel);
 
-
-            //But we want a CreateDto so we make a map
             return CreatedAtRoute(nameof(GetPropertyById), new { Id = propertyReadDto.Id }, propertyReadDto);
         }
 
@@ -77,7 +72,7 @@ namespace MSMBackend.Controllers
             var propertyModelFromRepo = _repository.GetPropertyById(id);
             if(propertyModelFromRepo ==  null)
             {
-                return NotFound();
+                return NotFound(); //404
             }
 
             _mapper.Map(propertyUpdateDto, propertyModelFromRepo);
@@ -85,6 +80,49 @@ namespace MSMBackend.Controllers
             //This isnt doing anything rn but if we update the repo implementation later its here
             _repository.UpdateProperty(propertyModelFromRepo);
 
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //PATCH api/commands{id}
+        [HttpPatch("{id}")]
+        public ActionResult PartialPropertyUpdate(int id, JsonPatchDocument<PropertyUpdateDto> patchDoc)
+        {
+            var propertyModelFromRepo = _repository.GetPropertyById(id);
+            if(propertyModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var propertyToPatch = _mapper.Map<PropertyUpdateDto>(propertyModelFromRepo);
+            patchDoc.ApplyTo(propertyToPatch, ModelState);
+
+            if(!TryValidateModel(propertyToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(propertyToPatch, propertyModelFromRepo);
+
+            _repository.UpdateProperty(propertyModelFromRepo);
+
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //DELETE api/properties/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteProperty(int id)
+        {
+            var propertyModelFromRepo = _repository.GetPropertyById(id);
+            if (propertyModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _repository.DeleteProperty(propertyModelFromRepo);
             _repository.SaveChanges();
 
             return NoContent();

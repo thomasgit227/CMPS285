@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MSMBackend.Models;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 
 namespace MSMBackend.Profiles
 {
@@ -13,10 +14,12 @@ namespace MSMBackend.Profiles
         public PropertiesProfile()
         {               //Source Object ---> Destination Object
             CreateMap<Property, PropertyReadDto>();
-            //CreateDTO mapped to ---> Property Domain Object (Property)
+            
             CreateMap<PropertyCreateDto, Property>();
-            //need to create propertyCreateDto
+            
             CreateMap<PropertyUpdateDto, Property>();
+
+            CreateMap<Property, PropertyUpdateDto>();
         }
 
     }

@@ -27,6 +27,16 @@ namespace MSMBackend.Data
 
         }
 
+        public void DeleteProperty(Property property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
+            _context.Properties.Remove(property);
+
+        }
+
         public IEnumerable<Property> GetAllProperties()
         {
             return _context.Properties.ToList();    
@@ -35,10 +45,6 @@ namespace MSMBackend.Data
         public Property GetPropertyById(int id)
         {
             return _context.Properties.FirstOrDefault(p => p.Id == id);
-
-            // p = that property id its calling from DB Table.
-            // => is checking if THAT p's Id is equal to the ID being
-            //passed into the arguement 
         }
 
         public bool SaveChanges()
@@ -48,7 +54,7 @@ namespace MSMBackend.Data
 
         public void UpdateProperty(Property property)
         {
-            //Nothing
+            //Nothing, DBContext does this for is
         }
     }
 }

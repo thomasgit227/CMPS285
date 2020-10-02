@@ -9,13 +9,16 @@ namespace MSMBackend.Data
     {
         bool SaveChanges();
 
-        IEnumerable<Property> GetAllProperties(); //maybe conflicting
+        IEnumerable<Property> GetAllProperties(); 
 
         Property GetPropertyById(int id);
 
         void CreateProperty(Property property);
 
         void UpdateProperty(Property property);
+
+        void DeleteProperty(Property property);
+
 
         
 
