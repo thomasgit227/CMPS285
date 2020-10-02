@@ -20,6 +20,12 @@ namespace MSMBackend.Models
         public string Location { get; set; }
 
         [Required]
+        public DateTimeOffset EditTime { get; set; }
+
+        [Required]
+        public String UserName { get; set; }
+
+        [Required]
         
         public string ImageURL { get; set; }
 
