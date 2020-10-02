@@ -49,8 +49,40 @@ namespace MSMBackend.Controllers
             return NotFound();
         }
 
-
         
+        // GET: api/Properties/{id}/average
+        [HttpGet("{id}/average", Name = "GetAverageOfProperty")]
+        public ActionResult<int> GetAverageOfProperty(int id)
+        {
+            var propertyItem = _repository.GetPropertyById(id);
+            
+            if (propertyItem != null)
+            {
+                int average = _repository.AverageAttributeRating(propertyItem);
+                return Ok(_mapper.Map<int>(average));
+            }
+
+            return NotFound();
+        }
+
+        // Get: api/Properties/best
+        [HttpGet("best", Name = "GetBestProperties")]
+        public ActionResult<IEnumerable<PropertyReadDto>> GetBestProperties()
+        {
+            var propertyItems = _repository.BestProperties();
+
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+        }
+
+        // Get: api/Properties/recent
+        [HttpGet("recent", Name = "GetRecentProperties")]
+        public ActionResult<IEnumerable<PropertyReadDto>> GetRecentProperties()
+        {
+            var propertyItems = _repository.RecentProperties();
+
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+        }
+
         //POST api/Properties
         [HttpPost]
         public ActionResult<PropertyReadDto> CreateProperty(PropertyCreateDto propertyCreateDto)
