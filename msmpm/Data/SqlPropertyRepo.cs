@@ -115,6 +115,11 @@ namespace MSMBackend.Data
             return props.ToList();
         }
 
+        private int CompareTime(Property a, Property b)
+        {
+            return a.EditTime.CompareTo(b.EditTime);
+        }
+
         public IEnumerable<Property> RecentProperties(int max = 5)
         {
             IEnumerable<Property> allProps = GetAllProperties();
@@ -134,7 +139,7 @@ namespace MSMBackend.Data
                         props[j - 1] = p;
                         props[j] = null;
                     }
-                    else if (props[j - 1].EditTime.CompareTo(p.EditTime) < 0)
+                    else if (CompareTime(props[j - 1], p) < 0)
                     {
                         Property x = props[j - 1];
                         props[j - 1] = p;
