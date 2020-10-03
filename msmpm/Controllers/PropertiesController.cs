@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MSMBackend.Data;
@@ -26,123 +27,138 @@ namespace MSMBackend.Controllers
             _mapper = mapper;
         }
 
-
-      //  private readonly PropertyContext _context;
-        
-
-      //  public PropertiesController(PropertyContext context)
-     ///   {
-      //      _context = context;
-      //  }
-
-       // private readonly TestRepo _repository = new TestRepo();
-
         // GET: api/Properties
         [HttpGet]
-        public ActionResult <IEnumerable<PropertyReadDto>> GetAllProperties()
+        public ActionResult<IEnumerable<PropertyReadDto>> GetAllProperties()
         {
             var propertyItems = _repository.GetAllProperties();
 
-            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));        //200 HTTP Success
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
 
         // GET: api/Properties/{id}
-        [HttpGet("{id}")]
-        public ActionResult <PropertyReadDto> GetPropertyById(int id)
+        [HttpGet("{id}", Name = "GetPropertyById")]
+        public ActionResult<PropertyReadDto> GetPropertyById(int id)
         {
             var propertyItem = _repository.GetPropertyById(id);
-            if(propertyItem != null)
+            if (propertyItem != null)
             {
                 return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
-            } 
-            
+            }
+
             return NotFound();
         }
 
-        //  // GET: api/Properties
-        ////*  [HttpGet]
-        //  public async Task<ActionResult<IEnumerable<Property>>> GetProperty()
-        //  {
-        //      return await _context.Properties.ToListAsync();
-        //  }
+        
+        // GET: api/Properties/{id}/average
+        [HttpGet("{id}/average", Name = "GetAverageOfProperty")]
+        public ActionResult<int> GetAverageOfProperty(int id)
+        {
+            var propertyItem = _repository.GetPropertyById(id);
+            
+            if (propertyItem != null)
+            {
+                int average = _repository.AverageAttributeRating(propertyItem);
+                return Ok(_mapper.Map<int>(average));
+            }
 
-        //  // GET: api/Properties/5
-        //  [HttpGet("{id}")]
-        //  public async Task<ActionResult<Property>> GetProperty(int id)
-        //  {
-        //      var @property = await _context.Properties.FindAsync(id);
+            return NotFound();
+        }
 
-        //      if (@property == null)
-        //      {
-        //          return NotFound();
-        //      }
+        // Get: api/Properties/best
+        [HttpGet("best", Name = "GetBestProperties")]
+        public ActionResult<IEnumerable<PropertyReadDto>> GetBestProperties()
+        {
+            var propertyItems = _repository.BestProperties();
 
-        //      return @property;
-        //  }
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+        }
 
-        //  // PUT: api/Properties/5
-        //  // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //  // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //  [HttpPut("{id}")]
-        //  public async Task<IActionResult> PutProperty(int id, Property @property)
-        //  {
-        //      if (id != @property.Id)
-        //      {
-        //          return BadRequest();
-        //      }
+        // Get: api/Properties/recent
+        [HttpGet("recent", Name = "GetRecentProperties")]
+        public ActionResult<IEnumerable<PropertyReadDto>> GetRecentProperties()
+        {
+            var propertyItems = _repository.RecentProperties();
 
-        //      _context.Entry(@property).State = EntityState.Modified;
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+        }
 
-        //      try
-        //      {
-        //          await _context.SaveChangesAsync();
-        //      }
-        //      catch (DbUpdateConcurrencyException)
-        //      {
-        //          if (!PropertyExists(id))
-        //          {
-        //              return NotFound();
-        //          }
-        //          else
-        //          {
-        //              throw;
-        //          }
-        //      }
+        //POST api/Properties
+        [HttpPost]
+        public ActionResult<PropertyReadDto> CreateProperty(PropertyCreateDto propertyCreateDto)
+        {
+            var propertyModel = _mapper.Map<Property>(propertyCreateDto); 
+                                                                          
+            _repository.CreateProperty(propertyModel);
+            _repository.SaveChanges();
 
-        //      return NoContent();
-        //  }
+            var propertyReadDto = _mapper.Map<PropertyReadDto>(propertyModel);
 
-        //  // POST: api/Properties
-        //  // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //  // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //  [HttpPost]
-        //  public async Task<ActionResult<Property>> PostProperty(Property @property)
-        //  {
-        //      _context.Properties.Add(@property);
-        //      await _context.SaveChangesAsync();
+            return CreatedAtRoute(nameof(GetPropertyById), new { Id = propertyReadDto.Id }, propertyReadDto);
+        }
 
-        //      return CreatedAtAction("GetProperty", new { id = @property.Id }, @property);
-        //  }
+        //PUT api/commands/{id}
+        [HttpPut("{id}")]
+        public ActionResult UpdateProperty(int id, PropertyUpdateDto propertyUpdateDto)
+        {
+            var propertyModelFromRepo = _repository.GetPropertyById(id);
+            if(propertyModelFromRepo ==  null)
+            {
+                return NotFound(); //404
+            }
 
-        //  // DELETE: api/Properties/5
-        //  [HttpDelete("{id}")]
-        //  public async Task<ActionResult<Property>> DeleteProperty(int id)
-        //  {
-        //      var @property = await _context.Properties.FindAsync(id);
-        //      if (@property == null)
-        //      {
-        //          return NotFound();
-        //      }
+            _mapper.Map(propertyUpdateDto, propertyModelFromRepo);
 
-        //      _context.Properties.Remove(@property);
-        //      await _context.SaveChangesAsync();
+            //This isnt doing anything rn but if we update the repo implementation later its here
+            _repository.UpdateProperty(propertyModelFromRepo);
 
-        //      return @property;
-        //  }
+            _repository.SaveChanges();
 
-        //  private bool PropertyExists(int id)
-        //  {
-        //      return _context.Properties.Any(e => e.Id == id);
-        //  }       *//
+            return NoContent();
+        }
+
+        //PATCH api/commands{id}
+        [HttpPatch("{id}")]
+        public ActionResult PartialPropertyUpdate(int id, JsonPatchDocument<PropertyUpdateDto> patchDoc)
+        {
+            var propertyModelFromRepo = _repository.GetPropertyById(id);
+            if(propertyModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var propertyToPatch = _mapper.Map<PropertyUpdateDto>(propertyModelFromRepo);
+            patchDoc.ApplyTo(propertyToPatch, ModelState);
+
+            if(!TryValidateModel(propertyToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(propertyToPatch, propertyModelFromRepo);
+
+            _repository.UpdateProperty(propertyModelFromRepo);
+
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //DELETE api/properties/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteProperty(int id)
+        {
+            var propertyModelFromRepo = _repository.GetPropertyById(id);
+            if (propertyModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _repository.DeleteProperty(propertyModelFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
     }
 }
