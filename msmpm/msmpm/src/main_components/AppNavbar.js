@@ -12,17 +12,37 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem, 
-  Button
+  Button,
+  NavbarText
 } from 'reactstrap';
 
 export default function AppNavbar() {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const logout = () => {
+      document.cookie="isLoggedIn="+false+";path=/";
+      document.cookie="username="+""+";path=/";
+    };
+    const getUsername = (cookieName) => {
+      var name = cookieName + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
 
     return (
         <div className = 'navbar'>
 
-        <Navbar color="light" light expand="md">
+        <Navbar light expand="md">
           <NavbarBrand href="/">MSMPM</NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
@@ -30,9 +50,9 @@ export default function AppNavbar() {
               <NavItem>
                 <NavLink href="/properties/">properties</NavLink>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink href="/search/">search</NavLink>
-              </NavItem>
+              </NavItem> */}
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   account
@@ -41,21 +61,20 @@ export default function AppNavbar() {
                   <DropdownItem href="/login/">
                     view
                   </DropdownItem>
-                  <DropdownItem href="/account/edit">
+                  {/* <DropdownItem href="/account/edit">
                     edit
-                  </DropdownItem>
+                  </DropdownItem> */}
                   <DropdownItem>
-                    <Button>
+                    <Button onClick={logout}>
                       sign out
                     </Button>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
+            <NavbarText>{getUsername("username")}</NavbarText>
           </Collapse>
         </Navbar>
-
       </div>
     );
-
 }

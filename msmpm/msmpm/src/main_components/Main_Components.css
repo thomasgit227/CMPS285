@@ -1,6 +1,6 @@
 .navbar {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    justify-content: left;
     background-color: olivedrab;
-    box-shadow: 0em .25em darkolivegreen;
-  }
+    color: white;
+    width: 100%;
+}

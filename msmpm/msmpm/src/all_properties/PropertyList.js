@@ -22,7 +22,7 @@ export default function PropertyList() {
                     <tr>
                         <td>
                             <Link to="/properties/myproperty/">
-                                CSTB Building
+                                CST Building
                             </Link>    
                         </td>
                         <td>Hammond, LA</td>
@@ -31,7 +31,7 @@ export default function PropertyList() {
 
                     <tr>
                         <td>
-                            <Link >
+                            <Link to="/properties/myproperty/">
                                 Chili's
                             </Link>    
                         </td>
@@ -41,7 +41,7 @@ export default function PropertyList() {
 
                     <tr>
                         <td>
-                            <Link >
+                            <Link to="/properties/myproperty/">
                                 GDoc's House
                             </Link>    
                         </td>
