@@ -60,7 +60,7 @@ export default function AppNavbar() {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-            <NavbarText>{sessionStorage.username}</NavbarText>
+            <NavbarText>Hello, {sessionStorage.username ? sessionStorage.username : "Guest"}</NavbarText>
           </Collapse>
         </Navbar>
       </div>

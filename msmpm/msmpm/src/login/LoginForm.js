@@ -10,14 +10,14 @@ import {
 
 export default function LoginForm() {
 
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    // const [isLoggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
     
     const login = () => {
         sessionStorage.isLoggedIn = true;
         sessionStorage.username = username;
         window.location.reload(false);
-        setLoggedIn(true);
+        // setLoggedIn(true);
     };
 
     return (
