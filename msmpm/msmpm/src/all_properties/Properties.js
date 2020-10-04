@@ -6,7 +6,6 @@ import PropertyList from "./PropertyList";
 export default function Properties() {
   return (
     <div>
-      <AppNavbar/>
       <PropertyList/>
     </div>
   );

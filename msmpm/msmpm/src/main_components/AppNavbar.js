@@ -18,26 +18,14 @@ import {
 
 export default function AppNavbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
-    const logout = () => {
-      document.cookie="isLoggedIn="+false+";path=/";
-      document.cookie="username="+""+";path=/";
-    };
-    const getUsername = (cookieName) => {
-      var name = cookieName + "=";
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var ca = decodedCookie.split(';');
-      for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-          c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-        }
-      }
-      return "";
+    const toggle = () => {
+      setIsOpen(!isOpen);
     }
+    const logout = () => {
+      window.location.reload(false);
+      sessionStorage.isLoggedIn = false;
+      sessionStorage.username = "Guest";
+    };
 
     return (
         <div className = 'navbar'>
@@ -72,7 +60,7 @@ export default function AppNavbar() {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-            <NavbarText>{getUsername("username")}</NavbarText>
+            <NavbarText>{sessionStorage.username}</NavbarText>
           </Collapse>
         </Navbar>
       </div>

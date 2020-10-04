@@ -6,10 +6,12 @@ import MyProperty from './selected_property/MyProperty';
 import Properties from './all_properties/Properties';
 import Template from './main_components/Template';
 import Login from './login/Login';
+import AppNavbar from './main_components/AppNavbar';
 
 function App() {
   return (
     <div>
+      <AppNavbar/>
       <BrowserRouter>
         <Switch>
 

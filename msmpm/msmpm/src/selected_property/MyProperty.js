@@ -8,7 +8,6 @@ import MyPropertyName from './MyPropertyName';
 export default function MyProperty() {
     return (
         <div className = 'myproperty'>
-            <AppNavbar/>
             <MyPropertyName/>
             <PropertyImage/>
             <MyPropertyForm/> 

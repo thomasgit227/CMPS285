@@ -10,15 +10,16 @@ import {
 
 export default function LoginForm() {
 
-    const login = () => {
-        setLoggedIn(true);
-        setUsername({username});
-        document.cookie="isLoggedIn="+isLoggedIn+";username"+username+";path=/"; 
-    };
-
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
     
+    const login = () => {
+        sessionStorage.isLoggedIn = true;
+        sessionStorage.username = username;
+        window.location.reload(false);
+        setLoggedIn(true);
+    };
+
     return (
 
         <div>
@@ -26,7 +27,7 @@ export default function LoginForm() {
             <Form className = 'loginform'>
                 <FormGroup>
                     <Label>username</Label>
-                    <Input type="username" name="username" id="username" onChange={(e) => setUsername(e.target.value)} placeholder="JohnSmith"/>
+                    <Input type="username" name="username" id="username" onChange={(e) => {setUsername(e.target.value)}} placeholder="JohnSmith"/>
 
                     <Label>password</Label>
                     <Input type="password" name="password" id="password" placeholder="1234" />
