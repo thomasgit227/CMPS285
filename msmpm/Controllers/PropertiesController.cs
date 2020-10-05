@@ -82,6 +82,7 @@ namespace MSMBackend.Controllers
 
             return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
+        
 
         //POST api/Properties
         [HttpPost]

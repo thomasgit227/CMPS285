@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace MSMBackend.Data
 {
-    public class TestRepo : IPropertyRepo
+    public class TestRepo// : IPropertyRepo
     {
+        /*
         public void CreateProperty(Property property)
         {
             throw new System.NotImplementedException();
@@ -70,6 +71,7 @@ namespace MSMBackend.Data
         {
             throw new System.NotImplementedException();
         }
+        */
     }
 
          
