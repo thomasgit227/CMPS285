@@ -16,7 +16,7 @@ namespace MSMBackend.Data
         {
             _context = context;
         }
-
+        
         public void CreateProperty(Property property)
         {
             if(property == null)
@@ -27,7 +27,7 @@ namespace MSMBackend.Data
             _context.Properties.Add(property);
 
         }
-
+        
         public void DeleteProperty(Property property)
         {
             if (property == null)
@@ -37,7 +37,7 @@ namespace MSMBackend.Data
             _context.Properties.Remove(property);
 
         }
-
+        
         public IEnumerable<Property> GetAllProperties()
         {
             return _context.Properties.ToList();    
@@ -47,7 +47,7 @@ namespace MSMBackend.Data
         {
             return _context.Properties.FirstOrDefault(p => p.Id == id);
         }
-
+       
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
@@ -58,6 +58,7 @@ namespace MSMBackend.Data
             //Nothing, DBContext does this for is
         }
 
+        
         public int AverageAttributeRating(Property property)
         {
             if (property == null)
@@ -72,14 +73,23 @@ namespace MSMBackend.Data
             {
                 avg += property.Electrical + property.Plumbing + property.Sewer + property.HVAC;
 
-                avg = avg / 14;
+                avg /= 14;
             }
             else
             {
-                avg = avg / 10;
+                avg /= 10;
             }
 
             return avg;
+        }
+
+        private bool CompareTime(Property a, Property b)
+        {
+            if (a == null || b == null)
+            {
+                return true;
+            }
+            return a.EditTime.CompareTo(b.EditTime) < 0;
         }
 
         public IEnumerable<Property> BestProperties(int max = 10)
@@ -106,18 +116,11 @@ namespace MSMBackend.Data
                         Property x = props[j - 1];
                         props[j - 1] = p;
                         props[j] = x;
-
                     }
-
                     j--;
                 }
             }
             return props.ToList();
-        }
-
-        private int CompareTime(Property a, Property b)
-        {
-            return a.EditTime.CompareTo(b.EditTime);
         }
 
         public IEnumerable<Property> RecentProperties(int max = 5)
@@ -134,12 +137,7 @@ namespace MSMBackend.Data
                 int j = len;
                 while (j >= 1)
                 {
-                    if (props[j - 1] == null)
-                    {
-                        props[j - 1] = p;
-                        props[j] = null;
-                    }
-                    else if (CompareTime(props[j - 1], p) < 0)
+                    if (CompareTime(props[j - 1], p))
                     {
                         Property x = props[j - 1];
                         props[j - 1] = p;

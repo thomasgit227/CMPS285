@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MSMBackend.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class Update : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +15,8 @@ namespace MSMBackend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Location = table.Column<string>(nullable: false),
+                    EditTime = table.Column<DateTimeOffset>(nullable: false),
+                    Username = table.Column<string>(nullable: false),
                     ImageURL = table.Column<string>(nullable: false),
                     Utilities = table.Column<bool>(nullable: false),
                     Roof = table.Column<int>(nullable: false),

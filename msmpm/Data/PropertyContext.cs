@@ -12,6 +12,6 @@ namespace MSMBackend.Models
         }
 
         public DbSet<Property> Properties { get; set; }
-
+        
     }
 }
