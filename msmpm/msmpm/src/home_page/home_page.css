@@ -1,24 +1,19 @@
+.home {
+  max-width: 95%;
+  margin-left: 2.5%;
+}
 .leaderboard_heading {
-  margin-top: 1%;
-  margin-left: 1%;
-  margin-bottom: 1%;
-  width: max-content;
-  color: black;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 1em;
 }
 
 .leaderboard {
-  width: 40%;
-  padding-left: 1%;
-  float: left;
-  font-size: medium;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border: .25em solid olivedrab;
+}
+
+.edithistory_heading {
+  margin-top: 1em;
 }
 
 .edithistory {
-  width: 60%;
-  padding: 1%;
-  float: right;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: small;
+  border: .25em solid olivedrab;
 }

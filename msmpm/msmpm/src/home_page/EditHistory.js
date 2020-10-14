@@ -4,11 +4,12 @@ import './home_page.css';
 
 export default function EditHistory() {
     return (
-        <div className = 'edithistory'>
-            <h3>
-                Recent History
-            </h3>
-            <Table>
+        <div>
+            <h4 className = 'edithistory_heading'>
+                Recent Changes
+            </h4>
+
+            <Table className = 'edithistory'>
                 <thead>
                     <tr>
                         <th>Changed Property</th>

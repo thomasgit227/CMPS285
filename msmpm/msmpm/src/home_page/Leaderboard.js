@@ -13,9 +13,9 @@ export default function Leadership() {
     return (
             <div>
 
-                <h3 className = 'leaderboard_heading'>
+                <h4 className = 'leaderboard_heading'>
                     Leaderboard
-                </h3>
+                </h4>
 
                 <ListGroup className = 'leaderboard'>
 

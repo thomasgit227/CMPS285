@@ -28,7 +28,7 @@ export default function AppNavbar() {
     };
 
     return (
-        <div className = 'navbar'>
+        <div>
 
         <Navbar light expand="md">
           <NavbarBrand href="/">MSMPM</NavbarBrand>
@@ -38,9 +38,9 @@ export default function AppNavbar() {
               <NavItem>
                 <NavLink href="/properties/">properties</NavLink>
               </NavItem>
-              {/* <NavItem>
+              <NavItem>
                 <NavLink href="/search/">search</NavLink>
-              </NavItem> */}
+              </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   account
@@ -49,9 +49,9 @@ export default function AppNavbar() {
                   <DropdownItem href="/login/">
                     view
                   </DropdownItem>
-                  {/* <DropdownItem href="/account/edit">
+                  <DropdownItem href="/account/edit">
                     edit
-                  </DropdownItem> */}
+                  </DropdownItem>
                   <DropdownItem>
                     <Button onClick={logout}>
                       sign out
