@@ -23,7 +23,7 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
-
+            //property.EditTime = DateTimeOffset.UtcNow();
             _context.Properties.Add(property);
 
         }
