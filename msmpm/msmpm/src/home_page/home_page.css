@@ -17,3 +17,8 @@
 .edithistory {
   border: .25em solid olivedrab;
 }
+
+.test {
+  text-align: center;
+  margin-top: 2em;
+}

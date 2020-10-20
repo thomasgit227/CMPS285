@@ -6,18 +6,20 @@ import {
 } from 'reactstrap';
 import EditHistory from './EditHistory';
 import Leaderboard from './Leaderboard';
+import Test from './Test';
 
 export default function Home() {
     return (
         <div className = 'home'>
-            <Row>
+            {/* <Row>
                 <Col>
                     <Leaderboard/>
                 </Col>
                 <Col>
                     <EditHistory/>
                 </Col>
-            </Row>
+            </Row> */}
+            <Test/>
         </div>
     );
 }
