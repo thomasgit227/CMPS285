@@ -23,6 +23,8 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
+            //Temporary for now hopefully
+            property.EditTime = DateTimeOffset.Now;
 
             _context.Properties.Add(property);
 
