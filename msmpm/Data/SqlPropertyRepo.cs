@@ -23,11 +23,7 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            //Temporary for now hopefully
-            property.EditTime = DateTimeOffset.Now;
-
             _context.Properties.Add(property);
-
         }
         
         public void DeleteProperty(Property property)
@@ -58,9 +54,14 @@ namespace MSMBackend.Data
         public void UpdateProperty(Property property)
         {
             //Nothing, DBContext does this for is
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
+
+            property.SetTime();
         }
 
-        
         public int AverageAttributeRating(Property property)
         {
             if (property == null)
@@ -68,21 +69,17 @@ namespace MSMBackend.Data
                 throw new ArgumentNullException(nameof(property));
             }
 
-            int avg = property.Roof + property.ExtWalls + property.ExtOpenings + property.Framework + property.Piers;
-            avg += property.Chimney + property.Door + property.Windows + property.Shutters + property.Flooring;
+            return property.Average();
+        }
 
-            if (property.Utilities)
+        public string PropertyEditTime(Property property)
+        {
+            if (property == null)
             {
-                avg += property.Electrical + property.Plumbing + property.Sewer + property.HVAC;
-
-                avg /= 14;
+                throw new ArgumentNullException(nameof(property));
             }
-            else
-            {
-                avg /= 10;
-            }
-
-            return avg;
+            string fmt = "G";
+            return property.EditTime.ToString(fmt);
         }
 
         private bool CompareTime(Property a, Property b)

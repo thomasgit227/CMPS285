@@ -21,10 +21,10 @@ namespace MSMBackend.Data
 
         int AverageAttributeRating(Property property);
 
+        string PropertyEditTime(Property property);
+
         IEnumerable<Property> BestProperties(int max = 10);
 
         IEnumerable<Property> RecentProperties(int max = 5);
-
-        
     }
 }

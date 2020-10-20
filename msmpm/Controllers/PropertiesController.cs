@@ -49,17 +49,32 @@ namespace MSMBackend.Controllers
             return NotFound();
         }
 
-        
+
         // GET: api/Properties/{id}/average
         [HttpGet("{id}/average", Name = "GetAverageOfProperty")]
         public ActionResult<int> GetAverageOfProperty(int id)
         {
             var propertyItem = _repository.GetPropertyById(id);
-            
+
             if (propertyItem != null)
             {
                 int average = _repository.AverageAttributeRating(propertyItem);
                 return Ok(_mapper.Map<int>(average));
+            }
+
+            return NotFound();
+        }
+
+        // GET: api/Properties/{id}/time
+        [HttpGet("{id}/time", Name = "GetEditTimeOfProperty")]
+        public ActionResult<string> GetEditTimeOfProperty(int id)
+        {
+            var propertyItem = _repository.GetPropertyById(id);
+
+            if (propertyItem != null)
+            {
+                string time = _repository.PropertyEditTime(propertyItem);
+                return Ok(_mapper.Map<string>(time));
             }
 
             return NotFound();
@@ -82,15 +97,19 @@ namespace MSMBackend.Controllers
 
             return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
-        
+
 
         //POST api/Properties
         [HttpPost]
         public ActionResult<PropertyReadDto> CreateProperty(PropertyCreateDto propertyCreateDto)
         {
-            var propertyModel = _mapper.Map<Property>(propertyCreateDto); 
-                                                                          
+            var propertyModel = _mapper.Map<Property>(propertyCreateDto);
+
             _repository.CreateProperty(propertyModel);
+
+            //This updates the edit time to be the current time
+            _repository.UpdateProperty(propertyModel);
+
             _repository.SaveChanges();
 
             var propertyReadDto = _mapper.Map<PropertyReadDto>(propertyModel);
@@ -103,14 +122,14 @@ namespace MSMBackend.Controllers
         public ActionResult UpdateProperty(int id, PropertyUpdateDto propertyUpdateDto)
         {
             var propertyModelFromRepo = _repository.GetPropertyById(id);
-            if(propertyModelFromRepo ==  null)
+            if (propertyModelFromRepo == null)
             {
                 return NotFound(); //404
             }
 
             _mapper.Map(propertyUpdateDto, propertyModelFromRepo);
 
-            //This isnt doing anything rn but if we update the repo implementation later its here
+            //This updates the edit time to be the current time
             _repository.UpdateProperty(propertyModelFromRepo);
 
             _repository.SaveChanges();
@@ -138,6 +157,7 @@ namespace MSMBackend.Controllers
 
             _mapper.Map(propertyToPatch, propertyModelFromRepo);
 
+            //This updates the edit time to be the current time
             _repository.UpdateProperty(propertyModelFromRepo);
 
             _repository.SaveChanges();
