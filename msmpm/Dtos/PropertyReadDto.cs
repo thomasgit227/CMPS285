@@ -18,9 +18,6 @@ namespace MSMBackend.Dtos
         public string Location { get; set; }
 
         [Required]
-        public DateTimeOffset EditTime { get; set; }
-
-        [Required]
         public string Username { get; set; }
 
         [Required]
@@ -56,8 +53,6 @@ namespace MSMBackend.Dtos
         public int Plumbing { get; set; }
         [Required]
         public int Sewer { get; set; }
-        
-        //REMOVING HVAC IN READ DTO FOR TESTING PURPOSES
         [Required]
         public int HVAC { get; set; }
     }

@@ -14,9 +14,6 @@ namespace MSMBackend.Dtos
         public string Location { get; set; }
 
         [Required]
-        public DateTimeOffset EditTime { get; set; }
-
-        [Required]
         public string Username { get; set; }
 
         [Required]

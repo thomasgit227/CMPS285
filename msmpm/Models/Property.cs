@@ -21,9 +21,6 @@ namespace MSMBackend.Models
         public string Location { get; set; }
 
         [Required]
-        public DateTimeOffset EditTime { get; set; }
-
-        [Required]
         public string Username { get; set; }
 
         [Required]
@@ -77,27 +74,35 @@ namespace MSMBackend.Models
         [Required]
         public int HVAC { get; set; }
 
-        /*
+        public DateTimeOffset EditTime { get; set; }
+
+
         //Average method if we decide to implement it in the Property class and not calculate it through the Repo
         public int Average()
         {
             int avg = Roof + ExtWalls + ExtOpenings + Framework + Piers;
             avg += Chimney + Door + Windows + Shutters + Flooring;
+            int div = 0;
 
             if (Utilities)
             {
                 avg += Electrical + Plumbing + Sewer + HVAC;
 
-                avg = avg / 14;
+                div = 14;
             }
             else
             {
-                avg = avg / 10;
+                div = 10;
             }
-
+            //avg /= div;
             return avg;
         }
-        */
 
+        
+        public void SetTime()
+        {
+            EditTime = DateTimeOffset.Now;
+        }
+        
     }
 }
