@@ -26,13 +26,6 @@ export default function Test() {
             <Button color = 'success' onClick = {makePost} block>post</Button>
             <br/>
             <Button color = 'secondary' onClick = {doGet} block>get</Button>
-
-            <br/>
-            <br/>
-            <br/>
-            <p>
-                Temporary Change of Home Page
-            </p>
         </div>
     );
 }

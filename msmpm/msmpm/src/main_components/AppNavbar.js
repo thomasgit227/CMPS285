@@ -39,7 +39,7 @@ export default function AppNavbar() {
                 <NavLink href="/properties/">properties</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/search/">search</NavLink>
+                <NavLink href="/test/">test</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>

@@ -6,6 +6,7 @@ import MyProperty from './selected_property/MyProperty';
 import Properties from './all_properties/Properties';
 import Template from './main_components/Template';
 import Login from './login/Login';
+import Test from './home_page/Test'
 import AppNavbar from './main_components/AppNavbar';
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
           <Route exact path="/search/"> <Template/> </Route>
 
           <Route exact path="/login/"> <Login/> </Route>
+
+          <Route exact path="/test/"> <Test/> </Route>
+
 
           <Route> <Redirect to = "/home"> </Redirect> </Route>
             

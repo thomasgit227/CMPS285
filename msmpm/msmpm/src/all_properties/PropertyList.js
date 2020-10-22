@@ -6,6 +6,7 @@ import {
 import {
     Link,
 } from 'react-router-dom';
+import ListedProperty from './ListedProperty';
 
 export default function PropertyList() {
     return (
@@ -19,16 +20,7 @@ export default function PropertyList() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <Link to="/properties/myproperty/">
-                                CST Building
-                            </Link>    
-                        </td>
-                        <td>Hammond, LA</td>
-                        <td>0000-00</td>
-                    </tr>
-
+                    <ListedProperty/>
                     <tr>
                         <td>
                             <Link to="/properties/myproperty/">
