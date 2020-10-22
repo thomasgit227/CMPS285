@@ -5,15 +5,20 @@ import './home_page.css';
 
 export default function Test() {
     const makePost = () => {
-        axios.post('/user', {
+        axios.post('/', {
             name: 'Thomas'
+        })
+        .then(function(response){
+            console.log(response);
+        })
+        .catch(function(error){
+            console.log(error);
         })
     }
 
     const doGet = () => {
 
     }
-
 
     return (
         <div className = 'test'>
@@ -22,14 +27,12 @@ export default function Test() {
             <br/>
             <Button color = 'secondary' onClick = {doGet} block>get</Button>
 
-
-            
             <br/>
             <br/>
             <br/>
-            <h6>
+            <p>
                 Temporary Change of Home Page
-            </h6>
+            </p>
         </div>
     );
 }

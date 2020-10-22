@@ -61,6 +61,7 @@ export default function MyPropertyForm() {
                                 Exterior Walls
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => extSetSelected(0)} active={extSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => extSetSelected(1)} active={extSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => extSetSelected(3)} active={extSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => extSetSelected(5)} active={extSelected === 5}>5</Button>
@@ -75,6 +76,7 @@ export default function MyPropertyForm() {
                                 Openings
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => opnsSetSelected(0)} active={opnsSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => opnsSetSelected(1)} active={opnsSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => opnsSetSelected(3)} active={opnsSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => opnsSetSelected(5)} active={opnsSelected === 5}>5</Button>
@@ -88,6 +90,7 @@ export default function MyPropertyForm() {
                                 Framework
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => fwSetSelected(0)} active={fwSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => fwSetSelected(1)} active={fwSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => fwSetSelected(3)} active={fwSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => fwSetSelected(5)} active={fwSelected === 5}>5</Button>
@@ -102,6 +105,7 @@ export default function MyPropertyForm() {
                                 Paint
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => paintSetSelected(0)} active={paintSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => paintSetSelected(1)} active={paintSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => paintSetSelected(3)} active={paintSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => paintSetSelected(5)} active={paintSelected === 5}>5</Button>
@@ -115,6 +119,7 @@ export default function MyPropertyForm() {
                                 Piers & Footlings
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => paintSelected(0)} active={pfSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => pfSetSelected(1)} active={pfSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => pfSetSelected(3)} active={pfSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => pfSetSelected(5)} active={pfSelected === 5}>5</Button>
@@ -128,6 +133,7 @@ export default function MyPropertyForm() {
                                 Chimneys
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => chimSetSelected(0)} active={chimSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => chimSetSelected(1)} active={chimSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => chimSetSelected(3)} active={chimSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => chimSetSelected(5)} active={chimSelected === 5}>5</Button>
@@ -141,6 +147,7 @@ export default function MyPropertyForm() {
                                 Doors
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => doorSetSelected(0)} active={doorSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => doorSetSelected(1)} active={doorSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => doorSetSelected(3)} active={doorSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => doorSetSelected(5)} active={doorSelected === 5}>5</Button>
@@ -155,6 +162,7 @@ export default function MyPropertyForm() {
                                 Windows
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => windSetSelected(0)} active={windSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => windSetSelected(1)} active={windSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => windSetSelected(3)} active={windSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => windSetSelected(5)} active={windSelected === 5}>5</Button>
@@ -168,6 +176,7 @@ export default function MyPropertyForm() {
                                 Shutters
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => shutSetSelected(0)} active={shutSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => shutSetSelected(1)} active={shutSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => shutSetSelected(3)} active={shutSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => shutSetSelected(5)} active={shutSelected === 5}>5</Button>
@@ -181,6 +190,7 @@ export default function MyPropertyForm() {
                                 Flooring
                             </h6>
                             <ButtonGroup>
+                                <Button color="secondary" onClick={() => floorSetSelected(0)} active={floorSelected === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => floorSetSelected(1)} active={floorSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => floorSetSelected(3)} active={floorSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => floorSetSelected(5)} active={floorSelected === 5}>5</Button>
@@ -190,7 +200,7 @@ export default function MyPropertyForm() {
                 </FormGroup>
 
             <div className = 'propertyform_util'>
-                <Button color="secondary" onClick={toggle}>{utlState}</Button>
+                <Button color="secondary" onClick={toggle} block>{utlState}</Button>
 
                 <Collapse isOpen={isOpen}>
                     <Form>
@@ -201,6 +211,7 @@ export default function MyPropertyForm() {
                                     Electrical
                                 </h6>
                                 <ButtonGroup>
+                                    <Button color="secondary" onClick={() => elecSetSelected(0)} active={elecSelected === 0}>∅</Button>
                                     <Button color="secondary" onClick={() => elecSetSelected(1)} active={elecSelected === 1}>1</Button>
                                     <Button color="secondary" onClick={() => elecSetSelected(3)} active={elecSelected === 3}>3</Button>
                                     <Button color="secondary" onClick={() => elecSetSelected(5)} active={elecSelected === 5}>5</Button>
@@ -214,6 +225,7 @@ export default function MyPropertyForm() {
                                     Plumbing
                                 </h6>
                                 <ButtonGroup>
+                                    <Button color="secondary" onClick={() => plumbSetSelected(0)} active={plumbSelected === 0}>∅</Button>
                                     <Button color="secondary" onClick={() => plumbSetSelected(1)} active={plumbSelected === 1}>1</Button>
                                     <Button color="secondary" onClick={() => plumbSetSelected(3)} active={plumbSelected === 3}>3</Button>
                                     <Button color="secondary" onClick={() => plumbSetSelected(5)} active={plumbSelected === 5}>5</Button>
@@ -227,6 +239,7 @@ export default function MyPropertyForm() {
                                     Sewage
                                 </h6>
                                 <ButtonGroup>
+                                    <Button color="secondary" onClick={() => sewSetSelected(0)} active={sewSelected === 0}>∅</Button>
                                     <Button color="secondary" onClick={() => sewSetSelected(1)} active={sewSelected === 1}>1</Button>
                                     <Button color="secondary" onClick={() => sewSetSelected(3)} active={sewSelected === 3}>3</Button>
                                     <Button color="secondary" onClick={() => sewSetSelected(5)} active={sewSelected === 5}>5</Button>
@@ -240,6 +253,7 @@ export default function MyPropertyForm() {
                                     HVAC
                                 </h6>
                                 <ButtonGroup>
+                                    <Button color="secondary" onClick={() => hvacSetSelected(0)} active={hvacSelected === 0}>∅</Button>
                                     <Button color="secondary" onClick={() => hvacSetSelected(1)} active={hvacSelected === 1}>1</Button>
                                     <Button color="secondary" onClick={() => hvacSetSelected(3)} active={hvacSelected === 3}>3</Button>
                                     <Button color="secondary" onClick={() => hvacSetSelected(5)} active={hvacSelected === 5}>5</Button>

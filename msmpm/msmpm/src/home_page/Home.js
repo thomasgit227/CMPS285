@@ -11,15 +11,15 @@ import Test from './Test';
 export default function Home() {
     return (
         <div className = 'home'>
-            {/* <Row>
+            <Row>
                 <Col>
                     <Leaderboard/>
                 </Col>
                 <Col>
                     <EditHistory/>
                 </Col>
-            </Row> */}
-            <Test/>
+            </Row>
+            {/* <Test/> */}
         </div>
     );
 }
