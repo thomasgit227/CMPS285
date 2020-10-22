@@ -82,17 +82,19 @@ namespace MSMBackend.Models
         {
             int avg = Roof + ExtWalls + ExtOpenings + Framework + Piers;
             avg += Chimney + Door + Windows + Shutters + Flooring;
+            int div = 0;
 
             if (Utilities)
             {
                 avg += Electrical + Plumbing + Sewer + HVAC;
 
-                avg /= 14;
+                div = 14;
             }
             else
             {
-                avg /= 10;
+                div = 10;
             }
+            //avg /= div;
             return avg;
         }
 

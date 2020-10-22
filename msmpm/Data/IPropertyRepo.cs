@@ -26,5 +26,8 @@ namespace MSMBackend.Data
         IEnumerable<Property> BestProperties(int max = 10);
 
         IEnumerable<Property> RecentProperties(int max = 5);
+
+        //Additional methods currently just for testing purposes:
+        public IEnumerable<Property> SortByAlphabetical();
     }
 }

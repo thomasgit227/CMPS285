@@ -181,5 +181,40 @@ namespace MSMBackend.Controllers
             return NoContent();
         }
 
+        //Additional methods currently just for testing:
+        /*
+        // GET: api/Properties/name/{name}
+        [HttpGet("name/{name}", Name = "GetPropertyByName")]
+        public ActionResult<PropertyReadDto> GetPropertyByName(string name)
+        {
+            var propertyItem = _repository.GetPropertyByName(name);
+            if (propertyItem != null)
+            {
+                return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
+            }
+
+            return NotFound();
+        }
+
+        // GET: api/Properties/location/{location}
+        [HttpGet("location/{location}", Name = "GetPropertyByLocation")]
+        public ActionResult<PropertyReadDto> GetPropertyByLocation(string name)
+        {
+            var propertyItem = _repository.GetPropertyByLocation(name);
+            if (propertyItem != null)
+            {
+                return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
+            }
+            return NotFound();
+        }
+        */
+        // Get: api/Properties/alphabetical
+        [HttpGet("alphabetical", Name = "GetAlphabeticalProperties")]
+        public ActionResult<IEnumerable<PropertyReadDto>> GetAlphabeticalProperties()
+        {
+            var propertyItems = _repository.SortByAlphabetical();
+
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+        }
     }
 }
