@@ -1,9 +1,10 @@
 ﻿using MSMBackend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MSMBackend.Models
 {
-    public class PropertyContext : DbContext
+    public class PropertyContext : IdentityDbContext
     {
         public PropertyContext(DbContextOptions<PropertyContext> options)
             : base(options)
