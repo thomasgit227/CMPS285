@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using MSMBackend.Data.Entity;
 
-namespace MSMBackend.Data
+
+namespace MSMBackend.Data.Entity
 {
     public class User : IdentityUser<int>
     {

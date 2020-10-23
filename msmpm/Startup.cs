@@ -15,6 +15,9 @@ using MSMBackend.Models;
 using MSMBackend.Data;
 using AutoMapper;
 using Newtonsoft.Json.Serialization;
+using MSMBackend.Data.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MSMBackend
 {
@@ -41,6 +44,8 @@ namespace MSMBackend
 
             services.AddScoped<IPropertyRepo, SqlPropertyRepo>();  //Created new implementation using sql server
                                                                    //Here is being injected
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<PropertyContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
