@@ -41,6 +41,10 @@ namespace MSMBackend
 
             services.AddScoped<IPropertyRepo, SqlPropertyRepo>();  //Created new implementation using sql server
                                                                    //Here is being injected
+                                                                   
+            services.AddSpaStaticFiles(configuration => {
+                configuration.RootPath = "MSMPM/build";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +64,18 @@ namespace MSMBackend
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            
+            app.UseSpaStaticFiles();
+
+            app.UseSpa(spa => {
+                spa.Options.SourcePath = "MSMPM";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
             });
         }
     }
