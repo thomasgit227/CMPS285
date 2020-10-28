@@ -13,11 +13,20 @@ import {
 
 
 export default function MyPropertyForm() {
+
     const [isOpen, setIsOpen] = useState(false);
     const [utlState, setUtilState] = useState('No Utilities');
     const toggle = () => {
         setIsOpen(!isOpen);
         setUtilState(isOpen ? 'No Utilities' : 'Has Utilities');
+    }
+
+    const submitForm = () => {
+        sessionStorage.isLoggedIn ? {
+            
+        } : {
+            //TODO Link them to Login Page
+        }
     }
 
     //All
