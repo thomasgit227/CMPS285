@@ -5,7 +5,7 @@ import './home_page.css';
 
 export default function Test() {
     const makePost = () => {
-        axios.post('/', {
+        axios.post('/api/commands', {
             name: 'Thomas'
         })
         .then(function(response){
@@ -17,7 +17,12 @@ export default function Test() {
     }
 
     const doGet = () => {
-
+        axios.get('/api/commands')
+        .then((response) => {
+            console.log(response);
+          }, (error) => {
+            console.log(error);
+          });
     }
 
     return (

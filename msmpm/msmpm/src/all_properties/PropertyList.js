@@ -21,25 +21,6 @@ export default function PropertyList() {
                 </thead>
                 <tbody>
                     <ListedProperty/>
-                    <tr>
-                        <td>
-                            <Link to="/properties/myproperty/">
-                                Chili's
-                            </Link>    
-                        </td>
-                        <td>Hammond, LA</td>
-                        <td>0001-00</td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <Link to="/properties/myproperty/">
-                                GDoc's House
-                            </Link>    
-                        </td>
-                        <td>UNKNOWN</td>
-                        <td>0002-00</td>
-                    </tr>
                 </tbody>
             </Table>
         </div>

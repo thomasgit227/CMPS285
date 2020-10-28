@@ -9,6 +9,7 @@
 .leaderboard {
   border: .25em solid olivedrab;
   box-shadow: .5em .5em lightgray;
+  border-radius: 0% !important;
 }
 
 .edithistory_heading {
@@ -18,6 +19,7 @@
 .edithistory {
   border: .25em solid olivedrab;
   box-shadow: .5em .5em lightgray;
+  border-radius: 0% !important;
 }
 
 .test {

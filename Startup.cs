@@ -33,6 +33,10 @@ namespace FireFerrets
 
             services.AddControllers();
 
+            services.AddSpaStaticFiles(configuration => {
+                configuration.RootPath = "MSMPM/build";
+            });
+            
 
             services.AddScoped<IFireFerretsRepo, SqlFireFerretsRepo>();
           //***Swapping Mock Implementation for
@@ -56,9 +60,19 @@ namespace FireFerrets
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
+            });
+
+            app.UseSpaStaticFiles();
+
+            app.UseSpa(spa => {
+                spa.Options.SourcePath = "MSMPM";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
             });
         }
     }
