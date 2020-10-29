@@ -66,7 +66,6 @@ namespace MSMBackend
             {
                 endpoints.MapControllers();
             });
-
             
             app.UseSpaStaticFiles();
 

@@ -21,13 +21,13 @@ export default function MyPropertyForm() {
         setUtilState(isOpen ? 'No Utilities' : 'Has Utilities');
     }
 
-    const submitForm = () => {
-        sessionStorage.isLoggedIn ? {
+    // const submitForm = () => {
+    //     sessionStorage.isLoggedIn ? {
             
-        } : {
-            //TODO Link them to Login Page
-        }
-    }
+    //     } : {
+    //         //TODO Link them to Login Page
+    //     }
+    // }
 
     //All
     const [roofSelected, roofSetSelected] = useState(null);
