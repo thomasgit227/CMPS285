@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MSMBackend.Data.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -76,6 +77,12 @@ namespace MSMBackend.Models
 
         [Required]
         public int HVAC { get; set; }
+
+        [Required]
+        public virtual User User { get; set; }
+        [Required]
+
+        public int UserId { get; set; }
 
         /*
         //Average method if we decide to implement it in the Property class and not calculate it through the Repo

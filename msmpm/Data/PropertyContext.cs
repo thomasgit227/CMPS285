@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MSMBackend.Data.Entity;
 using Microsoft.AspNetCore.Identity;
-using MSMBackend.Data.Post;
+
 
 namespace MSMBackend.Models
 {
