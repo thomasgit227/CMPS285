@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSMBackend.Migrations
 {
     [DbContext(typeof(PropertyContext))]
-    [Migration("20201028161934_SeedPropertyTable")]
-    partial class SeedPropertyTable
+    [Migration("20201029174017_FirstSeed")]
+    partial class FirstSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,7 +103,7 @@ namespace MSMBackend.Migrations
                             Id = 2,
                             Chimney = 7,
                             Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 40, 16, 731, DateTimeKind.Unspecified).AddTicks(6087), new TimeSpan(0, -5, 0, 0, 0)),
                             Electrical = 7,
                             ExtOpenings = 7,
                             ExtWalls = 7,

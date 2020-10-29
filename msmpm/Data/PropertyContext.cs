@@ -1,5 +1,6 @@
 ﻿using MSMBackend.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace MSMBackend.Models
 {
@@ -37,7 +38,8 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7
+                        HVAC = 7,
+                        EditTime = DateTime.Now
 
                     }
                  );
