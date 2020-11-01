@@ -27,6 +27,10 @@ namespace MSMBackend.Models
 
         public string ImageURL { get; set; }
 
+        public int Average { get; set; }
+
+        public string EditTime { get; set; }
+
         [Required]
         public Boolean Utilities { get; set; }
 
@@ -74,11 +78,12 @@ namespace MSMBackend.Models
         [Required]
         public int HVAC { get; set; }
 
-        public DateTimeOffset EditTime { get; set; }
+        public DateTimeOffset EditTimeOffset { get; set; }
+        
 
 
         //Average method if we decide to implement it in the Property class and not calculate it through the Repo
-        public int Average()
+        public void SetAverage()
         {
             int avg = Roof + ExtWalls + ExtOpenings + Framework + Piers;
             avg += Chimney + Door + Windows + Shutters + Flooring;
@@ -94,15 +99,26 @@ namespace MSMBackend.Models
             {
                 div = 10;
             }
-            //avg /= div;
-            return avg;
+            avg /= div;
+
+            Average = avg;
         }
 
         
         public void SetTime()
         {
-            EditTime = DateTimeOffset.Now;
+            //This is the DateTimeOffset format to get the date and time of the edit
+            string fmt = "G";
+            EditTimeOffset = DateTimeOffset.Now;
+
+            EditTime = EditTimeOffset.ToString(fmt);
         }
         
+        public void UpdateProperty()
+        {
+            SetAverage();
+            SetTime();
+        }
+
     }
 }

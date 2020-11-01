@@ -22,6 +22,13 @@ namespace MSMBackend.Dtos
 
         [Required]
         public string ImageURL { get; set; }
+
+        [Required]
+        public int Average { get; set; }
+
+        [Required]
+        public string EditTime { get; set; }
+
         [Required]
         public Boolean Utilities { get; set; }
 

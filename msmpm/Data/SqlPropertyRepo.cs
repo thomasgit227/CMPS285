@@ -60,7 +60,8 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            property.SetTime();
+
+            property.UpdateProperty();
         }
 
         public int AverageAttributeRating(Property property)
@@ -69,12 +70,12 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            return property.Average();
+            return property.Average;
         }
 
         private int CompareAverage(Property a, Property b)
         {
-            return a.Average() - b.Average();
+            return a.Average - b.Average;
         }
 
         public string PropertyEditTime(Property property)
@@ -83,9 +84,8 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            //This is the DateTimeOffset format to get the date and time of the edit
-            string fmt = "G";
-            return property.EditTime.ToString(fmt);
+
+            return property.EditTime;
         }
 
         public IEnumerable<Property> BestProperties(int max = 10)
@@ -103,7 +103,7 @@ namespace MSMBackend.Data
         public IEnumerable<Property> RecentProperties(int max = 5)
         {
             List<Property> propBank = GetAllProperties().ToList();
-            propBank.Sort(new Comparison<Property>((x, y) => DateTimeOffset.Compare(y.EditTime, x.EditTime)));
+            propBank.Sort(new Comparison<Property>((x, y) => DateTimeOffset.Compare(y.EditTimeOffset, x.EditTimeOffset)));
 
             if(max < propBank.Count())
             {

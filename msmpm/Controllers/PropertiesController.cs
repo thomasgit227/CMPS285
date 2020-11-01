@@ -13,7 +13,7 @@ using MSMBackend.Models;
 
 namespace MSMBackend.Controllers
 {
-    [Route("api/Properties")]
+    [Route("/")]
     [ApiController]
     public class PropertiesController : ControllerBase
     {
@@ -27,8 +27,8 @@ namespace MSMBackend.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Properties
-        [HttpGet]
+        // GET: https://msmbackenddeploy.azurewebsites.net/
+        [HttpGet("", Name = "Get All Properties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetAllProperties()
         {
             var propertyItems = _repository.GetAllProperties();
@@ -36,8 +36,9 @@ namespace MSMBackend.Controllers
             return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
 
-        // GET: api/Properties/{id}
-        [HttpGet("{id}", Name = "GetPropertyById")]
+
+        // GET: https://msmbackenddeploy.azurewebsites.net/{id}
+        [HttpGet("{id}", Name = "Get Property By Id")]
         public ActionResult<PropertyReadDto> GetPropertyById(int id)
         {
             var propertyItem = _repository.GetPropertyById(id);
@@ -49,9 +50,9 @@ namespace MSMBackend.Controllers
             return NotFound();
         }
 
-
-        // GET: api/Properties/{id}/average
-        [HttpGet("{id}/average", Name = "GetAverageOfProperty")]
+        /*
+        // GET: https://msmbackenddeploy.azurewebsites.net/average
+        [HttpGet("{id}/average", Name = "Get Average Of Property")]
         public ActionResult<int> GetAverageOfProperty(int id)
         {
             var propertyItem = _repository.GetPropertyById(id);
@@ -65,8 +66,9 @@ namespace MSMBackend.Controllers
             return NotFound();
         }
 
-        // GET: api/Properties/{id}/time
-        [HttpGet("{id}/time", Name = "GetEditTimeOfProperty")]
+        
+        // GET: https://msmbackenddeploy.azurewebsites.net/{id}/time
+        [HttpGet("{id}/time", Name = "Get Edit Time Of Property")]
         public ActionResult<string> GetEditTimeOfProperty(int id)
         {
             var propertyItem = _repository.GetPropertyById(id);
@@ -79,9 +81,10 @@ namespace MSMBackend.Controllers
 
             return NotFound();
         }
+        */
 
-        // Get: api/Properties/best
-        [HttpGet("best", Name = "GetBestProperties")]
+        // Get: https://msmbackenddeploy.azurewebsites.net/best
+        [HttpGet("best", Name = "Get Best Properties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetBestProperties()
         {
             var propertyItems = _repository.BestProperties();
@@ -89,8 +92,8 @@ namespace MSMBackend.Controllers
             return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
 
-        // Get: api/Properties/recent
-        [HttpGet("recent", Name = "GetRecentProperties")]
+        // Get: https://msmbackenddeploy.azurewebsites.net/recent
+        [HttpGet("recent", Name = "Get Recent Properties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetRecentProperties()
         {
             var propertyItems = _repository.RecentProperties();
@@ -99,8 +102,8 @@ namespace MSMBackend.Controllers
         }
 
 
-        //POST api/Properties
-        [HttpPost]
+        //POST https://msmbackenddeploy.azurewebsites.net
+        [HttpPost("", Name = "Create Property")]
         public ActionResult<PropertyReadDto> CreateProperty(PropertyCreateDto propertyCreateDto)
         {
             var propertyModel = _mapper.Map<Property>(propertyCreateDto);
@@ -117,8 +120,8 @@ namespace MSMBackend.Controllers
             return CreatedAtRoute(nameof(GetPropertyById), new { Id = propertyReadDto.Id }, propertyReadDto);
         }
 
-        //PUT api/commands/{id}
-        [HttpPut("{id}")]
+        //PUT https://msmbackenddeploy.azurewebsites.net/{id}
+        [HttpPut("{id}", Name ="Update Property")]
         public ActionResult UpdateProperty(int id, PropertyUpdateDto propertyUpdateDto)
         {
             var propertyModelFromRepo = _repository.GetPropertyById(id);
@@ -137,6 +140,7 @@ namespace MSMBackend.Controllers
             return NoContent();
         }
 
+        /*
         //PATCH api/commands{id}
         [HttpPatch("{id}")]
         public ActionResult PartialPropertyUpdate(int id, JsonPatchDocument<PropertyUpdateDto> patchDoc)
@@ -164,9 +168,10 @@ namespace MSMBackend.Controllers
 
             return NoContent();
         }
+        */
 
-        //DELETE api/properties/{id}
-        [HttpDelete("{id}")]
+        //DELETE https://msmbackenddeploy.azurewebsites.net/{id}
+        [HttpDelete("{id}", Name ="Delete Property")]
         public ActionResult DeleteProperty(int id)
         {
             var propertyModelFromRepo = _repository.GetPropertyById(id);
@@ -180,41 +185,16 @@ namespace MSMBackend.Controllers
 
             return NoContent();
         }
-
         //Additional methods currently just for testing:
-        /*
-        // GET: api/Properties/name/{name}
-        [HttpGet("name/{name}", Name = "GetPropertyByName")]
-        public ActionResult<PropertyReadDto> GetPropertyByName(string name)
-        {
-            var propertyItem = _repository.GetPropertyByName(name);
-            if (propertyItem != null)
-            {
-                return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
-            }
 
-            return NotFound();
-        }
-
-        // GET: api/Properties/location/{location}
-        [HttpGet("location/{location}", Name = "GetPropertyByLocation")]
-        public ActionResult<PropertyReadDto> GetPropertyByLocation(string name)
-        {
-            var propertyItem = _repository.GetPropertyByLocation(name);
-            if (propertyItem != null)
-            {
-                return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
-            }
-            return NotFound();
-        }
-        */
-        // Get: api/Properties/alphabetical
-        [HttpGet("alphabetical", Name = "GetAlphabeticalProperties")]
+        // Get: https://msmbackenddeploy.azurewebsites.net/alphabetical
+        [HttpGet("abc", Name = "Get Alphabetical List of Properties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetAlphabeticalProperties()
         {
             var propertyItems = _repository.SortByAlphabetical();
 
             return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
+        
     }
 }
