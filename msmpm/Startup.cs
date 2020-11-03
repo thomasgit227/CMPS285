@@ -18,6 +18,8 @@ using Newtonsoft.Json.Serialization;
 using MSMBackend.Data.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.SwaggerUI;
+
 
 namespace MSMBackend
 {
@@ -46,6 +48,11 @@ namespace MSMBackend
                                                                    //Here is being injected
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<PropertyContext>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "MSMPM API", Version = "V1" });
+            });
         }                                 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +66,12 @@ namespace MSMBackend
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MSMPM API");
+            });
 
             app.UseHttpsRedirection();
 

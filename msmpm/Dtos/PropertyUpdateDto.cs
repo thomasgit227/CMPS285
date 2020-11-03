@@ -16,8 +16,8 @@ namespace MSMBackend.Dtos
         [Required]
         public DateTimeOffset EditTime { get; set; }
 
-        [Required]
-        public string Username { get; set; }
+        //[Required]
+        //public string Username { get; set; }
 
         [Required]
         public string ImageURL { get; set; }
