@@ -24,8 +24,8 @@ namespace MSMBackend.Models
         [Required]
         public DateTimeOffset EditTime { get; set; }
 
-        [Required]
-        public string Username { get; set; }
+        //[Required]
+        //public string Username { get; set; }
 
         [Required]
 
@@ -77,12 +77,8 @@ namespace MSMBackend.Models
 
         [Required]
         public int HVAC { get; set; }
-
-        [Required]
         public virtual User User { get; set; }
-        [Required]
-
-        public int UserId { get; set; }
+        public int UsersId { get; set; }
 
         /*
         //Average method if we decide to implement it in the Property class and not calculate it through the Repo

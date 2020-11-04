@@ -54,6 +54,9 @@ namespace MSMBackend.Dtos
         [Required]
         public int Sewer { get; set; }
         [Required]
-        public int HVAC { get; set; }
+        public int HVAC
+        {
+            get; set;
+        }
     }
 }

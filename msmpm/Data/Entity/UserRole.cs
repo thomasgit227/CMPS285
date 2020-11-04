@@ -10,5 +10,6 @@ namespace MSMBackend.Data.Entity
     {
         public virtual User User { get; set; }
         public virtual Role Role { get; set; }
+        public int Id { get; set; }
     }
 }

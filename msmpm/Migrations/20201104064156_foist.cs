@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MSMBackend.Migrations
 {
-    public partial class RolesTest : Migration
+    public partial class foist : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -115,7 +115,8 @@ namespace MSMBackend.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
+                    RoleId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,7 +164,6 @@ namespace MSMBackend.Migrations
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Location = table.Column<string>(nullable: false),
                     EditTime = table.Column<DateTimeOffset>(nullable: false),
-                    Username = table.Column<string>(nullable: false),
                     ImageURL = table.Column<string>(nullable: false),
                     Utilities = table.Column<bool>(nullable: false),
                     Roof = table.Column<int>(nullable: false),
@@ -180,7 +180,8 @@ namespace MSMBackend.Migrations
                     Plumbing = table.Column<int>(nullable: false),
                     Sewer = table.Column<int>(nullable: false),
                     HVAC = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: true),
+                    UsersId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -190,7 +191,7 @@ namespace MSMBackend.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

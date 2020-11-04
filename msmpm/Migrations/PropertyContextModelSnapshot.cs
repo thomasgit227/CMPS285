@@ -123,6 +123,9 @@ namespace MSMBackend.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
@@ -192,12 +195,11 @@ namespace MSMBackend.Migrations
                     b.Property<int>("Shutters")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Utilities")
                         .HasColumnType("bit");
@@ -317,9 +319,7 @@ namespace MSMBackend.Migrations
                 {
                     b.HasOne("MSMBackend.Data.Entity.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
