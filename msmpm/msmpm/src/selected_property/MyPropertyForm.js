@@ -16,20 +16,19 @@ export default function MyPropertyForm() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [utlState, setUtilState] = useState('No Utilities');
+
+    const [submitted, setSubmitted] = useState(null);
     const toggle = () => {
         setIsOpen(!isOpen);
         setUtilState(isOpen ? 'No Utilities' : 'Has Utilities');
     }
 
-    // const submitForm = () => {
-    //     sessionStorage.isLoggedIn ? {
-            
-    //     } : {
-    //         //TODO Link them to Login Page
-    //     }
-    // }
+    const submitForm = () => {
+        
+    }
 
     //All
+    const [attributes, setAttributes] = useState(null);
     const [roofSelected, roofSetSelected] = useState(null);
     const [extSelected, extSetSelected] = useState(null);
     const [opnsSelected, opnsSetSelected] = useState(null);
@@ -78,7 +77,6 @@ export default function MyPropertyForm() {
                             </ButtonGroup>
                             <br/>
                         </div>
-
 
                         <div>
                             <br/>
@@ -275,7 +273,7 @@ export default function MyPropertyForm() {
             </div>
 
             <div className = 'submitbutton'>
-                <Button block>Submit</Button>
+                <Button block onClick = {submitForm}>Submit</Button>
             </div>
         </Form>
     );

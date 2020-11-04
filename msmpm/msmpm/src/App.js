@@ -12,8 +12,10 @@ import AppNavbar from './main_components/AppNavbar';
 function App() {
   return (
     <div className = 'main'>
-      <AppNavbar/>
       <BrowserRouter>
+        
+        <AppNavbar/>
+
         <Switch>
 
           <Route path="/home"> <Home/> </Route>

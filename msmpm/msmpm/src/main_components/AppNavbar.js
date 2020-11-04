@@ -6,8 +6,8 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
   NavLink,
+  NavItem,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -15,6 +15,10 @@ import {
   Button,
   NavbarText
 } from 'reactstrap';
+
+import {
+  Link
+} from 'react-router-dom';
 
 export default function AppNavbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -31,26 +35,34 @@ export default function AppNavbar() {
         <div>
 
         <Navbar light expand="md">
-          <NavbarBrand href="/">MSMPM</NavbarBrand>
+          <NavbarBrand tag = {Link} to="/">MSMPM</NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
+            <Nav className = 'mr-auto' navbar>
               <NavItem>
-                <NavLink href="/properties/">properties</NavLink>
+                <NavLink tag={Link} to = "/properties/">
+                  properties
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/test/">test</NavLink>
+                <NavLink tag={Link} to = "/test/">
+                  test
+                </NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   account
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem href="/login/">
-                    view
+                  <DropdownItem>
+                    <NavLink tag={Link} to = "/login/">
+                      view
+                    </NavLink>
                   </DropdownItem>
-                  <DropdownItem href="/account/edit">
-                    edit
+                  <DropdownItem>
+                    <NavLink tag={Link} to = "/account/edit">
+                      edit
+                    </NavLink>
                   </DropdownItem>
                   <DropdownItem>
                     <Button onClick={logout}>
