@@ -4,14 +4,16 @@ using MSMBackend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MSMBackend.Migrations
 {
     [DbContext(typeof(PropertyContext))]
-    partial class PropertyContextModelSnapshot : ModelSnapshot
+    [Migration("20201104064156_foist")]
+    partial class foist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,128 +214,6 @@ namespace MSMBackend.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Properties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Chimney = 7,
-                            Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 301, DateTimeKind.Unspecified).AddTicks(6022), new TimeSpan(0, -5, 0, 0, 0)),
-                            Electrical = 7,
-                            ExtOpenings = 7,
-                            ExtWalls = 7,
-                            Flooring = 7,
-                            Framework = 7,
-                            HVAC = 7,
-                            ImageURL = "TestImage2",
-                            Location = "TestLocatio2n",
-                            Name = "TestProp2",
-                            Piers = 7,
-                            Plumbing = 7,
-                            Roof = 7,
-                            Sewer = 7,
-                            Shutters = 7,
-                            Username = "TestUsername2",
-                            Utilities = false,
-                            Windows = 7
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Chimney = 7,
-                            Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 303, DateTimeKind.Unspecified).AddTicks(3545), new TimeSpan(0, -5, 0, 0, 0)),
-                            Electrical = 7,
-                            ExtOpenings = 7,
-                            ExtWalls = 7,
-                            Flooring = 7,
-                            Framework = 7,
-                            HVAC = 7,
-                            ImageURL = "TestImage4",
-                            Location = "TestLocation4",
-                            Name = "TestProp4",
-                            Piers = 7,
-                            Plumbing = 7,
-                            Roof = 7,
-                            Sewer = 7,
-                            Shutters = 7,
-                            Username = "TestUsername4",
-                            Utilities = false,
-                            Windows = 7
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Chimney = 7,
-                            Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 303, DateTimeKind.Unspecified).AddTicks(3602), new TimeSpan(0, -5, 0, 0, 0)),
-                            Electrical = 7,
-                            ExtOpenings = 7,
-                            ExtWalls = 7,
-                            Flooring = 7,
-                            Framework = 7,
-                            HVAC = 7,
-                            ImageURL = "TestImage5",
-                            Location = "TestLocation5",
-                            Name = "TestProp5",
-                            Piers = 7,
-                            Plumbing = 7,
-                            Roof = 7,
-                            Sewer = 7,
-                            Shutters = 7,
-                            Username = "TestUsername5",
-                            Utilities = false,
-                            Windows = 7
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Chimney = 7,
-                            Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 303, DateTimeKind.Unspecified).AddTicks(3611), new TimeSpan(0, -5, 0, 0, 0)),
-                            Electrical = 7,
-                            ExtOpenings = 7,
-                            ExtWalls = 7,
-                            Flooring = 7,
-                            Framework = 7,
-                            HVAC = 7,
-                            ImageURL = "TestImage6",
-                            Location = "TestLocation6",
-                            Name = "TestProp6",
-                            Piers = 7,
-                            Plumbing = 7,
-                            Roof = 7,
-                            Sewer = 7,
-                            Shutters = 7,
-                            Username = "TestUsername6",
-                            Utilities = false,
-                            Windows = 7
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Chimney = 7,
-                            Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 303, DateTimeKind.Unspecified).AddTicks(3618), new TimeSpan(0, -5, 0, 0, 0)),
-                            Electrical = 7,
-                            ExtOpenings = 7,
-                            ExtWalls = 7,
-                            Flooring = 7,
-                            Framework = 7,
-                            HVAC = 7,
-                            ImageURL = "TestImage7",
-                            Location = "TestLocation7",
-                            Name = "TestProp7",
-                            Piers = 7,
-                            Plumbing = 7,
-                            Roof = 7,
-                            Sewer = 7,
-                            Shutters = 7,
-                            Username = "TestUsername7",
-                            Utilities = false,
-                            Windows = 7
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

@@ -14,7 +14,10 @@ namespace MSMBackend.Dtos
         public string Location { get; set; }
 
         [Required]
-        public string Username { get; set; }
+        public DateTimeOffset EditTime { get; set; }
+
+        //[Required]
+        //public string Username { get; set; }
 
         [Required]
         public string ImageURL { get; set; }
@@ -51,6 +54,9 @@ namespace MSMBackend.Dtos
         [Required]
         public int Sewer { get; set; }
         [Required]
-        public int HVAC { get; set; }
+        public int HVAC
+        {
+            get; set;
+        }
     }
 }
