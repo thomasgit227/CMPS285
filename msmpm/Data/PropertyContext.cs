@@ -1,8 +1,7 @@
-﻿using MSMBackend.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+using MSMBackend.Data.Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MSMBackend.Models
 {

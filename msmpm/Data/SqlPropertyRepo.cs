@@ -4,9 +4,6 @@ using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace MSMBackend.Data
@@ -26,7 +23,9 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
+
             _context.Properties.Add(property);
+
         }
 
         public void DeleteProperty(Property property)
@@ -36,11 +35,12 @@ namespace MSMBackend.Data
                 throw new ArgumentNullException(nameof(property));
             }
             _context.Properties.Remove(property);
+
         }
 
         public IEnumerable<Property> GetAllProperties()
         {
-            return _context.Set<Property>().ToList();
+            return _context.Properties.ToList();
         }
 
         public Property GetPropertyById(int id)
@@ -56,12 +56,8 @@ namespace MSMBackend.Data
         public void UpdateProperty(Property property)
         {
             //Nothing, DBContext does this for is
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
-            property.SetTime();
         }
+
 
         public int AverageAttributeRating(Property property)
         {
@@ -69,54 +65,89 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            return property.Average();
-        }
 
-        private int CompareAverage(Property a, Property b)
-        {
-            return a.Average() - b.Average();
-        }
+            int avg = property.Roof + property.ExtWalls + property.ExtOpenings + property.Framework + property.Piers;
+            avg += property.Chimney + property.Door + property.Windows + property.Shutters + property.Flooring;
 
-        public string PropertyEditTime(Property property)
-        {
-            if (property == null)
+            if (property.Utilities)
             {
-                throw new ArgumentNullException(nameof(property));
+                avg += property.Electrical + property.Plumbing + property.Sewer + property.HVAC;
+
+                avg /= 14;
             }
-            //This is the DateTimeOffset format to get the date and time of the edit
-            string fmt = "G";
-            return property.EditTime.ToString(fmt);
+            else
+            {
+                avg /= 10;
+            }
+
+            return avg;
+        }
+
+        private bool CompareTime(Property a, Property b)
+        {
+            if (a == null || b == null)
+            {
+                return true;
+            }
+            return a.EditTime.CompareTo(b.EditTime) < 0;
         }
 
         public IEnumerable<Property> BestProperties(int max = 10)
         {
-            List<Property> propBank = GetAllProperties().ToList();
-            propBank.Sort(new Comparison<Property>((x, y) => CompareAverage(y, x)));
+            IEnumerable<Property> allProps = GetAllProperties();
+            Property[] props = new Property[max];
 
-            if (max < propBank.Count())
+            int len = max - 1;
+            foreach (Property p in allProps)
             {
-                propBank = propBank.GetRange(0, max);
+                if (props[len] == null)
+                    props[len] = p;
+
+                int j = len;
+                while (j >= 1)
+                {
+                    if (props[j - 1] == null)
+                    {
+                        props[j - 1] = p;
+                        props[j] = null;
+                    }
+                    else if (AverageAttributeRating(props[j - 1]) < AverageAttributeRating(p))
+                    {
+                        Property x = props[j - 1];
+                        props[j - 1] = p;
+                        props[j] = x;
+                    }
+                    j--;
+                }
             }
-            return propBank;
+            return props.ToList();
         }
 
         public IEnumerable<Property> RecentProperties(int max = 5)
         {
-            List<Property> propBank = GetAllProperties().ToList();
-            propBank.Sort(new Comparison<Property>((x, y) => DateTimeOffset.Compare(y.EditTime, x.EditTime)));
+            IEnumerable<Property> allProps = GetAllProperties();
+            Property[] props = new Property[max];
 
-            if(max < propBank.Count())
+            int len = max - 1;
+            foreach (Property p in allProps)
             {
-                propBank = propBank.GetRange(0, max);
-            }
-            return propBank;
-        }
-        //Some additional methods we may need to implement in the future:
+                if (props[len] == null)
+                    props[len] = p;
 
-        public IEnumerable<Property> SortByAlphabetical()
-        {
-            List<Property> propBank = GetAllProperties().ToList().OrderBy(p => p.Name).ToList();
-            return propBank;
+                int j = len;
+                while (j >= 1)
+                {
+                    if (CompareTime(props[j - 1], p))
+                    {
+                        Property x = props[j - 1];
+                        props[j - 1] = p;
+                        props[j] = x;
+
+                    }
+                    j--;
+                }
+            }
+            return props.ToList();
         }
     }
 }
