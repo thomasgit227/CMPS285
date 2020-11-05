@@ -1,5 +1,6 @@
 ﻿using MSMBackend.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace MSMBackend.Models
 {
@@ -12,6 +13,11 @@ namespace MSMBackend.Models
         }
 
         public DbSet<Property> Properties { get; set; }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+        }
     }
 }
+
