@@ -36,6 +36,7 @@ namespace MSMBackend.Controllers
             return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
 
+        //This method should be used instead of seperate endpoints for Average or EditTime
         // GET: api/Properties/{id}
         [HttpGet("{id}", Name = "GetPropertyById")]
         public ActionResult<PropertyReadDto> GetPropertyById(int id)
@@ -49,36 +50,7 @@ namespace MSMBackend.Controllers
             return NotFound();
         }
 
-
-        // GET: api/Properties/{id}/average
-        [HttpGet("{id}/average", Name = "GetAverageOfProperty")]
-        public ActionResult<int> GetAverageOfProperty(int id)
-        {
-            var propertyItem = _repository.GetPropertyById(id);
-
-            if (propertyItem != null)
-            {
-                int average = _repository.AverageAttributeRating(propertyItem);
-                return Ok(_mapper.Map<int>(average));
-            }
-
-            return NotFound();
-        }
-
-        // GET: api/Properties/{id}/time
-        [HttpGet("{id}/time", Name = "GetEditTimeOfProperty")]
-        public ActionResult<string> GetEditTimeOfProperty(int id)
-        {
-            var propertyItem = _repository.GetPropertyById(id);
-
-            if (propertyItem != null)
-            {
-                string time = _repository.PropertyEditTime(propertyItem);
-                return Ok(_mapper.Map<string>(time));
-            }
-
-            return NotFound();
-        }
+        
 
         // Get: api/Properties/best
         [HttpGet("best", Name = "GetBestProperties")]
@@ -137,6 +109,7 @@ namespace MSMBackend.Controllers
             return NoContent();
         }
 
+        //We should not have to use this endpoint
         //PATCH api/commands{id}
         [HttpPatch("{id}")]
         public ActionResult PartialPropertyUpdate(int id, JsonPatchDocument<PropertyUpdateDto> patchDoc)
@@ -182,32 +155,7 @@ namespace MSMBackend.Controllers
         }
 
         //Additional methods currently just for testing:
-        /*
-        // GET: api/Properties/name/{name}
-        [HttpGet("name/{name}", Name = "GetPropertyByName")]
-        public ActionResult<PropertyReadDto> GetPropertyByName(string name)
-        {
-            var propertyItem = _repository.GetPropertyByName(name);
-            if (propertyItem != null)
-            {
-                return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
-            }
 
-            return NotFound();
-        }
-
-        // GET: api/Properties/location/{location}
-        [HttpGet("location/{location}", Name = "GetPropertyByLocation")]
-        public ActionResult<PropertyReadDto> GetPropertyByLocation(string name)
-        {
-            var propertyItem = _repository.GetPropertyByLocation(name);
-            if (propertyItem != null)
-            {
-                return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
-            }
-            return NotFound();
-        }
-        */
         // Get: api/Properties/alphabetical
         [HttpGet("alphabetical", Name = "GetAlphabeticalProperties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetAlphabeticalProperties()
@@ -216,5 +164,39 @@ namespace MSMBackend.Controllers
 
             return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
+
+        /*
+        //We should not have to use this endpoint
+        // GET: api/Properties/{id}/average
+        [HttpGet("{id}/average", Name = "GetAverageOfProperty")]
+        public ActionResult<int> GetAverageOfProperty(int id)
+        {
+            var propertyItem = _repository.GetPropertyById(id);
+
+            if (propertyItem != null)
+            {
+                int average = _repository.AverageAttributeRating(propertyItem);
+                return Ok(_mapper.Map<int>(average));
+            }
+
+            return NotFound();
+        }
+
+        //We should not have to use this endpoint
+        // GET: api/Properties/{id}/time
+        [HttpGet("{id}/time", Name = "GetEditTimeOfProperty")]
+        public ActionResult<string> GetEditTimeOfProperty(int id)
+        {
+            var propertyItem = _repository.GetPropertyById(id);
+
+            if (propertyItem != null)
+            {
+                string time = _repository.PropertyEditTime(propertyItem);
+                return Ok(_mapper.Map<string>(time));
+            }
+
+            return NotFound();
+        }
+        */
     }
 }

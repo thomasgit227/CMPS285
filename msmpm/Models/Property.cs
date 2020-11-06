@@ -28,6 +28,12 @@ namespace MSMBackend.Models
         public string ImageURL { get; set; }
 
         [Required]
+        public int Average { get; set; }
+
+        [Required]
+        public string EditTime { get; set; }
+
+        [Required]
         public Boolean Utilities { get; set; }
 
         //public int SteveID { get; set; }
@@ -74,35 +80,52 @@ namespace MSMBackend.Models
         [Required]
         public int HVAC { get; set; }
 
-        public DateTimeOffset EditTime { get; set; }
+        public DateTimeOffset TimeOfEdit { get; set; }
 
 
-        //Average method if we decide to implement it in the Property class and not calculate it through the Repo
-        public int Average()
+        
+        private void ComputeAverage()
         {
-            int avg = Roof + ExtWalls + ExtOpenings + Framework + Piers;
-            avg += Chimney + Door + Windows + Shutters + Flooring;
+            int[] attributes = { Roof, ExtWalls, ExtOpenings, Framework, Piers, Chimney, Door, Windows, 
+                Shutters, Flooring, Electrical, Plumbing, Sewer, HVAC };
+            Average = 0;
             int div = 0;
-
-            if (Utilities)
+            for(int i = 0; i < attributes.Length; i++)
             {
-                avg += Electrical + Plumbing + Sewer + HVAC;
-
-                div = 14;
+                int num = attributes[i];
+                Average += num;
+                if (num != 0)
+                {
+                    div++;
+                }
             }
-            else
-            {
-                div = 10;
-            }
-            //avg /= div;
-            return avg;
+            Average /= div;
         }
 
-        
-        public void SetTime()
+
+        private void SetTime()
         {
-            EditTime = DateTimeOffset.Now;
+            TimeOfEdit = DateTimeOffset.Now;
+
+            //This is the DateTimeOffset format to get the date and time of the edit
+            string fmt = "G";
+            EditTime = TimeOfEdit.ToString(fmt);
         }
-        
+
+        public void Update()
+        {
+            SetTime();
+            ComputeAverage();
+        }
+
+        public int CompareEditTime(Property b)
+        {
+            return DateTimeOffset.Compare(TimeOfEdit, b.TimeOfEdit);
+        }
+
+        public int CompareAverage(Property b)
+        {
+            return Average - b.Average;
+        }
     }
 }

@@ -60,38 +60,13 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            property.SetTime();
-        }
-
-        public int AverageAttributeRating(Property property)
-        {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
-            return property.Average();
-        }
-
-        private int CompareAverage(Property a, Property b)
-        {
-            return a.Average() - b.Average();
-        }
-
-        public string PropertyEditTime(Property property)
-        {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
-            //This is the DateTimeOffset format to get the date and time of the edit
-            string fmt = "G";
-            return property.EditTime.ToString(fmt);
+            property.Update();
         }
 
         public IEnumerable<Property> BestProperties(int max = 10)
         {
             List<Property> propBank = GetAllProperties().ToList();
-            propBank.Sort(new Comparison<Property>((x, y) => CompareAverage(y, x)));
+            propBank.Sort(new Comparison<Property>((x, y) => y.CompareAverage(x)));
 
             if (max < propBank.Count())
             {
@@ -103,7 +78,7 @@ namespace MSMBackend.Data
         public IEnumerable<Property> RecentProperties(int max = 5)
         {
             List<Property> propBank = GetAllProperties().ToList();
-            propBank.Sort(new Comparison<Property>((x, y) => DateTimeOffset.Compare(y.EditTime, x.EditTime)));
+            propBank.Sort(new Comparison<Property>((x, y) => y.CompareEditTime(x)));
 
             if (max < propBank.Count())
             {
@@ -118,5 +93,25 @@ namespace MSMBackend.Data
             List<Property> propBank = GetAllProperties().ToList().OrderBy(p => p.Name).ToList();
             return propBank;
         }
+
+        /*
+        public int AverageAttributeRating(Property property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
+            return property.Average;
+        }
+
+        public string PropertyEditTime(Property property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException(nameof(property));
+            }
+            return property.EditTime;
+        }
+        */
     }
 }
