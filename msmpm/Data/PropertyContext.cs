@@ -15,12 +15,22 @@ namespace MSMBackend.Models
 
         public DbSet<Property> Properties { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.Seed();
+            base.OnModelCreating(builder);
+
+            var userRoleBuilder = builder.Entity<UserRole>();
+
+            userRoleBuilder.HasKey(x => new { x.UserId, x.RoleId });
+
+            userRoleBuilder.HasOne(x => x.Role)
+                .WithMany(x => x.Users)
+                .HasForeignKey(x => x.RoleId);
+
+            userRoleBuilder.HasOne(x => x.User)
+                .WithMany(x => x.Roles)
+                .HasForeignKey(x => x.UserId);
         }
-
-
     }
 }
 
