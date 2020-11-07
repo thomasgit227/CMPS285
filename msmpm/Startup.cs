@@ -114,6 +114,7 @@ namespace MSMBackend
             }
         }
 
+        
         private static async Task AddUsers(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -123,7 +124,6 @@ namespace MSMBackend
                 {
                     return;
                 }
-
                 await CreateUser(userManager, "admin", Roles.Admin, "password");
                 await CreateUser(userManager, "editor", Roles.Editor, "password");
                 await CreateUser(userManager, "viewer", Roles.Viewer, "password");

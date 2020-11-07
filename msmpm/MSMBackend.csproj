@@ -5,17 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20201020063314_timeupdate.cs" />
-    <Compile Remove="Migrations\20201020063314_timeupdate.Designer.cs" />
-    <Compile Remove="Migrations\20201028161934_SeedPropertyTable.cs" />
-    <Compile Remove="Migrations\20201028161934_SeedPropertyTable.Designer.cs" />
-    <Compile Remove="Migrations\20201029173427_seedTest.cs" />
-    <Compile Remove="Migrations\20201029173427_seedTest.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.9" />
