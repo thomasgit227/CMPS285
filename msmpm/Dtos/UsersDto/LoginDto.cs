@@ -8,6 +8,6 @@ namespace MSMBackend.Dtos.UsersDto
     public class LoginDto
     {
         public string Username { get; set; }
-        public string Password { get; set;s }
+        public string Password { get; set; }
     }
 }
