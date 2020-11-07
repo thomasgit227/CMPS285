@@ -43,19 +43,18 @@ namespace MSMBackend
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IPropertyRepo, SqlPropertyRepo>();  //Created new implementation using sql server
-                                                                   //Here is being injected
+            
+            services.AddIdentity<User, Role>()
+                    .AddEntityFrameworkStores<PropertyContext>();                                                       //Here is being injected
+
+            services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "MSMPM API", Version = "V1" });
+                });
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "MSMPM/build";
-
-                services.AddIdentity<User, Role>()
-                    .AddEntityFrameworkStores<PropertyContext>();
-
-                services.AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "MSMPM API", Version = "V1" });
-                });
             });
         }
 
