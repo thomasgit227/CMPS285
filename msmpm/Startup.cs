@@ -124,17 +124,16 @@ namespace MSMBackend
                     return;
                 }
 
-                await CreateUser(userManager, "admin", Roles.Admin);
-                await CreateUser(userManager, "editor", Roles.Editor);
-                await CreateUser(userManager, "viewer", Roles.Viewer);
+                await CreateUser(userManager, "admin", Roles.Admin, "password");
+                await CreateUser(userManager, "editor", Roles.Editor, "password");
+                await CreateUser(userManager, "viewer", Roles.Viewer, "password");
             }
         }
 
-        private static async Task CreateUser(UserManager<User> userManager, string username, string role)
+        private static async Task CreateUser(UserManager<User> userManager, string username, string role, string password)
         {
-            const string passwordForEveryone = "Password123!";
             var user = new User { UserName = username };
-            await userManager.CreateAsync(user, passwordForEveryone);
+            await userManager.CreateAsync(user, password);
             await userManager.AddToRoleAsync(user, role);
         }
 
