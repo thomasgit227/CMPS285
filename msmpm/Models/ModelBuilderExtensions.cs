@@ -18,6 +18,8 @@ namespace MSMBackend.Models
                         Location = "TestLocatio2n",
                         Username = "TestUsername2",
                         ImageURL = "TestImage2",
+                        Average = 0,
+                        EditTime = DateTime.Now.ToString(),
                         Utilities = false,
                         Roof = 7,
                         ExtWalls = 7,
@@ -32,8 +34,7 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7,
-                        EditTime = DateTime.Now
+                        HVAC = 7
                     },
                     new Property
                     {
@@ -42,6 +43,8 @@ namespace MSMBackend.Models
                         Location = "TestLocation4",
                         Username = "TestUsername4",
                         ImageURL = "TestImage4",
+                        Average = 0,
+                        EditTime = DateTime.Now.ToString(),
                         Utilities = false,
                         Roof = 7,
                         ExtWalls = 7,
@@ -56,8 +59,7 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7,
-                        EditTime = DateTime.Now
+                        HVAC = 7
                     },
                     new Property
                     {
@@ -66,6 +68,8 @@ namespace MSMBackend.Models
                         Location = "TestLocation5",
                         Username = "TestUsername5",
                         ImageURL = "TestImage5",
+                        Average = 0,
+                        EditTime = DateTime.Now.ToString(),
                         Utilities = false,
                         Roof = 7,
                         ExtWalls = 7,
@@ -80,8 +84,7 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7,
-                        EditTime = DateTime.Now
+                        HVAC = 7
                     },
                     new Property
                     {
@@ -90,6 +93,8 @@ namespace MSMBackend.Models
                         Location = "TestLocation6",
                         Username = "TestUsername6",
                         ImageURL = "TestImage6",
+                        Average = 0,
+                        EditTime = DateTime.Now.ToString(),
                         Utilities = false,
                         Roof = 7,
                         ExtWalls = 7,
@@ -104,8 +109,7 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7,
-                        EditTime = DateTime.Now
+                        HVAC = 7
                     },
                     new Property
                     {
@@ -114,6 +118,8 @@ namespace MSMBackend.Models
                         Location = "TestLocation7",
                         Username = "TestUsername7",
                         ImageURL = "TestImage7",
+                        Average = 0,
+                        EditTime = DateTime.Now.ToString(),
                         Utilities = false,
                         Roof = 7,
                         ExtWalls = 7,
@@ -128,8 +134,7 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7,
-                        EditTime = DateTime.Now
+                        HVAC = 7
                     }
 
 
