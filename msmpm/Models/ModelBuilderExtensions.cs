@@ -16,7 +16,7 @@ namespace MSMBackend.Models
                         Id = 2,
                         Name = "TestProp2",
                         Location = "TestLocatio2n",
-                        Username = "TestUsername2",
+                        
                         ImageURL = "TestImage2",
                         Average = 0,
                         EditTime = DateTime.Now.ToString(),
@@ -34,14 +34,15 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7
+                        HVAC = 7,
+                        UsersId = "TestUsername2"
                     },
                     new Property
                     {
                         Id = 4,
                         Name = "TestProp4",
                         Location = "TestLocation4",
-                        Username = "TestUsername4",
+                        
                         ImageURL = "TestImage4",
                         Average = 0,
                         EditTime = DateTime.Now.ToString(),
@@ -59,14 +60,15 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7
+                        HVAC = 7,
+                        UsersId = "TestUsername4"
                     },
                     new Property
                     {
                         Id = 5,
                         Name = "TestProp5",
                         Location = "TestLocation5",
-                        Username = "TestUsername5",
+                        
                         ImageURL = "TestImage5",
                         Average = 0,
                         EditTime = DateTime.Now.ToString(),
@@ -84,14 +86,15 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7
+                        HVAC = 7,
+                        UsersId = "TestUsername5"
                     },
                     new Property
                     {
                         Id = 6,
                         Name = "TestProp6",
                         Location = "TestLocation6",
-                        Username = "TestUsername6",
+                        
                         ImageURL = "TestImage6",
                         Average = 0,
                         EditTime = DateTime.Now.ToString(),
@@ -109,14 +112,15 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7
+                        HVAC = 7,
+                        UsersId = "TestUsername6"
                     },
                     new Property
                     {
                         Id = 7,
                         Name = "TestProp7",
                         Location = "TestLocation7",
-                        Username = "TestUsername7",
+                        
                         ImageURL = "TestImage7",
                         Average = 0,
                         EditTime = DateTime.Now.ToString(),
@@ -134,7 +138,8 @@ namespace MSMBackend.Models
                         Electrical = 7,
                         Plumbing = 7,
                         Sewer = 7,
-                        HVAC = 7
+                        HVAC = 7,
+                        UsersId = "TestUsername7"
                     }
 
 

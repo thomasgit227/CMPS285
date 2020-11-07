@@ -56,6 +56,6 @@ namespace MSMBackend.Dtos
         [Required]
         public int HVAC { get; set; }
 
-        public int UserId { get; set; }
+        public string UsersId { get; set; }
     }
 }

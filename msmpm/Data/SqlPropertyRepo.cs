@@ -94,24 +94,6 @@ namespace MSMBackend.Data
             return propBank;
         }
 
-        /*
-        public int AverageAttributeRating(Property property)
-        {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
-            return property.Average;
-        }
-
-        public string PropertyEditTime(Property property)
-        {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
-            return property.EditTime;
-        }
-        */
+        
     }
 }

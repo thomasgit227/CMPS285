@@ -126,8 +126,8 @@ namespace MSMBackend
                 }
 
                 await CreateUser(userManager, "admin", Roles.Admin);
-                await CreateUser(userManager, "employee", Roles.Editor);
-                await CreateUser(userManager, "employee", Roles.Viewer);
+                await CreateUser(userManager, "editor", Roles.Editor);
+                await CreateUser(userManager, "viewer", Roles.Viewer);
             }
         }
 
