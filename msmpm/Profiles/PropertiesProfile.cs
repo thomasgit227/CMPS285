@@ -12,7 +12,9 @@ namespace MSMBackend.Profiles
     public class PropertiesProfile : Profile
     {
         public PropertiesProfile()
-        {               //Source Object ---> Destination Object
+        {               
+            //Source Object ---> Destination Object
+
             CreateMap<Property, PropertyReadDto>();
             
             CreateMap<PropertyCreateDto, Property>();
@@ -20,6 +22,7 @@ namespace MSMBackend.Profiles
             CreateMap<PropertyUpdateDto, Property>();
 
             CreateMap<Property, PropertyUpdateDto>();
+
         }
 
     }
