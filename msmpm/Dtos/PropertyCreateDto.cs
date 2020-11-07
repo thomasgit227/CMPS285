@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using MSMBackend.Data.Entity;
 
 namespace MSMBackend.Dtos
 {
@@ -15,8 +17,8 @@ namespace MSMBackend.Dtos
         [Required]
         public string Location { get; set; }
 
-        [Required]
-        public string Username { get; set; }
+        //[Required]
+        //public string Username { get; set; }
 
         [Required]
         public string ImageURL { get; set; }
@@ -53,5 +55,7 @@ namespace MSMBackend.Dtos
         public int Sewer { get; set; }
         [Required]
         public int HVAC { get; set; }
+
+        public int UserId { get; set; }
     }
 }

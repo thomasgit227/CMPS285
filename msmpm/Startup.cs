@@ -16,6 +16,8 @@ using MSMBackend.Data;
 using AutoMapper;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using MSMBackend.Data.Entity;
+using Microsoft.AspNetCore.Identity;
 
 namespace MSMBackend
 {
@@ -42,52 +44,109 @@ namespace MSMBackend
 
             services.AddScoped<IPropertyRepo, SqlPropertyRepo>();  //Created new implementation using sql server
                                                                    //Here is being injected
-                                                                   
-            services.AddSpaStaticFiles(configuration => {
-                configuration.RootPath = "MSMPM/build";
-            });
 
-            services.AddSwaggerGen(c =>
+            services.AddSpaStaticFiles(configuration =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "MSMPM API", Version = "V1" });
+                configuration.RootPath = "MSMPM/build";
+
+                services.AddIdentity<User, Role>()
+                    .AddEntityFrameworkStores<PropertyContext>();
+
+                services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "MSMPM API", Version = "V1" });
+                });
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             {
-                app.UseDeveloperExceptionPage();
-            }
-           
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MSMPM API");
-            });
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-            
-            app.UseSpaStaticFiles();
-
-            app.UseSpa(spa => {
-                spa.Options.SourcePath = "MSMPM";
+                MigrateDb(app);
+                AddRoles(app).GetAwaiter().GetResult();
+                AddUsers(app).GetAwaiter().GetResult();
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    app.UseDeveloperExceptionPage();
                 }
-            });
+
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MSMPM API");
+                });
+
+                app.UseHttpsRedirection();
+
+                app.UseRouting();
+
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
+
+                app.UseSpaStaticFiles();
+
+                app.UseSpa(spa => {
+                    spa.Options.SourcePath = "MSMPM";
+
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseReactDevelopmentServer(npmScript: "start");
+                    }
+                });
+            }
+        private static async Task AddRoles(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<Role>>();
+                if (roleManager.Roles.Any())
+                {
+                    return;
+                }
+
+                await roleManager.CreateAsync(new Role { Name = Roles.Admin });
+                await roleManager.CreateAsync(new Role { Name = Roles.Editor });
+                await roleManager.CreateAsync(new Role { Name = Roles.Viewer });
+            }
+        }
+
+        private static async Task AddUsers(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
+                if (userManager.Users.Any())
+                {
+                    return;
+                }
+
+                await CreateUser(userManager, "admin", Roles.Admin);
+                await CreateUser(userManager, "employee", Roles.Editor);
+                await CreateUser(userManager, "employee", Roles.Viewer);
+            }
+        }
+
+        private static async Task CreateUser(UserManager<User> userManager, string username, string role)
+        {
+            const string passwordForEveryone = "Password123!";
+            var user = new User { UserName = username };
+            await userManager.CreateAsync(user, passwordForEveryone);
+            await userManager.AddToRoleAsync(user, role);
+        }
+
+        private static void MigrateDb(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<PropertyContext>();
+                context.Database.Migrate();
+            }
         }
     }
-}
+    }
+
