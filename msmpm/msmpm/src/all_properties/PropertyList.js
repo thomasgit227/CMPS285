@@ -7,6 +7,7 @@ import {
     Link,
 } from 'react-router-dom';
 import ListedProperty from './ListedProperty';
+import Properties from './Properties';
 
 export default function PropertyList() {
     return (
@@ -20,7 +21,9 @@ export default function PropertyList() {
                     </tr>
                 </thead>
                 <tbody>
-                    <ListedProperty/>
+                    <th>{Properties.name}</th>
+                    <th>{Properties.location}</th>
+                    <th>{Properties.id}</th>
                 </tbody>
             </Table>
         </div>
