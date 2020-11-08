@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './All_Properties.css';
 import { 
+    NavLink,
     Table,
 } from 'reactstrap';
 import {
@@ -49,15 +50,13 @@ export default function PropertyList() {
                         <th>ID</th>
                     </tr>
                 </thead>
-                <tbody>
-                    { rows.map( (row) => (
-                        <div className = "row">
-                            <th>{row.name}</th>
-                            <th>{row.location}</th>
-                            <th>{row.id}</th>
-                        </div>                    
-                    ))}
-                </tbody>
+                {rows.map( (row) => (
+                    <tbody className = "tableinfo">
+                        <th><NavLink tag={Link} to={'myproperty/' + row.id}>{row.name}</NavLink></th>
+                        <th>{row.location}</th>
+                        <th>{row.id}</th>
+                    </tbody>
+                ))}
             </Table>
         </div>
       );

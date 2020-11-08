@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import './Main_Components.css';
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavLink,
@@ -13,7 +11,6 @@ import {
   DropdownMenu,
   DropdownItem, 
   Button,
-  NavbarText
 } from 'reactstrap';
 
 import {
