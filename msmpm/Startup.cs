@@ -41,7 +41,8 @@ namespace MSMBackend
                 (Configuration.GetConnectionString("MSMConnection")));
 
             services.AddIdentity<User, Role>()
-                    .AddEntityFrameworkStores<PropertyContext>();
+                    .AddEntityFrameworkStores<PropertyContext>()
+                    .AddDefaultTokenProviders();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
