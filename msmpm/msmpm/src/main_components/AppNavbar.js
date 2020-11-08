@@ -17,14 +17,11 @@ import {
 } from 'reactstrap';
 
 import {
-  Link
+  Link, Redirect
 } from 'react-router-dom';
 
 export default function AppNavbar() {
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => {
-      setIsOpen(!isOpen);
-    }
+
     const logout = () => {
       window.location.reload(false);
       sessionStorage.isLoggedIn = false;
@@ -32,49 +29,46 @@ export default function AppNavbar() {
     };
 
     return (
+      
         <div>
 
         <Navbar light expand="md">
           <NavbarBrand tag = {Link} to="/">MSMPM</NavbarBrand>
-          <NavbarToggler onClick={toggle}/>
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className = 'mr-auto' navbar>
+            <Nav className = 'navbar' navbar>
+
               <NavItem>
                 <NavLink tag={Link} to = "/properties/">
                   properties
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to = "/test/">
-                  test
-                </NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+
+              <UncontrolledDropdown className = "account" nav inNavbar>
                 <DropdownToggle nav caret>
-                  account
+                  hello, {sessionStorage.isLoggedIn ? sessionStorage.username : "Guest"}
                 </DropdownToggle>
                 <DropdownMenu right>
+
+
                   <DropdownItem>
                     <NavLink tag={Link} to = "/login/">
-                      view
+                      sign in
                     </NavLink>
                   </DropdownItem>
-                  <DropdownItem>
-                    <NavLink tag={Link} to = "/account/edit">
-                      edit
-                    </NavLink>
-                  </DropdownItem>
+
                   <DropdownItem>
                     <Button onClick={logout}>
                       sign out
+                      <Redirect to = "/home/"/>
                     </Button>
                   </DropdownItem>
+
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-            <NavbarText>Hello, {sessionStorage.username ? sessionStorage.username : "Guest"}</NavbarText>
-          </Collapse>
+            
         </Navbar>
+
       </div>
+      
     );
 }

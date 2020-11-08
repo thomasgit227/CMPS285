@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './home_page.css';
 import {
     ListGroup,
@@ -10,6 +10,7 @@ import {
 
 
 export default function Leadership() {
+ //TODO Grab ID of called property
     return (
             <div>
 
@@ -20,7 +21,7 @@ export default function Leadership() {
                 <ListGroup className = 'leaderboard'>
 
                     <ListGroupItem>
-                        <Link to="/properties/myproperty/1/">
+                        <Link to={ "/properties/myproperty/" + 1}>
                             property 1
                         </Link>
                     </ListGroupItem>

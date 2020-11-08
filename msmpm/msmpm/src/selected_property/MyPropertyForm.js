@@ -10,6 +10,7 @@ import {
     Collapse,
     ButtonGroup
 } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 
 
 export default function MyPropertyForm() {
@@ -17,18 +18,18 @@ export default function MyPropertyForm() {
     const [isOpen, setIsOpen] = useState(false);
     const [utlState, setUtilState] = useState('No Utilities');
 
-    const [submitted, setSubmitted] = useState(null);
     const toggle = () => {
         setIsOpen(!isOpen);
         setUtilState(isOpen ? 'No Utilities' : 'Has Utilities');
     }
 
+    const [submitted, setSubmitted] = useState(false);
     const submitForm = () => {
-        
+        setSubmitted(true);
+        //TODO 
     }
 
     //All
-    const [attributes, setAttributes] = useState(null);
     const [roofSelected, roofSetSelected] = useState(null);
     const [extSelected, extSetSelected] = useState(null);
     const [opnsSelected, opnsSetSelected] = useState(null);
@@ -47,8 +48,8 @@ export default function MyPropertyForm() {
     const [hvacSelected, hvacSetSelected] = useState(null);
 
     return (
-
             <Form>
+                {submitted ? <Redirect to = "/properties/"/> : null}
                 <FormGroup>
                     <div className = 'propertyform_one'>
                         <div>
@@ -273,7 +274,9 @@ export default function MyPropertyForm() {
             </div>
 
             <div className = 'submitbutton'>
-                <Button block onClick = {submitForm}>Submit</Button>
+                <Button block onClick = {submitForm}>
+                    Submit
+                </Button>
             </div>
         </Form>
     );
