@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSMBackend.Migrations
 {
     [DbContext(typeof(PropertyContext))]
-    [Migration("20201029175212_SecondSeedTest")]
-    partial class SecondSeedTest
+    [Migration("20201108000436_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,7 +103,7 @@ namespace MSMBackend.Migrations
                             Id = 2,
                             Chimney = 7,
                             Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 301, DateTimeKind.Unspecified).AddTicks(6022), new TimeSpan(0, -5, 0, 0, 0)),
+                            EditTime = new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 690, DateTimeKind.Unspecified).AddTicks(5798), new TimeSpan(0, -6, 0, 0, 0)),
                             Electrical = 7,
                             ExtOpenings = 7,
                             ExtWalls = 7,
@@ -127,7 +127,7 @@ namespace MSMBackend.Migrations
                             Id = 4,
                             Chimney = 7,
                             Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 303, DateTimeKind.Unspecified).AddTicks(3545), new TimeSpan(0, -5, 0, 0, 0)),
+                            EditTime = new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 693, DateTimeKind.Unspecified).AddTicks(1079), new TimeSpan(0, -6, 0, 0, 0)),
                             Electrical = 7,
                             ExtOpenings = 7,
                             ExtWalls = 7,
@@ -151,7 +151,7 @@ namespace MSMBackend.Migrations
                             Id = 5,
                             Chimney = 7,
                             Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 303, DateTimeKind.Unspecified).AddTicks(3602), new TimeSpan(0, -5, 0, 0, 0)),
+                            EditTime = new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 693, DateTimeKind.Unspecified).AddTicks(1153), new TimeSpan(0, -6, 0, 0, 0)),
                             Electrical = 7,
                             ExtOpenings = 7,
                             ExtWalls = 7,
@@ -175,7 +175,7 @@ namespace MSMBackend.Migrations
                             Id = 6,
                             Chimney = 7,
                             Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 303, DateTimeKind.Unspecified).AddTicks(3611), new TimeSpan(0, -5, 0, 0, 0)),
+                            EditTime = new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 693, DateTimeKind.Unspecified).AddTicks(1162), new TimeSpan(0, -6, 0, 0, 0)),
                             Electrical = 7,
                             ExtOpenings = 7,
                             ExtWalls = 7,
@@ -199,7 +199,7 @@ namespace MSMBackend.Migrations
                             Id = 7,
                             Chimney = 7,
                             Door = 7,
-                            EditTime = new DateTimeOffset(new DateTime(2020, 10, 29, 12, 52, 12, 303, DateTimeKind.Unspecified).AddTicks(3618), new TimeSpan(0, -5, 0, 0, 0)),
+                            EditTime = new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 693, DateTimeKind.Unspecified).AddTicks(1169), new TimeSpan(0, -6, 0, 0, 0)),
                             Electrical = 7,
                             ExtOpenings = 7,
                             ExtWalls = 7,

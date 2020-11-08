@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MSMBackend.Migrations
 {
-    public partial class FirstSeed : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,14 @@ namespace MSMBackend.Migrations
             migrationBuilder.InsertData(
                 table: "Properties",
                 columns: new[] { "Id", "Chimney", "Door", "EditTime", "Electrical", "ExtOpenings", "ExtWalls", "Flooring", "Framework", "HVAC", "ImageURL", "Location", "Name", "Piers", "Plumbing", "Roof", "Sewer", "Shutters", "Username", "Utilities", "Windows" },
-                values: new object[] { 2, 7, 7, new DateTimeOffset(new DateTime(2020, 10, 29, 12, 40, 16, 731, DateTimeKind.Unspecified).AddTicks(6087), new TimeSpan(0, -5, 0, 0, 0)), 7, 7, 7, 7, 7, 7, "TestImage", "TestLocation", "TestProp", 7, 7, 7, 7, 7, "TestUsername", false, 7 });
+                values: new object[,]
+                {
+                    { 2, 7, 7, new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 690, DateTimeKind.Unspecified).AddTicks(5798), new TimeSpan(0, -6, 0, 0, 0)), 7, 7, 7, 7, 7, 7, "TestImage2", "TestLocatio2n", "TestProp2", 7, 7, 7, 7, 7, "TestUsername2", false, 7 },
+                    { 4, 7, 7, new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 693, DateTimeKind.Unspecified).AddTicks(1079), new TimeSpan(0, -6, 0, 0, 0)), 7, 7, 7, 7, 7, 7, "TestImage4", "TestLocation4", "TestProp4", 7, 7, 7, 7, 7, "TestUsername4", false, 7 },
+                    { 5, 7, 7, new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 693, DateTimeKind.Unspecified).AddTicks(1153), new TimeSpan(0, -6, 0, 0, 0)), 7, 7, 7, 7, 7, 7, "TestImage5", "TestLocation5", "TestProp5", 7, 7, 7, 7, 7, "TestUsername5", false, 7 },
+                    { 6, 7, 7, new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 693, DateTimeKind.Unspecified).AddTicks(1162), new TimeSpan(0, -6, 0, 0, 0)), 7, 7, 7, 7, 7, 7, "TestImage6", "TestLocation6", "TestProp6", 7, 7, 7, 7, 7, "TestUsername6", false, 7 },
+                    { 7, 7, 7, new DateTimeOffset(new DateTime(2020, 11, 7, 18, 4, 35, 693, DateTimeKind.Unspecified).AddTicks(1169), new TimeSpan(0, -6, 0, 0, 0)), 7, 7, 7, 7, 7, 7, "TestImage7", "TestLocation7", "TestProp7", 7, 7, 7, 7, 7, "TestUsername7", false, 7 }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
