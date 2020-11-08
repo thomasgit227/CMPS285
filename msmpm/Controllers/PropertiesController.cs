@@ -107,9 +107,6 @@ namespace MSMBackend.Controllers
 
             _repository.CreateProperty(propertyModel);
 
-            //This updates the edit time to be the current time
-            _repository.UpdateProperty(propertyModel);
-
             _repository.SaveChanges();
 
             var propertyReadDto = _mapper.Map<PropertyReadDto>(propertyModel);

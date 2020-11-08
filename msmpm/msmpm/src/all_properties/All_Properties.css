@@ -3,3 +3,16 @@
     border: .25em solid olivedrab;
 
 }
+
+.row th:nth-child(1){
+    margin-left: 10%;
+}
+
+.row th:nth-child(2){
+    margin-left: 75%;
+
+}
+
+.row th:nth-child(3){
+    margin-left: 100%;
+}
