@@ -140,11 +140,11 @@ namespace MSMBackend.Migrations
                     b.Property<int>("Chimney")
                         .HasColumnType("int");
 
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<int>("Door")
                         .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("EditTime")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("Electrical")
                         .HasColumnType("int");

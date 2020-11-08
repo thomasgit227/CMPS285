@@ -74,7 +74,12 @@ namespace MSMBackend.Models
         [Required]
         public int HVAC { get; set; }
 
-        public DateTimeOffset EditTime { get; set; }
+        [Required]
+        public DateTimeOffset Created { get; set; }
+
+        //public DateTimeOffset? LastUpdated {get; set;}
+        
+        //public DateTimeOffset? Deleted { get; set; }
 
         public string UsersId { get; set; }
 

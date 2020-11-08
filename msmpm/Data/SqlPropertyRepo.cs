@@ -104,7 +104,7 @@ namespace MSMBackend.Data
         public IEnumerable<Property> RecentProperties(int max = 5)
         {
             List<Property> propBank = GetAllProperties().ToList();
-            propBank.Sort(new Comparison<Property>((x, y) => DateTimeOffset.Compare(y.EditTime, x.EditTime)));
+            propBank.Sort(new Comparison<Property>((x, y) => DateTimeOffset.Compare(y.Created, x.Created)));
 
             if(max < propBank.Count())
             {

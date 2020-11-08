@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSMBackend.Migrations
 {
     [DbContext(typeof(PropertyContext))]
-    [Migration("20201108053131_init")]
+    [Migration("20201108094627_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,11 +142,11 @@ namespace MSMBackend.Migrations
                     b.Property<int>("Chimney")
                         .HasColumnType("int");
 
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<int>("Door")
                         .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("EditTime")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("Electrical")
                         .HasColumnType("int");

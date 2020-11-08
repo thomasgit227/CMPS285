@@ -72,7 +72,7 @@ namespace MSMBackend.Migrations
                     Plumbing = table.Column<int>(nullable: false),
                     Sewer = table.Column<int>(nullable: false),
                     HVAC = table.Column<int>(nullable: false),
-                    EditTime = table.Column<DateTimeOffset>(nullable: false),
+                    Created = table.Column<DateTimeOffset>(nullable: false),
                     UsersId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

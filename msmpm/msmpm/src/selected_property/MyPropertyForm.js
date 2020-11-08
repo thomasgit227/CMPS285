@@ -39,6 +39,7 @@ export default function MyPropertyForm() {
 
     //All
     const [roofSelected, roofSetSelected] = useState(3);
+
     const [extSelected, extSetSelected] = useState(null);
     const [opnsSelected, opnsSetSelected] = useState(null);
     const [fwSelected, fwSetSelected] = useState(null);
