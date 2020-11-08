@@ -55,6 +55,8 @@ export default function MyPropertyForm() {
     const [sewSelected, sewSetSelected] = useState(null);
     const [hvacSelected, hvacSetSelected] = useState(null);
 
+
+    
     return (
             <Form>
                 {submitted && sessionStorage.getItem("isLoggedIn") == "true" ? <Redirect to = "/properties/"/> : null}
