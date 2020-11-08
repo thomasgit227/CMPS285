@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace MSMBackend.Data.Entity
 {
-    public class User : IdentityUser<int>
+    public class UserRole : IdentityUserRole<int>
     {
-        public virtual ICollection<UserRole> Roles { get; set; } = new List<UserRole>();
+        public virtual User User { get; set; }
+        public virtual Role Role { get; set; }
     }
 }
