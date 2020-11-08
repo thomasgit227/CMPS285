@@ -40,7 +40,8 @@ namespace MSMBackend
             services.AddDbContext<PropertyContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("MSMConnection")));
 
-            
+            services.AddIdentity<User, Role>()
+                    .AddEntityFrameworkStores<PropertyContext>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -51,8 +52,6 @@ namespace MSMBackend
                 configuration.RootPath = "MSMPM/build";
             });
 
-            services.AddIdentity<User, Role>()
-                    .AddEntityFrameworkStores<PropertyContext>();
 
             services.AddSwaggerGen(c =>
             {
@@ -66,10 +65,7 @@ namespace MSMBackend
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             MigrateDb(app);
-            //CreateUser(userManager, "SteveyId", "admin", "SteveyIdPassword1!").GetAwaiter().GetResult();
-            
             AddRoles(app).GetAwaiter().GetResult();
-            
             AddUsers(app).GetAwaiter().GetResult();
 
             if (env.IsDevelopment())
@@ -108,38 +104,6 @@ namespace MSMBackend
             });
         }
 
-        private static async Task CreateUser(UserManager<User> userManager, string username, string role, string password)
-        {
-            
-            var user = new User { UserName = username };
-            await userManager.CreateAsync(user, password);
-            await userManager.AddToRoleAsync(user, role);
-        }
-
-        private static void MigrateDb(IApplicationBuilder app)
-        {
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<PropertyContext>();
-                context.Database.Migrate();
-            }
-        }
-
-        private static async Task AddUsers(IApplicationBuilder app)
-        {
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
-                if (userManager.Users.Any())
-                {
-                    return;
-                }
-
-                await CreateUser(userManager, "admin", Roles.Admin, "password");
-                await CreateUser(userManager, "editor", Roles.Editor, "password");
-                await CreateUser(userManager, "Viewer", Roles.Viewer, "password");
-            }
-        }
 
         private static async Task AddRoles(IApplicationBuilder app)
         {
@@ -154,6 +118,39 @@ namespace MSMBackend
                 await roleManager.CreateAsync(new Role { Name = Roles.Admin });
                 await roleManager.CreateAsync(new Role { Name = Roles.Editor });
                 await roleManager.CreateAsync(new Role { Name = Roles.Viewer });
+            }
+        }
+
+        private static async Task AddUsers(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
+                if (userManager.Users.Any())
+                {
+                    return;
+                }
+
+                await CreateUser(userManager, "admin", Roles.Admin);
+                await CreateUser(userManager, "editor", Roles.Editor);
+                await CreateUser(userManager, "viewer", Roles.Viewer);
+            }
+        }
+
+        private static async Task CreateUser(UserManager<User> userManager, string username, string role)
+        {
+            const string passwordForEveryone = "Password123!";
+            var user = new User { UserName = username };
+            await userManager.CreateAsync(user, passwordForEveryone);
+            await userManager.AddToRoleAsync(user, role);
+        }
+
+        private static void MigrateDb(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<PropertyContext>();
+                context.Database.Migrate();
             }
         }
     }

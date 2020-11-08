@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSMBackend.Migrations
 {
     [DbContext(typeof(PropertyContext))]
-    [Migration("20201108010447_plz")]
-    partial class plz
+    [Migration("20201108053131_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -194,8 +194,7 @@ namespace MSMBackend.Migrations
                     b.Property<int>("Shutters")
                         .HasColumnType("int");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
+                    b.Property<string>("UsersId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Utilities")

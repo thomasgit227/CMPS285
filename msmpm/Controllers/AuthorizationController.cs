@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IIS;
 using MSMBackend.Data.Entity;
+using MSMBackend.Dtos.LoginReturnDto;
 using MSMBackend.Dtos.UserDto;
 using MSMBackend.Models;
 using System;
@@ -11,9 +12,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace MSMBackend.Controllers
 {
-    [Route("/api/auth")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthorizationController : ControllerBase
     {
@@ -57,13 +59,35 @@ namespace MSMBackend.Controllers
             });
         }
         [HttpPost("create")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult> Create(CreateUserDto dto)
         {
-            var user = new User { UserName = dto.Username };
-            await userManager.CreateAsync(user, dto.Password);
-            await userManager.AddToRoleAsync(user, dto.Role);
-            return Ok();
-        }
+            
 
+            var newUser = new User 
+            {
+                UserName = dto.Username
+            };
+            
+            using(var transaction = await propertyContext.Database.BeginTransactionAsync())
+            {
+                var identityresults = await userManager.CreateAsync(newUser, dto.Password);
+
+                if(!identityresults.Succeeded) return BadRequest();
+
+                var roleResluts = await userManager.AddToRoleAsync(newUser, dto.Role);
+
+                if(!roleResluts.Succeeded) return BadRequest();
+                
+                transaction.Commit();
+            }
+
+            return Created(string.Empty, new LoginReturnDto
+            {
+                Id = newUser.Id,
+                Username = newUser.UserName,
+                UserRoles = dto.Role
+            });
+        }
     }
 }

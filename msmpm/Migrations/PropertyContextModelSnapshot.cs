@@ -192,8 +192,7 @@ namespace MSMBackend.Migrations
                     b.Property<int>("Shutters")
                         .HasColumnType("int");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
+                    b.Property<string>("UsersId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Utilities")
