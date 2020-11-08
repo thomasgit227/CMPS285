@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IIS;
 using MSMBackend.Data.Entity;
+using MSMBackend.Dtos.UserDto;
 using MSMBackend.Models;
 using System;
 using System.Collections.Generic;
@@ -13,12 +15,20 @@ namespace MSMBackend.Controllers
 {
     [Route("/api/auth")]
     [ApiController]
-    public class AuthorizationController
+    public class AuthorizationController : ControllerBase
     {
         private readonly PropertyContext propertyContext;
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
         private readonly SignInManager<User> signInManager;
+
+        public AuthorizationController(PropertyContext propertyContext, UserManager<User> userManager, RoleManager<Role> roleManager, SignInManager<User> signInManager)
+        {
+            this.propertyContext = propertyContext;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+            this.signInManager = signInManager;
+        }
 
         [HttpPost("login")]
         public async Task<ActionResult> LoginAsync(LoginDto dto)
@@ -44,7 +54,7 @@ namespace MSMBackend.Controllers
                 Id = user.Id,
                 Username = user.UserName,
                 UserRoles = roles
-            }); ;
+            });
         }
         [HttpPost("create")]
         public async Task<ActionResult> Create(CreateUserDto dto)
@@ -54,5 +64,5 @@ namespace MSMBackend.Controllers
             await userManager.AddToRoleAsync(user, dto.Role);
             return Ok();
         }
-    }
+    
 }
