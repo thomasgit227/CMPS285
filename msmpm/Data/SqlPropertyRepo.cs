@@ -118,5 +118,32 @@ namespace MSMBackend.Data
             List<Property> propBank = GetAllProperties().ToList().OrderBy(p => p.Name).ToList();
             return propBank;
         }
+
+        //Average method if we decide to implement it in the Property class and not calculate it through the Repo
+        public int Average()
+        {
+            int avg = Roof + ExtWalls + ExtOpenings + Framework + Piers;
+            avg += Chimney + Door + Windows + Shutters + Flooring;
+            int div = 0;
+
+            if (Utilities)
+            {
+                avg += Electrical + Plumbing + Sewer + HVAC;
+
+                div = 14;
+            }
+            else
+            {
+                div = 10;
+            }
+            //avg /= div;
+            return avg;
+        }
+
+
+        public void SetTime()
+        {
+            EditTime = DateTimeOffset.Now;
+        }
     }
 }

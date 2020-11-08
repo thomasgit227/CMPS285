@@ -63,7 +63,7 @@ namespace MSMBackend
         {
             MigrateDb(app);
             AddRoles(app).GetAwaiter().GetResult();
-            AddUsers(app).GetAwaiter().GetResult();
+            //AddUsers(app).GetAwaiter().GetResult();
 
             if (env.IsDevelopment())
             {
@@ -149,5 +149,6 @@ namespace MSMBackend
                 await roleManager.CreateAsync(new Role { Name = Roles.Viewer });
             }
         }
+
     }
 }
