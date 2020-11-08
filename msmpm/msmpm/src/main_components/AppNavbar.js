@@ -33,38 +33,40 @@ export default function AppNavbar() {
         <div>
 
         <Navbar light expand="md">
-          <NavbarBrand tag = {Link} to="/">MSMPM</NavbarBrand>
+          <NavbarBrand tag = {Link} to="/">
+            <img src="../../../assets/logo.png" width="40" height="40"/> 
+          </NavbarBrand>
             <Nav className = 'navbar' navbar>
 
-              <NavItem>
-                <NavLink tag={Link} to = "/properties/">
-                  properties
-                </NavLink>
-              </NavItem>
+            <NavItem>
+              <NavLink tag={Link} to = "/properties/">
+                properties
+              </NavLink>
+            </NavItem>
 
-              <UncontrolledDropdown className = "account" nav inNavbar>
-                <DropdownToggle nav caret>
-                  hello, {sessionStorage.isLoggedIn ? sessionStorage.username : "Guest"}
-                </DropdownToggle>
-                <DropdownMenu right>
+            <UncontrolledDropdown className = "account" nav inNavbar>
+              <DropdownToggle nav caret>
+                hello, {sessionStorage.isLoggedIn ? sessionStorage.username : "Guest"}
+              </DropdownToggle>
+              <DropdownMenu right>
 
 
-                  <DropdownItem>
-                    <NavLink tag={Link} to = "/login/">
-                      sign in
-                    </NavLink>
-                  </DropdownItem>
+                <DropdownItem>
+                  <NavLink tag={Link} to = "/login/">
+                    sign in
+                  </NavLink>
+                </DropdownItem>
 
-                  <DropdownItem>
-                    <Button onClick={logout}>
-                      sign out
-                      <Redirect to = "/home/"/>
-                    </Button>
-                  </DropdownItem>
+                <DropdownItem>
+                  <Button onClick={logout}>
+                    sign out
+                    <Redirect to = "/home/"/>
+                  </Button>
+                </DropdownItem>
 
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
             
         </Navbar>
 

@@ -8,7 +8,11 @@ import {
     Form, 
     FormGroup, 
     Collapse,
-    ButtonGroup
+    ButtonGroup,
+    Modal, 
+    ModalHeader, 
+    ModalBody, 
+    ModalFooter 
 } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 
@@ -17,8 +21,13 @@ export default function MyPropertyForm() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [utlState, setUtilState] = useState('No Utilities');
+    const [modal, setModal] = useState(false);
 
-    const toggle = () => {
+    const toggle = () => setModal(!modal);
+
+    const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={toggle}>&times;</button>;
+   
+    const toggleUtil = () => {
         setIsOpen(!isOpen);
         setUtilState(isOpen ? 'No Utilities' : 'Has Utilities');
     }
@@ -26,11 +35,10 @@ export default function MyPropertyForm() {
     const [submitted, setSubmitted] = useState(false);
     const submitForm = () => {
         setSubmitted(true);
-        //TODO 
     }
 
     //All
-    const [roofSelected, roofSetSelected] = useState(null);
+    const [roofSelected, roofSetSelected] = useState(3);
     const [extSelected, extSetSelected] = useState(null);
     const [opnsSelected, opnsSetSelected] = useState(null);
     const [fwSelected, fwSetSelected] = useState(null);
@@ -49,7 +57,7 @@ export default function MyPropertyForm() {
 
     return (
             <Form>
-                {submitted ? <Redirect to = "/properties/"/> : null}
+                {submitted && sessionStorage.getItem("isLoggedIn") == "true" ? <Redirect to = "/properties/"/> : null}
                 <FormGroup>
                     <div className = 'propertyform_one'>
                         <div>
@@ -209,7 +217,7 @@ export default function MyPropertyForm() {
                 </FormGroup>
 
             <div className = 'propertyform_util'>
-                <Button color="secondary" onClick={toggle} block>{utlState}</Button>
+                <Button color="secondary" onClick={toggleUtil} block>{utlState}</Button>
 
                 <Collapse isOpen={isOpen}>
                     <Form>
@@ -274,20 +282,24 @@ export default function MyPropertyForm() {
             </div>
 
             <div className = 'submitbutton'>
-                <Button block onClick = {submitForm}>
-                    Submit
-                </Button>
+            <Button color="secondary" onClick={toggle} block>Submit</Button>
+            <Modal isOpen={modal} toggle={toggle} className="confirmsubmission" external={externalCloseBtn}>
+                <ModalHeader>Submit?</ModalHeader>
+                <ModalBody>
+                    {sessionStorage.getItem("isLoggedIn") == "true" ? 
+                    "Are you sure you would like to submit? This cannot be undone."
+                    :
+                    "You are not Logged In"
+                    }
+                </ModalBody>
+                <ModalFooter>
+                {sessionStorage.getItem("isLoggedIn") == "true" ? //TODO check AuthO
+                    <Button block color="success" onClick={submitForm}>Submit</Button> : null}
+                    <Button block color="secondary" onClick={toggle}>Cancel</Button>
+                </ModalFooter>
+            </Modal>
             </div>
         </Form>
     );
 }
 
-//Note to Self:
-// {
-//     state === 'new' ? 
-//     (
-//     <h1> New Button Saying </h1>
-//     ) : (
-//     <h1> Old Button Saying </h1>
-//     )
-// };
