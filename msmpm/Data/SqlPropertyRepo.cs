@@ -53,7 +53,7 @@ namespace MSMBackend.Data
             return (_context.SaveChanges() >= 0);
         }
 
-        public void UpdateProperty(Property property)
+       /* public void UpdateProperty(Property property)
         {
             //Nothing, DBContext does this for is
             if (property == null)
@@ -61,23 +61,23 @@ namespace MSMBackend.Data
                 throw new ArgumentNullException(nameof(property));
             }
             property.SetTime();
-        }
+        }*/
 
-        public int AverageAttributeRating(Property property)
+        /*public int AverageAttributeRating(Property property)
         {
             if (property == null)
             {
                 throw new ArgumentNullException(nameof(property));
             }
             return property.Average();
-        }
+        }*/
 
-        private int CompareAverage(Property a, Property b)
+        /*private int CompareAverage(Property a, Property b)
         {
             return a.Average() - b.Average();
-        }
+        }*/
 
-        public string PropertyEditTime(Property property)
+        /*public string PropertyEditTime(Property property)
         {
             if (property == null)
             {
@@ -86,9 +86,9 @@ namespace MSMBackend.Data
             //This is the DateTimeOffset format to get the date and time of the edit
             string fmt = "G";
             return property.EditTime.ToString(fmt);
-        }
+        }*/
 
-        public IEnumerable<Property> BestProperties(int max = 10)
+        /*public IEnumerable<Property> BestProperties(int max = 10)
         {
             List<Property> propBank = GetAllProperties().ToList();
             propBank.Sort(new Comparison<Property>((x, y) => CompareAverage(y, x)));
@@ -98,7 +98,7 @@ namespace MSMBackend.Data
                 propBank = propBank.GetRange(0, max);
             }
             return propBank;
-        }
+        }*/
 
         public IEnumerable<Property> RecentProperties(int max = 5)
         {
@@ -117,6 +117,26 @@ namespace MSMBackend.Data
         {
             List<Property> propBank = GetAllProperties().ToList().OrderBy(p => p.Name).ToList();
             return propBank;
+        }
+
+        public void UpdateProperty(Property property)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AverageAttributeRating(Property property)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string PropertyEditTime(Property property)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Property> BestProperties(int max = 10)
+        {
+            throw new NotImplementedException();
         }
     }
 }

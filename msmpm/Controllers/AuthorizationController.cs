@@ -64,5 +64,6 @@ namespace MSMBackend.Controllers
             await userManager.AddToRoleAsync(user, dto.Role);
             return Ok();
         }
-    
+
+    }
 }

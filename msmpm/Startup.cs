@@ -23,9 +23,11 @@ namespace MSMBackend
 {
     public class Startup
     {
+        //private readonly UserManager<User> userManager;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //this.userManager = new UserManager<User>();
         }
 
         public IConfiguration Configuration { get; }
@@ -33,12 +35,12 @@ namespace MSMBackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+            
             services.AddDbContext<PropertyContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("MSMConnection")));
 
-            services.AddControllers().AddNewtonsoftJson(s => {
-                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            });
+            
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -49,21 +51,27 @@ namespace MSMBackend
                 configuration.RootPath = "MSMPM/build";
             });
 
+            services.AddIdentity<User, Role>()
+                    .AddEntityFrameworkStores<PropertyContext>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "MSMPM API", Version = "V1" });
             });
 
-            services.AddIdentity<User, Role>()
-                    .AddEntityFrameworkStores<PropertyContext>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             MigrateDb(app);
+            //CreateUser(userManager, "SteveyId", "admin", "SteveyIdPassword1!").GetAwaiter().GetResult();
+            
             AddRoles(app).GetAwaiter().GetResult();
+            
             AddUsers(app).GetAwaiter().GetResult();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -78,6 +86,8 @@ namespace MSMBackend
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
