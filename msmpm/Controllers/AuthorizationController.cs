@@ -89,5 +89,25 @@ namespace MSMBackend.Controllers
                 UserRoles = dto.Role
             });
         }
+
+        [HttpPut("updatePassword")]
+        public async Task<ActionResult> UpdatePassword(LoginDto dto, string NewPassword)
+        {
+            var user = await userManager.FindByNameAsync(dto.Username);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await userManager.ResetPasswordAsync(user, token, NewPassword);
+            if (!result.Succeeded)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }
