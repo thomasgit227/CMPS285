@@ -30,7 +30,7 @@ namespace MSMBackend.Models
         [Required]
         public Boolean Utilities { get; set; }
 
-        //public int SteveID { get; set; }
+        //public string MSMID { get; set; }
 
         [Required]
         public int Roof { get; set; }
@@ -85,31 +85,57 @@ namespace MSMBackend.Models
 
 
         //Average method if we decide to implement it in the Property class and not calculate it through the Repo
-        /*public int Average()
+        public int Average()
         {
-            int avg = Roof + ExtWalls + ExtOpenings + Framework + Piers;
-            avg += Chimney + Door + Windows + Shutters + Flooring;
-            int div = 0;
+            int[] attributes = { Roof , ExtWalls , ExtOpenings , Framework , Piers ,
+            Chimney , Door , Windows , Shutters , Flooring, Electrical , Plumbing , Sewer , HVAC };
 
-            if (Utilities)
-            {
-                avg += Electrical + Plumbing + Sewer + HVAC;
+            int avg = 0, div = 0;
 
-                div = 14;
-            }
-            else
+            //We ignore values if they are equal to zero
+            for(int i = 0; i < attributes.Length; i++)
             {
-                div = 10;
+                int a = attributes[i];
+                if (a != 0)
+                {
+                    avg += a;
+                    div++;
+                }
             }
+
             avg /= div;
             return avg;
         }
 
-        
-        public void SetTime()
+
+        //I added compare methods just to make the sorting methods easier and cleaner
+        public int CompareAverage(Property b)
         {
-            EditTime = DateTimeOffset.Now;
-        }*/
+            return Average() - b.Average();
+        }
+
+        public int CompareTime(Property b)
+        {
+            return Created.CompareTo(b.Created);
+        }
+        
+        private void SetTime()
+        {
+            Created = DateTimeOffset.Now;
+        }
+
+        public string GetTime()
+        {
+            string fmt = "G";
+            return Created.ToString(fmt);
+        }
+
+        //We have a seperate method for Update for now in case we decide to return the Average in the DTO instead of an endpoint
+        //If we return the Average in a DTO we need to update the Average in this method
+        public void Update()
+        {
+            SetTime();
+        }
         
     }
 }

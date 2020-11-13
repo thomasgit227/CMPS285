@@ -23,7 +23,7 @@ namespace MSMBackend.Dtos
         [Required]
         public Boolean Utilities { get; set; }
 
-        //public int SteveID { get; set; }
+        //public string MSMID { get; set; }
 
         [Required]
         public int Roof { get; set; }

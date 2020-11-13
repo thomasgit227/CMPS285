@@ -19,11 +19,13 @@ namespace MSMBackend.Controllers
     {
 
         private readonly IPropertyRepo _repository;
+        private readonly IPropertySortRepo _sorter;
         private readonly IMapper _mapper;
 
-        public PropertiesController(IPropertyRepo repository, IMapper mapper)
+        public PropertiesController(IPropertyRepo repository,  IMapper mapper)
         {
             _repository = repository;
+            _sorter = new PropertySortRepo();
             _mapper = mapper;
         }
 
@@ -55,10 +57,10 @@ namespace MSMBackend.Controllers
         public ActionResult<int> GetAverageOfProperty(int id)
         {
             var propertyItem = _repository.GetPropertyById(id);
-
             if (propertyItem != null)
             {
-                int average = _repository.AverageAttributeRating(propertyItem);
+                int average = propertyItem.Average();
+
                 return Ok(_mapper.Map<int>(average));
             }
 
@@ -70,10 +72,9 @@ namespace MSMBackend.Controllers
         public ActionResult<string> GetEditTimeOfProperty(int id)
         {
             var propertyItem = _repository.GetPropertyById(id);
-
             if (propertyItem != null)
             {
-                string time = _repository.PropertyEditTime(propertyItem);
+                string time = propertyItem.GetTime();
                 return Ok(_mapper.Map<string>(time));
             }
 
@@ -84,18 +85,22 @@ namespace MSMBackend.Controllers
         [HttpGet("best", Name = "GetBestProperties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetBestProperties()
         {
-            var propertyItems = _repository.BestProperties();
+            var propertyItems = _repository.GetAllProperties();
 
-            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+            var sortedProperties = _sorter.SortByAverage(propertyItems);
+
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(sortedProperties));
         }
 
         // Get: api/Properties/recent
         [HttpGet("recent", Name = "GetRecentProperties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetRecentProperties()
         {
-            var propertyItems = _repository.RecentProperties();
+            var propertyItems = _repository.GetAllProperties();
 
-            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+            var sortedProperties = _sorter.SortByTime(propertyItems);
+
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(sortedProperties));
         }
 
 
@@ -106,6 +111,10 @@ namespace MSMBackend.Controllers
             var propertyModel = _mapper.Map<Property>(propertyCreateDto);
 
             _repository.CreateProperty(propertyModel);
+
+            _repository.SaveChanges();
+
+            propertyModel.Update();
 
             _repository.SaveChanges();
 
@@ -123,6 +132,7 @@ namespace MSMBackend.Controllers
             {
                 return NotFound(); //404
             }
+
 
             _mapper.Map(propertyUpdateDto, propertyModelFromRepo);
 
@@ -178,40 +188,15 @@ namespace MSMBackend.Controllers
             return NoContent();
         }
 
-        //Additional methods currently just for testing:
-        /*
-        // GET: api/Properties/name/{name}
-        [HttpGet("name/{name}", Name = "GetPropertyByName")]
-        public ActionResult<PropertyReadDto> GetPropertyByName(string name)
-        {
-            var propertyItem = _repository.GetPropertyByName(name);
-            if (propertyItem != null)
-            {
-                return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
-            }
-
-            return NotFound();
-        }
-
-        // GET: api/Properties/location/{location}
-        [HttpGet("location/{location}", Name = "GetPropertyByLocation")]
-        public ActionResult<PropertyReadDto> GetPropertyByLocation(string name)
-        {
-            var propertyItem = _repository.GetPropertyByLocation(name);
-            if (propertyItem != null)
-            {
-                return Ok(_mapper.Map<PropertyReadDto>(propertyItem));
-            }
-            return NotFound();
-        }
-        */
         // Get: api/Properties/alphabetical
         [HttpGet("alphabetical", Name = "GetAlphabeticalProperties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetAlphabeticalProperties()
         {
-            var propertyItems = _repository.SortByAlphabetical();
+            var propertyItems = _repository.GetAllProperties();
 
-            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+            var sorted = _sorter.SortByAlphabetical(propertyItems);
+
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(sorted));
         }
     }
 }
