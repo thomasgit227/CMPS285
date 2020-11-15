@@ -18,6 +18,10 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using MSMBackend.Data.Entity;
 using Microsoft.AspNetCore.Identity;
+using MSMBackend.Data.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace MSMBackend
 {
@@ -48,7 +52,25 @@ namespace MSMBackend
 
             services.AddScoped<IPropertyRepo, SqlPropertyRepo>();  //Created new implementation using sql server
                                                                    //Here is being injected
-                                                                   
+            services.AddScoped<ITokenGenerator, TokenGenerator>();
+
+            services.AddAuthentication(cfg =>
+            {
+                cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                cfg.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Token:Key"])),
+                    ValidIssuer = Configuration["Token:Issuer"],
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                };
+            });
+
             services.AddSpaStaticFiles(configuration => {
                 configuration.RootPath = "MSMPM/build";
             });
@@ -67,11 +89,9 @@ namespace MSMBackend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //MigrateDb(app);
-            //AddRoles(app).GetAwaiter().GetResult();
-            //AddUsers(app).GetAwaiter().GetResult();
-
-            
+            MigrateDb(app);
+            AddRoles(app).GetAwaiter().GetResult();
+            AddUsers(app).GetAwaiter().GetResult();
 
             if (env.IsDevelopment())
             {
@@ -92,13 +112,11 @@ namespace MSMBackend
 
             app.UseAuthorization();
 
-            app.UseCors("AllowAll");
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-            
+
             app.UseSpaStaticFiles();
 
             app.UseSpa(spa => {
@@ -138,14 +156,15 @@ namespace MSMBackend
                     return;
                 }
 
-                await CreateUser(userManager, "admin", "password", Roles.Admin);
-                await CreateUser(userManager, "editor", "password", Roles.Editor);
-                await CreateUser(userManager, "viewer", "password", Roles.Viewer);
+                await CreateUser(userManager, "admin", Roles.Admin, "password");
+                await CreateUser(userManager, "editor", Roles.Editor, "password");
+                await CreateUser(userManager, "viewer", Roles.Viewer, "password");
             }
         }
 
-        private static async Task CreateUser(UserManager<User> userManager, string username, string password, string role)
+        private static async Task CreateUser(UserManager<User> userManager, string username, string role, string password)
         {
+            //const string passwordForEveryone = "Password123!";
             var user = new User { UserName = username };
             await userManager.CreateAsync(user, password);
             await userManager.AddToRoleAsync(user, role);

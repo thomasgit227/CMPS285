@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IIS;
 using MSMBackend.Data.Entity;
+using MSMBackend.Data.Tokens;
 using MSMBackend.Dtos.LoginReturnDto;
 using MSMBackend.Dtos.UserDto;
 using MSMBackend.Models;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 
@@ -23,16 +25,18 @@ namespace MSMBackend.Controllers
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
         private readonly SignInManager<User> signInManager;
+        private readonly ITokenGenerator _token;
 
-        public AuthorizationController(PropertyContext propertyContext, UserManager<User> userManager, RoleManager<Role> roleManager, SignInManager<User> signInManager)
+        public AuthorizationController(PropertyContext propertyContext, UserManager<User> userManager, RoleManager<Role> roleManager, SignInManager<User> signInManager, ITokenGenerator Token)
         {
             this.propertyContext = propertyContext;
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.signInManager = signInManager;
+            this._token = Token;
         }
 
-        [HttpPost("login")]
+        /*[HttpPost("login")]
         public async Task<ActionResult> LoginAsync(LoginDto dto)
         {
             var user = await userManager.FindByNameAsync(dto.Username);
@@ -57,9 +61,41 @@ namespace MSMBackend.Controllers
                 Username = user.UserName,
                 UserRoles = roles
             });
-        }
+        }*/
+
+        [HttpPost("login")]
+		public async Task<ActionResult> LoginAsync(LoginDto dto)
+		{
+
+			var user = await userManager.FindByNameAsync(dto.Username);
+
+			if (user == null)
+			{
+				return BadRequest();
+			}
+
+			var result = await signInManager.CheckPasswordSignInAsync(user, dto.Password, false);
+
+
+			if (!result.Succeeded)
+			{
+				return BadRequest();
+			}
+
+			var roles = await userManager.GetRolesAsync(user);
+            
+			IList<Claim> claims = await userManager.GetClaimsAsync(user);
+			return Ok(new
+			{
+				result = result,
+				username = user.UserName,
+				UserRoles = roles,
+				token = _token.GenerateToken(user, roles, claims)
+			});
+		}
+        
         [HttpPost("create")]
-        [Authorize(Roles = Roles.Admin)]
+        //[Authorize(Roles = Roles.Admin)]
         public async Task<ActionResult> Create(CreateUserDto dto)
         {
             
