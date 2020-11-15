@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSMBackend.Migrations
 {
     [DbContext(typeof(PropertyContext))]
-    [Migration("20201113041308_Ramsey")]
-    partial class Ramsey
+    [Migration("20201113130520_foist")]
+    partial class foist
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
