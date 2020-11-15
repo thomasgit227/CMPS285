@@ -22,7 +22,8 @@
   border-radius: 0% !important;
 }
 
-.test {
-  text-align: center;
-  margin-top: 2em;
+.orderbuttons {
+  margin-top: .25em;
+  border-radius: 5% !important;
+  box-shadow: .5em .5em lightgray;
 }

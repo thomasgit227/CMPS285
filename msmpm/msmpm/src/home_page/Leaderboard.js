@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import './home_page.css';
 import {
+    Button,
+    ButtonGroup,
     ListGroup,
     ListGroupItem,
   } from 'reactstrap';
@@ -10,7 +12,13 @@ import {
 
 
 export default function Leadership() {
- //TODO Grab ID of called property
+
+    const [order, setOrder] = useState("descending");
+
+    useEffect(() => {
+        console.log(order)
+    })
+
     return (
             <div>
 
@@ -63,6 +71,11 @@ export default function Leadership() {
                     </ListGroupItem>
 
                 </ListGroup>
+
+                <ButtonGroup className = "orderbuttons">
+                    <Button onClick = {() => setOrder("ascending")}> ▲ </Button>
+                    <Button onClick = {() => setOrder("descending")}> ▼ </Button>
+                </ButtonGroup>
             </div>
     );
 
