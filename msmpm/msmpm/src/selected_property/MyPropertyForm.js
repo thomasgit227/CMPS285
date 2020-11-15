@@ -42,6 +42,7 @@ export default function MyPropertyForm() {
         setSubmitted(true);
     }
 
+
     // TODO:
     //WHENEVER U HIT SUBMIT DO A TOAST
     //ALSO CLOSE MODAL
@@ -221,6 +222,8 @@ export default function MyPropertyForm() {
 
 
     // SET LABELS ON INPUTS
+    //TODO: MAKE THE INPUT LABELS NOT UGLY
+    
     return (
             <Form>
                 {
