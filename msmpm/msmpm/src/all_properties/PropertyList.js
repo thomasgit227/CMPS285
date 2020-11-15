@@ -23,6 +23,10 @@ export default function PropertyList() {
 
     });
 
+    const putIDInSession = (id) => {
+        sessionStorage.id = id;
+    }
+
     useEffect(() => {
         axios.get("/api/Properties")
         .then( (res) =>{
@@ -39,7 +43,7 @@ export default function PropertyList() {
     const rows = tableInfo.data;
 
     console.log(tableInfo);
-
+    //TODO put ID in session
     return (
         <div className = 'fulllist'>
             <Table>
@@ -52,7 +56,7 @@ export default function PropertyList() {
                 </thead>
                 {rows.map( (row) => (
                     <tbody className = "tableinfo">
-                        <th><NavLink tag={Link} to={'myproperty/' + row.id}>{row.name}</NavLink></th>
+                        <th><NavLink tag={Link} to={'myproperty/' + row.id} onClick={putIDInSession(row.id)}>{row.name}</NavLink></th>
                         <th>{row.location}</th>
                         <th>{row.id}</th>
                     </tbody>
