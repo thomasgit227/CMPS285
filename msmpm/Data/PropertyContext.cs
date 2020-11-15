@@ -15,7 +15,7 @@ namespace MSMBackend.Models
 
         }
 
-        public DbSet<Property> Propertys { get; set; }
+        public DbSet<Property> Properties { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

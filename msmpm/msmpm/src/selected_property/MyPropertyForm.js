@@ -13,7 +13,8 @@ import {
     Modal, 
     ModalHeader, 
     ModalBody, 
-    ModalFooter 
+    ModalFooter,
+    Input 
 } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 
@@ -53,8 +54,11 @@ export default function MyPropertyForm() {
             Electrical: elecSelected,
             Plumbing: plumbSelected,
             Sewer: sewSelected,
-            HVAC: hvacSelected
-        };
+            HVAC: hvacSelected,
+            Location: propertyLocation,
+            Name: propertyName,
+            ImageURL
+        }; //Left is side on server and right is state sending it
         let res = await axios.post("https://localhost:44378/api/Properties", dataBody);
         console.log(res);
         toggleSubmitModal();
@@ -91,6 +95,9 @@ export default function MyPropertyForm() {
     const [plumbSelected, plumbSetSelected] = useState(null);
     const [sewSelected, sewSetSelected] = useState(null);
     const [hvacSelected, hvacSetSelected] = useState(null);
+    const [propertyLocation, setLocation] = useState(null);
+    const [propertyName, setName] = useState(null);
+    const [ImageURL, setImageURL] = useState(null);
 
 
     const [FLAGBAG, setFLAGBAG] = useState(false);
@@ -202,12 +209,16 @@ export default function MyPropertyForm() {
         // So this makes useffect essentially a component did mount 
     []);
 
-    
     return (
             <Form>
                 {
                 //submitted && sessionStorage.getItem("isLoggedIn") == "true" ? <Redirect to = "/properties/"/> : null
                 }
+                <FormGroup>
+                    <Input type="text" value={propertyName} onChange={(e) => setName(e.target.value) }/>
+                    <Input type="text" value={propertyLocation} onChange={(e) => setLocation(e.target.value)}/>
+                    <Input type="text" value={ImageURL} onChange={(e) => setImageURL(e.target.value)}/>
+                </FormGroup>
                 <FormGroup>
                     <div className = 'propertyform_one'>
                         <div>
