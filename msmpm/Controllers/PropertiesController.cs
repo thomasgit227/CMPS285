@@ -176,7 +176,7 @@ namespace MSMBackend.Controllers
             return NoContent();
         }
 
-        //DELETE api/properties/{id}
+        //DELETE api/Properties/{id}
         [HttpDelete("{id}")]
         public ActionResult DeleteProperty(int id)
         {
@@ -189,7 +189,7 @@ namespace MSMBackend.Controllers
             _repository.DeleteProperty(propertyModelFromRepo);
             _repository.SaveChanges();
 
-            return NoContent();
+            return Ok(_mapper.Map<PropertyReadDto>(propertyModelFromRepo));
         }
 
         // Get: api/Properties/alphabetical

@@ -50,8 +50,7 @@ export default function Leadership() {
                 </h4>
 
                 <ListGroup className = 'leaderboard'>
-                    {/* {rows.sort((a,b) => a-b)}; */}
-                    {
+                {
                     rows.map( (row) => (
                         <ListGroupItem className = "tableinfo">
                             <NavLink tag={Link} to={'/properties/myproperty/' + row.id}>{row.name}</NavLink>
