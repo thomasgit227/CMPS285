@@ -36,6 +36,33 @@ namespace MSMBackend.Controllers
             this._token = Token;
         }
 
+        /*[HttpPost("login")]
+        public async Task<ActionResult> LoginAsync(LoginDto dto)
+        {
+            var user = await userManager.FindByNameAsync(dto.Username);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            var result = await signInManager.CheckPasswordSignInAsync(user, dto.Password, true);
+            if (!result.Succeeded)
+            {
+                return BadRequest();
+            }
+
+            await signInManager.SignInAsync(user, false, "Password");
+
+            var roles = await userManager.GetRolesAsync(user);
+
+            return Ok(new UserRoleDto
+            {
+                Id = user.Id,
+                Username = user.UserName,
+                UserRoles = roles
+            });
+        }*/
+
         [HttpPost("login")]
 		public async Task<ActionResult> LoginAsync(LoginDto dto)
 		{
