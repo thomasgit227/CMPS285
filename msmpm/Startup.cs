@@ -71,7 +71,7 @@ namespace MSMBackend
             //AddRoles(app).GetAwaiter().GetResult();
             //AddUsers(app).GetAwaiter().GetResult();
 
-            app.UseCors("AllowAll");
+            
 
             if (env.IsDevelopment())
             {
@@ -91,6 +91,8 @@ namespace MSMBackend
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseCors("AllowAll");
 
             app.UseEndpoints(endpoints =>
             {

@@ -27,7 +27,7 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            _context.Properties.Add(property);
+            _context.Propertys.Add(property);
         }
 
         public void DeleteProperty(Property property)
@@ -36,7 +36,7 @@ namespace MSMBackend.Data
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            _context.Properties.Remove(property);
+            _context.Propertys.Remove(property);
         }
 
         public IEnumerable<Property> GetAllProperties()
@@ -46,7 +46,7 @@ namespace MSMBackend.Data
 
         public Property GetPropertyById(int id)
         {
-            return _context.Properties.FirstOrDefault(p => p.Id == id);
+            return _context.Propertys.FirstOrDefault(p => p.Id == id);
         }
 
         public bool SaveChanges()

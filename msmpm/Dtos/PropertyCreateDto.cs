@@ -10,15 +10,15 @@ namespace MSMBackend.Dtos
     {
         //We don't pass the Id in our create dto because our DB is creating that when the object is created public int Id { get; set; }
 
-        [Required]
+        
         public string Name { get; set; }
-        [Required]
+        
         public string Location { get; set; }
 
         //[Required]
         //public string Username { get; set; }
 
-        [Required]
+        
         public string ImageURL { get; set; }
         [Required]
         public Boolean Utilities { get; set; }
