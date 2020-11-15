@@ -11,21 +11,15 @@ namespace MSMBackend.Data.Tokens
 {
     public class TokenGenerator : ITokenGenerator
     {
-		private IConfiguration _config;
+		private readonly IConfiguration _config;
 
-		public void JWTTokenGenerator(IConfiguration config)
+		public TokenGenerator(IConfiguration config)
 		{
-            _config = config;
+			_config = config;
 
 		}
-
-        public string GenerateToken(User user, IList<string> roles, IList<Claim> claims)
+		public string GenerateToken(User user, IList<string> roles, IList<Claim> claims)
 		{
-			// var claims = new List<Claim>
-			// {
-			// 	new Claim(JwtRegisteredClaimNames.GivenName , user.UserName),
-			// 	new Claim(JwtRegisteredClaimNames.Email , user.Email),
-			// };
 
 			claims.Add(new Claim(JwtRegisteredClaimNames.GivenName, user.UserName));
 
@@ -53,5 +47,6 @@ namespace MSMBackend.Data.Tokens
 			return tokenHandler.WriteToken(token);
 		}
 	}
+	
 }
     
