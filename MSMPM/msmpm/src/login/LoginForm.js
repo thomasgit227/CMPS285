@@ -37,11 +37,11 @@ export default function LoginForm() {
 
             <Form className = 'loginform'>
                 <FormGroup>
-                    <Label>username</Label>
-                    <Input type="username" name="username" id="username" onChange={(e) => {setUsername(e.target.value)}} placeholder="username"/>
+                    <Label>Username:</Label>
+                    <Input type="username" name="username" id="username" onChange={(e) => {setUsername(e.target.value)}} placeholder="Username"/>
 
-                    <Label>password</Label>
-                    <Input type="password" name="password" id="password" onChange={(e) => {setPassword(e.target.value)}} placeholder="password" />
+                    <Label>Password:</Label>
+                    <Input type="password" name="password" id="password" onChange={(e) => {setPassword(e.target.value)}} placeholder="Password" />
                 </FormGroup>
                 <FormGroup>
                     <Button className = 'loginbutton' block onClick = {login}>Login</Button>

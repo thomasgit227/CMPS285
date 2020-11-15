@@ -170,49 +170,49 @@ export default function MyPropertyForm() {
         // }
 
         if(changes != null){
-          if(changes.roofSelected != null){
+            if(changes.roofSelected != null){
                 roofSetSelected(changes.roofSelected);
             }
-          if(changes.extSelected != null){
+            if(changes.extSelected != null){
                 extSetSelected(changes.extSelected);
             }
-          if(changes.opnsSelected != null){
+            if(changes.opnsSelected != null){
             fwSetSelected(changes.opnsSelected);
             }
-          if(changes.fwSelected != null){
+            if(changes.fwSelected != null){
             paintSetSelected(changes.fwSelected);
             }
-          if(changes.paintSelected != null){
+            if(changes.paintSelected != null){
             pfSetSelected(changes.paintSelected);
             }
-          if(changes.pfSelected != null){
+            if(changes.pfSelected != null){
             chimSetSelected(changes.pfSelected);
             }
-          if(changes.chimSelected != null){
+            if(changes.chimSelected != null){
             doorSetSelected(changes.chimSelected);
             }
-          if(changes.doorSelected != null){
+            if(changes.doorSelected != null){
             windSetSelected(changes.doorSelected);
             }
-          if(changes.windSelected != null){
+            if(changes.windSelected != null){
             shutSetSelected(changes.windSelected);
             }
-          if(changes.shutSelected != null){
+            if(changes.shutSelected != null){
             shutSetSelected(changes.shutSelected);
             }
-          if(changes.floorSelected != null){
+            if(changes.floorSelected != null){
             floorSetSelected(changes.floorSelected);
             }
-          if(changes.elecSelected != null){
+            if(changes.elecSelected != null){
                 roofSetSelected(changes.elecSelected);
             }
-          if(changes.plumbSelected != null){
+            if(changes.plumbSelected != null){
                 roofSetSelected(changes.plumbSelected);
             }
-          if(changes.sewSelected != null){
+            if(changes.sewSelected != null){
                 roofSetSelected(changes.sewSelected);
             }
-          if(changes.hvacSelected != null){
+            if(changes.hvacSelected != null){
                 roofSetSelected(changes.hvacSelected);
             }
         }

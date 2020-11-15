@@ -31,13 +31,13 @@ export default function AppNavbar() {
 
         <Navbar light expand="md">
           <NavbarBrand tag = {Link} to="/">
-            <img src="../../../assets/logo.png" width="40" height="40"/> 
+            <img src="../../../assets/logo.png" width="41" height="41"/> 
           </NavbarBrand>
             <Nav className = 'navbar' navbar>
 
             <NavItem>
               <NavLink tag={Link} to = "/properties/">
-                properties
+                Properties
               </NavLink>
             </NavItem>
 
@@ -50,13 +50,13 @@ export default function AppNavbar() {
 
                 <DropdownItem>
                   <NavLink tag={Link} to = "/login/">
-                    sign in
+                    Sign in
                   </NavLink>
                 </DropdownItem>
 
                 <DropdownItem>
                   <Button onClick={logout}>
-                    sign out
+                    Log out
                     <Redirect to = "/home/"/>
                   </Button>
                 </DropdownItem>
