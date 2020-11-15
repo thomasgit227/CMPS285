@@ -8,8 +8,6 @@ import {
 import {
     Link,
 } from 'react-router-dom';
-import ListedProperty from './ListedProperty';
-import Properties from './Properties';
 import axios from 'axios';
 
 export default function PropertyList() {

@@ -37,7 +37,7 @@ export default function AppNavbar() {
 
             <NavItem>
               <NavLink tag={Link} to = "/properties/">
-                Properties
+                properties
               </NavLink>
             </NavItem>
 

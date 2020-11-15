@@ -8,8 +8,7 @@ export default function Login() {
     const [message, setMsg] = useState("");
     
     useEffect( ()=>{
-        (sessionStorage.getItem("isLoggedIn") == "true") ? setMsg("Logged In") : setMsg("Nah");
-        console.log(sessionStorage.getItem("IsLoggedIn")==true);
+        (sessionStorage.getItem("isLoggedIn") == "true") ? setMsg("Logged In") : setMsg("");
     });
 
     return (

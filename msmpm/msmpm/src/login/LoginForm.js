@@ -8,19 +8,27 @@ import {
     Button,
 } from 'reactstrap';
 
+import axios from 'axios';
+
 export default function LoginForm() {
 
-    // const [isLoggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const login = () => {
-        sessionStorage.isLoggedIn = true;
-        sessionStorage.username = username;
-        sessionStorage.password = password; //This is bad, don't do dis
-        //TODO User Auth/Token Junk
         window.location.reload(false);
-        // setLoggedIn(true);
+
+        axios.post('/api/auth/login', {
+            username: username,
+            password: password
+        })
+        .then( (r) => {
+            console.log(r.data.token);
+            if(r.status === 200) {
+                sessionStorage.isLoggedIn = true;
+                sessionStorage.username = username;
+            }
+        });
     };
 
     return (
