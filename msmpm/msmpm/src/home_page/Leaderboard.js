@@ -5,19 +5,42 @@ import {
     ButtonGroup,
     ListGroup,
     ListGroupItem,
+    NavLink,
   } from 'reactstrap';
 import {
     Link,
 } from 'react-router-dom';
 
+import axios from 'axios';
 
 export default function Leadership() {
 
     const [order, setOrder] = useState("descending");
 
+    const [tableInfo,setTableInfo] = useState({
+        columns: [{
+            name: "Name",
+            location: "Location",
+            id: "Id"
+        }],
+        data: [],
+
+    });
+
     useEffect(() => {
-        console.log(order)
-    })
+         axios.get("/api/Properties")
+        .then( (res) =>{
+            setTableInfo( (table) => {
+                const callInfo = {...table};
+                res.data.map( (d) => {
+                    callInfo.data = [...callInfo.data, d];
+                })
+                return callInfo;
+            })
+        })
+    },[])
+
+    const rows = tableInfo.data;
 
     return (
             <div>
@@ -27,53 +50,16 @@ export default function Leadership() {
                 </h4>
 
                 <ListGroup className = 'leaderboard'>
-
-                    <ListGroupItem>
-                        <Link to={ "/properties/myproperty/" + 1}>
-                            Property 1
-                        </Link>
-                    </ListGroupItem>
-
-                    <ListGroupItem>
-                        <Link to="/properties/myproperty/2/">
-                            Property 2
-                        </Link>
-                    </ListGroupItem>
-
-                    <ListGroupItem>
-                        <Link to="/properties/myproperty/3/">
-                            Property 3
-                        </Link>
-                    </ListGroupItem>
-
-                    <ListGroupItem>
-                        <Link to="/properties/myproperty/4/">
-                            Property 4
-                        </Link>
-                    </ListGroupItem>
-
-                    <ListGroupItem>
-                        <Link to="/properties/myproperty/5/">
-                            Property 5
-                        </Link>
-                    </ListGroupItem>
-
-                    <ListGroupItem>
-                        <Link to="/properties/myproperty/6/">
-                            Property 6
-                        </Link>
-                    </ListGroupItem>
-
-                    <ListGroupItem>
-                        <Link to="/properties/">
-                            . . . 
-                        </Link>
-                    </ListGroupItem>
-
+                {
+                    rows.map( (row) => (
+                        <ListGroupItem className = "tableinfo">
+                            <NavLink tag={Link} to={'/properties/myproperty/' + row.id}>{row.name}</NavLink>
+                        </ListGroupItem>
+                    ))}
                 </ListGroup>
 
                 <ButtonGroup className = "orderbuttons">
-                    <Button onClick = {() => setOrder("ascending")}> ▲ </Button>
+                    <Button onClick = {() => setOrder("ascending"), rows.reverse}> ▲ </Button>
                     <Button onClick = {() => setOrder("descending")}> ▼ </Button>
                 </ButtonGroup>
             </div>

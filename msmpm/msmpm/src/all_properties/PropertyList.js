@@ -66,7 +66,6 @@ export default function PropertyList() {
     const rows = tableInfo.data;
 
     console.log(tableInfo);
-    //TODO put ID in session
     return (
         <div className = 'fulllist'>
             <Table>

@@ -229,11 +229,6 @@ export default function MyPropertyForm() {
                 {
                 //submitted && sessionStorage.getItem("isLoggedIn") == "true" ? <Redirect to = "/properties/"/> : null
                 }
-                <FormGroup> 
-                    <Input type="text" value={propertyName} onChange={(e) => setName(e.target.value) }/>
-                    <Input type="text" value={propertyLocation} onChange={(e) => setLocation(e.target.value)}/>
-                    <Input type="text" value={ImageURL} onChange={(e) => setImageURL(e.target.value)}/>
-                </FormGroup>
                 <FormGroup>
                     <div className = 'propertyform_one'>
                         <div>
@@ -457,6 +452,7 @@ export default function MyPropertyForm() {
                                 </ButtonGroup>
                             </div>
                         </FormGroup>
+
                     </Form>
                 </Collapse>
             </div>
@@ -479,6 +475,13 @@ export default function MyPropertyForm() {
                 </ModalFooter>
             </Modal>
             </div>
+
+            <FormGroup className = 'propertyform_texts'>
+                <h6> Change Name / Location </h6>
+                <Input type="text" value={propertyName} onChange={(e) => setName(e.target.value)} placeholder = "property name"/>
+                <Input type="text" value={propertyLocation} onChange={(e) => setLocation(e.target.value)} placeholder = "location"/>
+                <Input type="text" value={ImageURL} onChange={(e) => setImageURL(e.target.value)} placeholder = "image URL"/>
+            </FormGroup>
         </Form>
     );
 }
