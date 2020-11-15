@@ -1,0 +1,12 @@
+.navbar {
+    font-size: x-large !important;
+
+    background-color: olivedrab;
+    box-shadow: 0em .5em lightgrey;
+
+    width: 100%;
+    padding: 0em !important;
+    padding-left: .5em !important;
+    padding-right: .5em !important;
+
+}
