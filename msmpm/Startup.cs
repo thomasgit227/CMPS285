@@ -59,15 +59,19 @@ namespace MSMBackend
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "MSMPM API", Version = "V1" });
             });
 
-            
+            services.AddCors(x => x.AddPolicy("AllowAll", Builder => {
+                Builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            } ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             MigrateDb(app);
-            AddRoles(app).GetAwaiter().GetResult();
-            AddUsers(app).GetAwaiter().GetResult();
+            //AddRoles(app).GetAwaiter().GetResult();
+            //AddUsers(app).GetAwaiter().GetResult();
+
+            app.UseCors("AllowAll");
 
             if (env.IsDevelopment())
             {

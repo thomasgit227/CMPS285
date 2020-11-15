@@ -34,8 +34,31 @@ export default function MyPropertyForm() {
     }
 
     const [submitted, setSubmitted] = useState(false);
-    const submitForm = () => {
+    const toggleSubmitModal = () => {
         setSubmitted(true);
+    }
+
+    const submitForm = async () => {
+        let dataBody = {
+            Roof: roofSelected,
+            ExtWalls: extSelected,
+            ExtOpenings: opnsSelected,
+            Framework: fwSelected,
+            Piers: pfSelected,
+            Chimney: chimSelected,
+            Door: doorSelected,
+            Windows: windSelected,
+            Shutters: shutSelected,
+            Flooring: floorSelected,
+            Electrical: elecSelected,
+            Plumbing: plumbSelected,
+            Sewer: sewSelected,
+            HVAC: hvacSelected
+        };
+        let res = await axios.post("https://localhost:44378/api/Properties", dataBody);
+        console.log(res);
+        toggleSubmitModal();
+
     }
 
 
@@ -69,32 +92,41 @@ export default function MyPropertyForm() {
     const [sewSelected, sewSetSelected] = useState(null);
     const [hvacSelected, hvacSetSelected] = useState(null);
 
+
+    const [FLAGBAG, setFLAGBAG] = useState(false);
+
     useEffect(() => {
-        var changes = { //var grabbing all of the values of current state
-                        // making an object of state to store in session
-            roofSelected,
-            extSelected,
-            opnsSelected,
-            fwSelected,
-            paintSelected,
-            pfSelected,
-            chimSelected,
-            doorSelected,
-            windSelected,
-            shutSelected,
-            floorSelected,
-            elecSelected,
-            plumbSelected,
-            sewSelected,
-            hvacSelected
-        };
+        if(FLAGBAG === false){
+            setFLAGBAG(true);
+        }
+        else{
+            var changes = { //var grabbing all of the values of current state
+                            // making an object of state to store in session
+                roofSelected,
+                extSelected,
+                opnsSelected,
+                fwSelected,
+                paintSelected,
+                pfSelected,
+                chimSelected,
+                doorSelected,
+                windSelected,
+                shutSelected,
+                floorSelected,
+                elecSelected,
+                plumbSelected,
+                sewSelected,
+                hvacSelected
+            };
 
-        console.log(changes);
-        
-        sessionStorage.changes = JSON.stringify(changes);
+            console.log(changes);
+            
+            sessionStorage.changes = JSON.stringify(changes);
 
-        console.log(sessionStorage);
-    }, [roofSelected,
+            console.log(sessionStorage);
+        }
+    }, [
+        roofSelected,
         extSelected,
         opnsSelected,
         fwSelected,
@@ -120,12 +152,50 @@ export default function MyPropertyForm() {
         // }
 
         if(changes != null){
-            if(changes.extSelected != null){
-                extSetSelected(changes.extSelected)
+          if(changes.roofSelected != null){
+                roofSetSelected(changes.roofSelected);
             }
-            if(changes.roofSelected != null){
-                roofSetSelected(changes.roofSelected)
-
+          if(changes.extSelected != null){
+                extSetSelected(changes.extSelected);
+            }
+          if(changes.opnsSelected != null){
+            fwSetSelected(changes.opnsSelected);
+            }
+          if(changes.fwSelected != null){
+            paintSetSelected(changes.fwSelected);
+            }
+          if(changes.paintSelected != null){
+            pfSetSelected(changes.paintSelected);
+            }
+          if(changes.pfSelected != null){
+            chimSetSelected(changes.pfSelected);
+            }
+          if(changes.chimSelected != null){
+            doorSetSelected(changes.chimSelected);
+            }
+          if(changes.doorSelected != null){
+            windSetSelected(changes.doorSelected);
+            }
+          if(changes.windSelected != null){
+            shutSetSelected(changes.windSelected);
+            }
+          if(changes.shutSelected != null){
+            shutSetSelected(changes.shutSelected);
+            }
+          if(changes.floorSelected != null){
+            floorSetSelected(changes.floorSelected);
+            }
+          if(changes.elecSelected != null){
+                roofSetSelected(changes.elecSelected);
+            }
+          if(changes.plumbSelected != null){
+                roofSetSelected(changes.plumbSelected);
+            }
+          if(changes.sewSelected != null){
+                roofSetSelected(changes.sewSelected);
+            }
+          if(changes.hvacSelected != null){
+                roofSetSelected(changes.hvacSelected);
             }
         }
     }, //Eeverytime the dependency gets updated this UseEffect gets called!!!
@@ -135,7 +205,9 @@ export default function MyPropertyForm() {
     
     return (
             <Form>
-                {submitted && sessionStorage.getItem("isLoggedIn") == "true" ? <Redirect to = "/properties/"/> : null}
+                {
+                //submitted && sessionStorage.getItem("isLoggedIn") == "true" ? <Redirect to = "/properties/"/> : null
+                }
                 <FormGroup>
                     <div className = 'propertyform_one'>
                         <div>

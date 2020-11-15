@@ -22,7 +22,7 @@ function App() {
             
           <Route exact path="/properties/"> <Properties/> </Route>
 
-          <Route path="/properties/myproperty/"> <MyProperty/> </Route>
+          <Route path="/properties/myproperty/:id"> <MyProperty/> </Route>
 
           <Route exact path="/search/"> <Template/> </Route>
 
