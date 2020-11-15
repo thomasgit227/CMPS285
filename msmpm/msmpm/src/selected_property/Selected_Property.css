@@ -54,6 +54,18 @@
   height: fit-content;
 }
 
+.propertyform_texts {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  float: left;
+  margin-left: 2em;
+  width: 50em;
+  padding: 1%;
+  text-align: center;
+  background-color: darkgrey;
+  box-shadow: .5em .5em lightgrey;
+  margin-bottom: 2em;
+}
+
 .propertyform_util {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   float: left;

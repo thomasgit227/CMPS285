@@ -19,7 +19,6 @@ export default function Home() {
                     <EditHistory/>
                 </Col>
             </Row>
-            {/* <Test/> */}
         </div>
     );
 }
