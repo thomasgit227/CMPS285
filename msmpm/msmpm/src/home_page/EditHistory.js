@@ -1,14 +1,32 @@
-import React from 'react';
+import Axios from 'axios';
+import React, {
+    useEffect,
+    useState 
+} from 'react';
 import { Table } from 'reactstrap';
 import './home_page.css';
 
 export default function EditHistory() {
+
+    const [recentProperties, setRecentProperties] = useState(null);
+
+    //getting from endpoint
+    useEffect(() => {   
+        var fetchData = async () => {
+            var res = await Axios.get("https://localhost:44378/api/Properties/recent");
+            //console.log(res.data);
+            setRecentProperties(res.data);
+        }
+        fetchData();
+    }, [])
+
+
+
     return (
         <div>
             <h4 className = 'edithistory_heading'>
                 Recent Changes
             </h4>
-
             <Table className = 'edithistory'>
                 <thead>
                     <tr>
@@ -18,23 +36,24 @@ export default function EditHistory() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Property 1</td>
-                        <td>4 / 20 / 1999 - 5:34pm</td>
-                        <td>@jjredick</td>
-                    </tr>
-                    <tr>
-                        <td>Property 2</td>
-                        <td>12 / 25 / 1985 - 7:15am</td>
-                        <td>@stevedfisk</td>
-                    </tr>
-                    <tr>
-                        <td>Property 3</td>
-                        <td>1 / 6 / 2005 - 8:44pm</td>
-                        <td>@johncena</td>
-                    </tr>
+                    {recentProperties && 
+                    // Map is iterating through each of the properties and rendering a row for each
+                    // With the values because EVERYTHING in brackets gets rendered as JavaScript
+                    // Look into falsies
+                        recentProperties.map((recentProperty) => {
+                            console.log(recentProperty);
+                            //Null Coalescing Operator "??" If object on left is null --> Display object on right
+                            return (
+                                <tr>
+                                    <td>{recentProperty.name}</td>
+                                    <td>{recentProperty.created}</td>
+                                    <td>{recentProperty.UsersId??"Anonymous"}</td> 
+                                </tr>
+                            );
+                        })
+                    }
                 </tbody>
             </Table>
         </div>
-      );
+    );
 }

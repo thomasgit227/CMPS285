@@ -55,6 +55,9 @@ namespace MSMBackend.Dtos
         public int Sewer { get; set; }
         [Required]
         public int HVAC { get; set; }
+        
+        public DateTimeOffset Created { get; set; }
+
         public string UsersId { get; set; }
     }
 }

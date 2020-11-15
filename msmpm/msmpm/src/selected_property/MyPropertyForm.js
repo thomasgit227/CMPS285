@@ -19,6 +19,9 @@ import {
 import { Redirect } from 'react-router-dom';
 
 
+//TODO
+//MAKE A TRY CATCH FOR A TOAST ON SUBMIT
+
 export default function MyPropertyForm() {
 
     const [isOpen, setIsOpen] = useState(false);
@@ -38,6 +41,10 @@ export default function MyPropertyForm() {
     const toggleSubmitModal = () => {
         setSubmitted(true);
     }
+
+    // TODO:
+    //WHENEVER U HIT SUBMIT DO A TOAST
+    //ALSO CLOSE MODAL
 
     const submitForm = async () => {
         let dataBody = {
@@ -64,9 +71,12 @@ export default function MyPropertyForm() {
         toggleSubmitModal();
 
     }
-
-
     
+
+
+    // MAKE ANOTHER GET REQUEST TO CONTROLLER FOR 
+
+    //Make
 
     //Saving the state of the values on the buttons
     const [unsavedChanges, setChanges] = useState();
@@ -209,12 +219,14 @@ export default function MyPropertyForm() {
         // So this makes useffect essentially a component did mount 
     []);
 
+
+    // SET LABELS ON INPUTS
     return (
             <Form>
                 {
                 //submitted && sessionStorage.getItem("isLoggedIn") == "true" ? <Redirect to = "/properties/"/> : null
                 }
-                <FormGroup>
+                <FormGroup> 
                     <Input type="text" value={propertyName} onChange={(e) => setName(e.target.value) }/>
                     <Input type="text" value={propertyLocation} onChange={(e) => setLocation(e.target.value)}/>
                     <Input type="text" value={ImageURL} onChange={(e) => setImageURL(e.target.value)}/>
