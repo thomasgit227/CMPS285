@@ -8,7 +8,7 @@
 A property management tool for Matilda Stream Management Inc.
 
 ## The Team ##
-Cameron Bonura
-Kenneth Cole
-Thomas Floyd
-Timothy McReynolds
+* Cameron Bonura
+* Kenneth Cole
+* Thomas Floyd
+* Timothy McReynolds
