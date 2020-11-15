@@ -1,5 +1,6 @@
 import React, {
-    useState 
+    useState,
+    useEffect 
 } from 'react';
 import axios from 'axios';
 import './Selected_Property.css';
@@ -37,8 +38,20 @@ export default function MyPropertyForm() {
         setSubmitted(true);
     }
 
+
+    
+
+    //Saving the state of the values on the buttons
+    const [unsavedChanges, setChanges] = useState();
+    
+
+
+    // Things to try to save button values to session storage
+    // On componenet unmount grab all values and save to storage
+    // Anytime value is changed pass a callback function
+
     //All
-    const [roofSelected, roofSetSelected] = useState(3);
+    const [roofSelected, roofSetSelected] = useState(null);
 
     const [extSelected, extSetSelected] = useState(null);
     const [opnsSelected, opnsSetSelected] = useState(null);
@@ -56,6 +69,68 @@ export default function MyPropertyForm() {
     const [sewSelected, sewSetSelected] = useState(null);
     const [hvacSelected, hvacSetSelected] = useState(null);
 
+    useEffect(() => {
+        var changes = { //var grabbing all of the values of current state
+                        // making an object of state to store in session
+            roofSelected,
+            extSelected,
+            opnsSelected,
+            fwSelected,
+            paintSelected,
+            pfSelected,
+            chimSelected,
+            doorSelected,
+            windSelected,
+            shutSelected,
+            floorSelected,
+            elecSelected,
+            plumbSelected,
+            sewSelected,
+            hvacSelected
+        };
+
+        console.log(changes);
+        
+        sessionStorage.changes = JSON.stringify(changes);
+
+        console.log(sessionStorage);
+    }, [roofSelected,
+        extSelected,
+        opnsSelected,
+        fwSelected,
+        paintSelected,
+        pfSelected,
+        chimSelected,
+        doorSelected,
+        windSelected,
+        shutSelected,
+        floorSelected,
+        elecSelected,
+        plumbSelected,
+        sewSelected,
+        hvacSelected]);
+
+    useEffect(() => {
+        //Grabbing value and setting state
+        var changes = JSON.parse(sessionStorage.getItem("changes"));
+        //This one is calling ternary inside roof selected setting the state no matter what 
+        //but we dont wanna set state no matter what cuz thats big dum 
+        // if(changes != null){    // ?. means dont throw if it is null
+        //     roofSetSelected(changes?.roofSelected != null ? changes.roofSelected : roofSelected)
+        // }
+
+        if(changes != null){
+            if(changes.extSelected != null){
+                extSetSelected(changes.extSelected)
+            }
+            if(changes.roofSelected != null){
+                roofSetSelected(changes.roofSelected)
+
+            }
+        }
+    }, //Eeverytime the dependency gets updated this UseEffect gets called!!!
+        // So this makes useffect essentially a component did mount 
+    []);
 
     
     return (
@@ -80,9 +155,13 @@ export default function MyPropertyForm() {
                             <br/>
                             <h6>
                                 Exterior Walls
-                            </h6>
+                            </h6> 
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => extSetSelected(0)} active={extSelected === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => extSetSelected(0)} active={extSelected === 0}>∅</Button>  
+                                {// A callback function is a parameter that you pass to a function and then that function calls it after you finish whatever ur doing
+                                // 
+                                // In JS you can passs function as parameters (CallBack functions)
+                                }
                                 <Button color="secondary" onClick={() => extSetSelected(1)} active={extSelected === 1}>1</Button>
                                 <Button color="secondary" onClick={() => extSetSelected(3)} active={extSelected === 3}>3</Button>
                                 <Button color="secondary" onClick={() => extSetSelected(5)} active={extSelected === 5}>5</Button>
