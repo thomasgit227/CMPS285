@@ -8,15 +8,17 @@ export default function Login() {
     const [message, setMsg] = useState("");
     
     useEffect( ()=>{
-        setMsg("Signed in as " + sessionStorage.username)
+        (sessionStorage.getItem("isLoggedIn") == "true") ? setMsg("Logged In") : setMsg("");
     });
 
     return (
         <div>
-            <h6 className = "message">
-                {message}
-            </h6>
+            {sessionStorage.getItem("isLoggedIn") == "true" ? 
+            
+            <h6 className = "message"> {message} </h6>
+            : 
             <LoginForm/>
+            }
         </div>
     );
 }

@@ -18,6 +18,7 @@ namespace MSMBackend.Data
         void UpdateProperty(Property property);
 
         void DeleteProperty(Property property);
+<<<<<<< HEAD:msmpm/Data/IPropertyRepo.cs
 
         
 
@@ -31,5 +32,7 @@ namespace MSMBackend.Data
         //int AverageAttributeRating(Property property);
 
         //string PropertyEditTime(Property property);
+=======
+>>>>>>> 696f93dd93dcbece9ad9e80f612c2197a9a043bc:MSMPM/Data/IPropertyRepo.cs
     }
 }

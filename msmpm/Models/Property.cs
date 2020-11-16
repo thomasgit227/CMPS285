@@ -36,7 +36,7 @@ namespace MSMBackend.Models
         [Required]
         public Boolean Utilities { get; set; }
 
-        //public int SteveID { get; set; }
+        //public string MSMID { get; set; }
 
         [Required]
         public int Roof { get; set; }
@@ -84,34 +84,66 @@ namespace MSMBackend.Models
 
         public DateTimeOffset TimeOfEdit { get; set; }
 
+        [Required]
+        public DateTimeOffset Created { get; set; }
+
+        //public DateTimeOffset? LastUpdated {get; set;}
+        
+        //public DateTimeOffset? Deleted { get; set; }
+
+        public string UsersId { get; set; }
 
 
         private void ComputeAverage()
         {
-            int[] attributes = { Roof, ExtWalls, ExtOpenings, Framework, Piers, Chimney, Door, Windows,
-                Shutters, Flooring, Electrical, Plumbing, Sewer, HVAC };
-            Average = 0;
-            int div = 0;
-            for (int i = 0; i < attributes.Length; i++)
+            int[] attributes = { Roof , ExtWalls , ExtOpenings , Framework , Piers ,
+            Chimney , Door , Windows , Shutters , Flooring, Electrical , Plumbing , Sewer , HVAC };
+
+            int avg = 0, div = 0;
+
+            //We ignore values if they are equal to zero
+            for(int i = 0; i < attributes.Length; i++)
             {
-                int num = attributes[i];
-                Average += num;
-                if (num != 0)
+                int a = attributes[i];
+                if (a != 0)
                 {
+                    avg += a;
                     div++;
                 }
             }
-            Average /= div;
+
+            avg /= div;
+            return avg;
         }
 
 
+        //I added compare methods just to make the sorting methods easier and cleaner
+        public int CompareAverage(Property b)
+        {
+            return Average() - b.Average();
+        }
+
+        public int CompareTime(Property b)
+        {
+            return Created.CompareTo(b.Created);
+        }
+        
         private void SetTime()
         {
-            TimeOfEdit = DateTimeOffset.Now;
+            Created = DateTimeOffset.Now;
+        }
 
-            //This is the DateTimeOffset format to get the date and time of the edit
+        public string GetTime()
+        {
             string fmt = "G";
-            EditTime = TimeOfEdit.ToString(fmt);
+            return Created.ToString(fmt);
+        }
+
+        //We have a seperate method for Update for now in case we decide to return the Average in the DTO instead of an endpoint
+        //If we return the Average in a DTO we need to update the Average in this method
+        public void Update()
+        {
+            SetTime();
         }
 
         public void Update()

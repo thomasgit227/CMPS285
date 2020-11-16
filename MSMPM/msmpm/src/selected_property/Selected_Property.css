@@ -1,6 +1,8 @@
 .propertyimage {
-    margin: 2em;
+    margin-left: 2em;
+    margin-bottom: 2em;
     display: flex;
+    float: left;
     width: 20%;
     max-width: 20%;
     background-color: grey;
@@ -9,7 +11,7 @@
 
 .name {
   margin-top: 2em;
-  float: right;
+  margin-left: 2em;
   margin-right: 60%;
   text-align: left;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -19,7 +21,6 @@
   color: white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   float: left;
-  margin-top: 1em;
   padding: 1%;
   background-color: olivedrab;
   box-shadow: .5em .5em lightgrey;
@@ -33,7 +34,6 @@
   color: white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   float: left;
-  margin-top: 1em;
   padding: 1%;
   background-color: olivedrab;
   box-shadow: .5em .5em lightgrey;
@@ -46,7 +46,6 @@
   color: white;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   float: left;
-  margin-top: 1em;
   padding: 1%;
   background-color: olivedrab;
   box-shadow: .5em .5em lightgrey;
@@ -55,12 +54,23 @@
   height: fit-content;
 }
 
+.propertyform_texts {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  float: left;
+  margin-left: 2em;
+  width: 50em;
+  padding: 1%;
+  text-align: center;
+  background-color: darkgrey;
+  box-shadow: .5em .5em lightgrey;
+  margin-bottom: 2em;
+}
+
 .propertyform_util {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   float: left;
   margin-left: 2em;
-  margin-top: 1em;
-  width: 13%;
+  width: auto;
   padding: 1%;
   text-align: center;
   background-color: darkgrey;
@@ -71,7 +81,6 @@
 .submitbutton {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   float: left;
-  margin-top: 1em;
   padding: 1%;
   background-color: olivedrab;
   box-shadow: .5em .5em lightgrey;

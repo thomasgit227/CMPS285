@@ -19,6 +19,7 @@ namespace MSMBackend.Data
         {
             _context = context;
         }
+        
 
         public void CreateProperty(Property property)
         {
@@ -55,45 +56,12 @@ namespace MSMBackend.Data
 
         public void UpdateProperty(Property property)
         {
-            //Nothing, DBContext does this for is
+            //Nothing DB Context does this for us
             if (property == null)
             {
                 throw new ArgumentNullException(nameof(property));
             }
             property.Update();
         }
-
-        public IEnumerable<Property> BestProperties(int max = 10)
-        {
-            List<Property> propBank = GetAllProperties().ToList();
-            propBank.Sort(new Comparison<Property>((x, y) => y.CompareAverage(x)));
-
-            if (max < propBank.Count())
-            {
-                propBank = propBank.GetRange(0, max);
-            }
-            return propBank;
-        }
-
-        public IEnumerable<Property> RecentProperties(int max = 5)
-        {
-            List<Property> propBank = GetAllProperties().ToList();
-            propBank.Sort(new Comparison<Property>((x, y) => y.CompareEditTime(x)));
-
-            if (max < propBank.Count())
-            {
-                propBank = propBank.GetRange(0, max);
-            }
-            return propBank;
-        }
-        //Some additional methods we may need to implement in the future:
-
-        public IEnumerable<Property> SortByAlphabetical()
-        {
-            List<Property> propBank = GetAllProperties().ToList().OrderBy(p => p.Name).ToList();
-            return propBank;
-        }
-
-        
     }
 }

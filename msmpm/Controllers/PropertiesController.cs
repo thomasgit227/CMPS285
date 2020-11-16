@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,13 @@ namespace MSMBackend.Controllers
     {
 
         private readonly IPropertyRepo _repository;
+        private readonly IPropertySortRepo _sorter;
         private readonly IMapper _mapper;
 
-        public PropertiesController(IPropertyRepo repository, IMapper mapper)
+        public PropertiesController(IPropertyRepo repository,  IMapper mapper)
         {
             _repository = repository;
+            _sorter = new PropertySortRepo();
             _mapper = mapper;
         }
 
@@ -50,28 +53,63 @@ namespace MSMBackend.Controllers
             return NotFound();
         }
 
-        
+
+        // GET: api/Properties/{id}/average
+        [HttpGet("{id}/average", Name = "GetAverageOfProperty")]
+        public ActionResult<int> GetAverageOfProperty(int id)
+        {
+            var propertyItem = _repository.GetPropertyById(id);
+            if (propertyItem != null)
+            {
+                int average = propertyItem.Average();
+
+                return Ok(_mapper.Map<int>(average));
+            }
+
+            return NotFound();
+        }
+
+        // GET: api/Properties/{id}/time
+        [HttpGet("{id}/time", Name = "GetEditTimeOfProperty")]
+        public ActionResult<string> GetEditTimeOfProperty(int id)
+        {
+            var propertyItem = _repository.GetPropertyById(id);
+            if (propertyItem != null)
+            {
+                string time = propertyItem.GetTime();
+                return Ok(_mapper.Map<string>(time));
+            }
+
+            return NotFound();
+        }
 
         // Get: api/Properties/best
         [HttpGet("best", Name = "GetBestProperties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetBestProperties()
         {
-            var propertyItems = _repository.BestProperties();
+            var propertyItems = _repository.GetAllProperties();
 
-            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+            var sortedProperties = _sorter.SortByAverage(propertyItems);
+
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(sortedProperties));
         }
 
         // Get: api/Properties/recent
         [HttpGet("recent", Name = "GetRecentProperties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetRecentProperties()
         {
-            var propertyItems = _repository.RecentProperties();
+            var propertyItems = _repository.GetAllProperties();
 
-            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+            var sortedProperties = _sorter.SortByTime(propertyItems);
+
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(sortedProperties));
         }
 
 
+        
+
         //POST api/Properties
+        [EnableCors("AllowAll")]
         [HttpPost]
         public ActionResult<PropertyReadDto> CreateProperty(PropertyCreateDto propertyCreateDto)
         {
@@ -79,8 +117,9 @@ namespace MSMBackend.Controllers
 
             _repository.CreateProperty(propertyModel);
 
-            //This updates the edit time to be the current time
-            _repository.UpdateProperty(propertyModel);
+            _repository.SaveChanges();
+
+            propertyModel.Update();
 
             _repository.SaveChanges();
 
@@ -98,6 +137,7 @@ namespace MSMBackend.Controllers
             {
                 return NotFound(); //404
             }
+
 
             _mapper.Map(propertyUpdateDto, propertyModelFromRepo);
 
@@ -138,7 +178,7 @@ namespace MSMBackend.Controllers
             return NoContent();
         }
 
-        //DELETE api/properties/{id}
+        //DELETE api/Properties/{id}
         [HttpDelete("{id}")]
         public ActionResult DeleteProperty(int id)
         {
@@ -151,52 +191,18 @@ namespace MSMBackend.Controllers
             _repository.DeleteProperty(propertyModelFromRepo);
             _repository.SaveChanges();
 
-            return NoContent();
+            return Ok(_mapper.Map<PropertyReadDto>(propertyModelFromRepo));
         }
-
-        //Additional methods currently just for testing:
 
         // Get: api/Properties/alphabetical
         [HttpGet("alphabetical", Name = "GetAlphabeticalProperties")]
         public ActionResult<IEnumerable<PropertyReadDto>> GetAlphabeticalProperties()
         {
-            var propertyItems = _repository.SortByAlphabetical();
+            var propertyItems = _repository.GetAllProperties();
 
-            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
+            var sorted = _sorter.SortByAlphabetical(propertyItems);
+
+            return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(sorted));
         }
-
-        /*
-        //We should not have to use this endpoint
-        // GET: api/Properties/{id}/average
-        [HttpGet("{id}/average", Name = "GetAverageOfProperty")]
-        public ActionResult<int> GetAverageOfProperty(int id)
-        {
-            var propertyItem = _repository.GetPropertyById(id);
-
-            if (propertyItem != null)
-            {
-                int average = _repository.AverageAttributeRating(propertyItem);
-                return Ok(_mapper.Map<int>(average));
-            }
-
-            return NotFound();
-        }
-
-        //We should not have to use this endpoint
-        // GET: api/Properties/{id}/time
-        [HttpGet("{id}/time", Name = "GetEditTimeOfProperty")]
-        public ActionResult<string> GetEditTimeOfProperty(int id)
-        {
-            var propertyItem = _repository.GetPropertyById(id);
-
-            if (propertyItem != null)
-            {
-                string time = _repository.PropertyEditTime(propertyItem);
-                return Ok(_mapper.Map<string>(time));
-            }
-
-            return NotFound();
-        }
-        */
     }
 }

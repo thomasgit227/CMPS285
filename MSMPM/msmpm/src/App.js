@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import './App.css';
+import './CSS/App.css';
 import Home from './home_page/Home';
 import MyProperty from './selected_property/MyProperty';
 import Properties from './all_properties/Properties';
@@ -22,7 +22,7 @@ function App() {
             
           <Route path="/properties/"> <Properties/> </Route>
 
-          <Route path="/properties/myproperty/"> <MyProperty/> </Route>
+          <Route path="/properties/myproperty/:id"> <MyProperty/> </Route>
 
           <Route exact path="/search/"> <Template/> </Route>
 
