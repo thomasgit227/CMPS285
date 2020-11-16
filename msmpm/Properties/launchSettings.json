@@ -12,10 +12,6 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-<<<<<<< HEAD:msmpm/Properties/launchSettings.json
-      "launchUrl": "/home",
-=======
->>>>>>> 696f93dd93dcbece9ad9e80f612c2197a9a043bc:MSMPM/Properties/launchSettings.json
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

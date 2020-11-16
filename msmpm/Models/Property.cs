@@ -1,5 +1,4 @@
-﻿using MSMBackend.Data.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,11 +27,6 @@ namespace MSMBackend.Models
 
         public string ImageURL { get; set; }
 
-        [Required]
-        public int Average { get; set; }
-
-        [Required]
-        public string EditTime { get; set; }
         [Required]
         public Boolean Utilities { get; set; }
 
@@ -79,10 +73,6 @@ namespace MSMBackend.Models
 
         [Required]
         public int HVAC { get; set; }
-        public virtual User User { get; set; }
-        public string UsersId { get; set; }
-
-        public DateTimeOffset TimeOfEdit { get; set; }
 
         [Required]
         public DateTimeOffset Created { get; set; }
@@ -94,7 +84,8 @@ namespace MSMBackend.Models
         public string UsersId { get; set; }
 
 
-        private void ComputeAverage()
+        //Average method if we decide to implement it in the Property class and not calculate it through the Repo
+        public int Average()
         {
             int[] attributes = { Roof , ExtWalls , ExtOpenings , Framework , Piers ,
             Chimney , Door , Windows , Shutters , Flooring, Electrical , Plumbing , Sewer , HVAC };
@@ -145,22 +136,6 @@ namespace MSMBackend.Models
         {
             SetTime();
         }
-
-        public void Update()
-        {
-            SetTime();
-            ComputeAverage();
-        }
-
-        public int CompareEditTime(Property b)
-        {
-            return DateTimeOffset.Compare(TimeOfEdit, b.TimeOfEdit);
-        }
-
-        public int CompareAverage(Property b)
-        {
-            return Average - b.Average;
-        }
-
+        
     }
 }

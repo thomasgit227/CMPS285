@@ -39,7 +39,6 @@ namespace MSMBackend.Controllers
             return Ok(_mapper.Map<IEnumerable<PropertyReadDto>>(propertyItems));
         }
 
-        //This method should be used instead of seperate endpoints for Average or EditTime
         // GET: api/Properties/{id}
         [HttpGet("{id}", Name = "GetPropertyById")]
         public ActionResult<PropertyReadDto> GetPropertyById(int id)
@@ -149,7 +148,6 @@ namespace MSMBackend.Controllers
             return NoContent();
         }
 
-        //We should not have to use this endpoint
         //PATCH api/commands{id}
         [HttpPatch("{id}")]
         public ActionResult PartialPropertyUpdate(int id, JsonPatchDocument<PropertyUpdateDto> patchDoc)
