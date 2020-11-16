@@ -37,13 +37,13 @@ export default function AppNavbar() {
 
             <NavItem>
               <NavLink tag={Link} to = "/properties/">
-                Properties
+                properties
               </NavLink>
             </NavItem>
 
             <UncontrolledDropdown className = "account" nav inNavbar>
               <DropdownToggle nav caret>
-                Hello, {sessionStorage.isLoggedIn ? sessionStorage.username : "Guest"}
+                hello, {sessionStorage.isLoggedIn ? sessionStorage.username : "Guest"}
               </DropdownToggle>
               <DropdownMenu right>
 

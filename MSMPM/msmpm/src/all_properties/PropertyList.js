@@ -7,7 +7,7 @@ import {
 } from 'reactstrap';
 import {
     Link,
-} from 'react-router-dom';
+} from 'react-router-dom'; 
 import axios from 'axios';
 
 export default function PropertyList() {
@@ -45,7 +45,7 @@ export default function PropertyList() {
     });
 
     const putIDInSession = (id) => {
-        sessionStorage.id = id;
+        sessionStorage.setItem("id", id);
     }
 
     useEffect(() => {
@@ -76,7 +76,7 @@ export default function PropertyList() {
                 </thead>
                 {rows.map( (row) => (
                     <tbody className = "tableinfo">
-                        <th><NavLink tag={Link} to={'myproperty/' + row.id} onClick={putIDInSession(row.id)}>{row.name}</NavLink></th>
+                        <th><NavLink tag={Link} to={'myproperty/' + row.id} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink></th>
                         <th>{row.location}</th>
                         <th>{row.id}</th>
                         <th><Button color="primary" onClick={() => handleDelete(row.id)}> Delete </Button></th>
