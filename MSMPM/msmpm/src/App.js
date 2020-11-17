@@ -3,6 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './CSS/App.css';
 import Home from './home_page/Home';
 import MyProperty from './selected_property/MyProperty';
+import NewProperty from './selected_property/NewProperty';
 import Properties from './all_properties/Properties';
 import Template from './main_components/Template';
 import Login from './login/Login';
@@ -22,9 +23,9 @@ function App() {
             
           <Route exact path="/properties/"> <Properties/> </Route>
 
-          <Route path="/properties/myproperty/:id" children={ <MyProperty formType="EditForm" />} />  
+          <Route path="/properties/myproperty"> <MyProperty/> </Route>  
 
-          <Route path="/properties/createProperty" children={ <MyProperty formType="CreateForm" /> } />
+          <Route path="/properties/new/"> <NewProperty/> </Route>
 
           <Route exact path="/search/"> <Template/> </Route>
 

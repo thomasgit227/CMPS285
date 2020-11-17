@@ -16,10 +16,6 @@ export default function PropertyList() {
     
     const history = useHistory();
     
-    const handleCreate = () => {
-        history.push("/properties/createProperty");
-    }
-
     //If status code equals 200 remove the 
     const handleDelete = async (id) => {
         let res = await axios.delete(`https://localhost:44378/api/Properties/${id}`);
@@ -71,9 +67,9 @@ export default function PropertyList() {
 
     console.log(tableInfo);
     return (
-        <div className='fulllist'>
-            <Button onClick={ () => handleCreate()}> Add Property </Button>
-            <Table>
+        <div>
+
+            <Table className='fulllist'>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -90,6 +86,10 @@ export default function PropertyList() {
                     </tbody>
                 ))}
             </Table>
+
+            <Button color = 'success'  className = 'addbutton'  tag={Link} to = "new/"> 
+                Add
+            </Button>
         </div>
     );
 }
