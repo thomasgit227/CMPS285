@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSMBackend.Migrations
 {
     [DbContext(typeof(PropertyContext))]
-    [Migration("20201117092710_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201117140140_Dubstep")]
+    partial class Dubstep
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -89,9 +89,9 @@ namespace MSMBackend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-           //MigrateDb(app);
-           //AddRoles(app).GetAwaiter().GetResult();
-           //AddUsers(app).GetAwaiter().GetResult();
+           MigrateDb(app);
+           AddRoles(app).GetAwaiter().GetResult();
+           AddUsers(app).GetAwaiter().GetResult();
 
             if (env.IsDevelopment())
             {
@@ -166,9 +166,9 @@ namespace MSMBackend
 
         private static async Task CreateUser(UserManager<User> userManager, string username, string role, string password)
         {
-            //const string passwordForEveryone = "Password123!";
+            const string passwordFor = "Password123!";
             var user = new User { UserName = username };
-            await userManager.CreateAsync(user, password);
+            await userManager.CreateAsync(user, passwordFor);
             await userManager.AddToRoleAsync(user, role);
         }
 

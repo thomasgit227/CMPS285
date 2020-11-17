@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MSMBackend.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Dubstep : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
