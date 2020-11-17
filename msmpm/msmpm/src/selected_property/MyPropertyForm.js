@@ -123,7 +123,6 @@ export default function MyPropertyForm(props) {
             HVAC: hvac,
             Location: propertyLocation,
             Name: propertyName,
-            ImageURL
         }; //Left is side on server and right is state sending it
         if(props.formType === "CreateForm"){
             let res = await axios.post("https://localhost:44378/api/Properties", dataBody);
@@ -193,7 +192,6 @@ export default function MyPropertyForm(props) {
     const [shutters, setShutters] = useState(null);
     const [flooring, setFlooring] = useState(null);
     //Utility Only
-    const [electrical, setElectrical] = useState(null);
     const [plumbing, setPlumbing] = useState(null);
     const [sewer, setSewer] = useState(null);
     const [hvac, setHvac] = useState(null);
@@ -201,6 +199,7 @@ export default function MyPropertyForm(props) {
     const [propertyName, setPropertyName] = useState(null);
     const [ImageURL, setImageURL] = useState(null);
 
+    const [electrical, setElectrical] = useState(null);
 
     const [FLAGBAG, setFLAGBAG] = useState(false);
 

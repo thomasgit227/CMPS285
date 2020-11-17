@@ -15,7 +15,7 @@ import axios from 'axios';
 
 export default function Leadership() {
 
-    const [order, setOrder] = useState("descending");
+    const [order, setOrder] = useState("ascending");
 
     const [tableInfo,setTableInfo] = useState({
         columns: [{
@@ -24,11 +24,10 @@ export default function Leadership() {
             id: "Id"
         }],
         data: [],
-
     });
 
     useEffect(() => {
-        axios.get("/api/Properties")
+        axios.get("/api/Properties/best/")
         .then( (res) =>{
             setTableInfo( (table) => {
                 const callInfo = {...table};
@@ -52,18 +51,25 @@ export default function Leadership() {
                 <h4 className = 'leaderboard_heading'>
                     Leaderboard
                 </h4>
-
+ 
                 <ListGroup className = 'leaderboard'>
-                {
+                { order == "ascending" ?
                     rows.map( (row) => (
                         <ListGroupItem className = "tableinfo">
                             <NavLink tag={Link} to={'/properties/myproperty/' + row.id + '/'} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink>
                         </ListGroupItem>
-                    ))}
+                    )) 
+                    : 
+                    rows.map( (row) => (
+                        <ListGroupItem className = "tableinfo">
+                            <NavLink tag={Link} to={'/properties/myproperty/' + row.id + '/'} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink>
+                        </ListGroupItem>
+                    )).reverse()
+                }
                 </ListGroup>
 
                 <ButtonGroup className = "orderbuttons">
-                    <Button onClick = {() => rows.sort}> ▲ </Button>
+                    <Button onClick = {() => setOrder("ascending")}> ▲ </Button>
                     <Button onClick = {() => setOrder("descending")}> ▼ </Button>
                 </ButtonGroup>
             </div>

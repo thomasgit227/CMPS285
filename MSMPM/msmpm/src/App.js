@@ -18,7 +18,7 @@ function App() {
 
         <Switch>
 
-          <Route path="/home"> <Home/> </Route>
+          <Route exact path="/home/"> <Home/> </Route>
             
           <Route exact path="/properties/"> <Properties/> </Route>
 
@@ -32,7 +32,7 @@ function App() {
 
           <Route exact path="/test/"> <Test/> </Route>
 
-          <Route> <Redirect to = "/home"> </Redirect> </Route>
+          <Route> <Redirect to = "/home/"> </Redirect> </Route>
             
         </Switch>
       </BrowserRouter>

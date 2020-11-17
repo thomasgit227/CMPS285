@@ -83,7 +83,7 @@ export default function PropertyList() {
                 </thead>
                 {rows.map( (row) => (
                     <tbody className = "tableinfo">
-                        <th><NavLink tag={Link} to={'myproperty/' + row.id} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink></th>
+                        <th><NavLink tag={Link} to={'myproperty/' + row.id + '/'} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink></th>
                         <th>{row.location}</th>
                         <th>{row.id}</th>
                         <th><Button color="primary" onClick={() => handleDelete(row.id)}> Delete </Button></th>
