@@ -67,7 +67,6 @@ export default function MyPropertyForm() {
             HVAC: hvacSelected,
             Location: propertyLocation,
             Name: propertyName,
-            ImageURL
         }; //Left is side on server and right is state sending it
         let res = await axios.post("https://localhost:44378/api/Properties", dataBody);
         console.log(res);
@@ -109,8 +108,6 @@ export default function MyPropertyForm() {
     const [hvacSelected, hvacSetSelected] = useState(null);
     const [propertyLocation, setLocation] = useState(null);
     const [propertyName, setName] = useState(null);
-    const [ImageURL, setImageURL] = useState(null);
-
 
     const [FLAGBAG, setFLAGBAG] = useState(false);
 
@@ -482,7 +479,6 @@ export default function MyPropertyForm() {
                 <h6> Change Name / Location </h6>
                 <Input type="text" value={propertyName} onChange={(e) => setName(e.target.value)} placeholder = "property name"/>
                 <Input type="text" value={propertyLocation} onChange={(e) => setLocation(e.target.value)} placeholder = "location"/>
-                <Input type="text" value={ImageURL} onChange={(e) => setImageURL(e.target.value)} placeholder = "image URL"/>
             </FormGroup>
         </Form>
     );

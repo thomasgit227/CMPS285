@@ -41,7 +41,7 @@ export default function EditHistory() {
                     // With the values because EVERYTHING in brackets gets rendered as JavaScript
                     // Look into falsies
                         recentProperties.map((recentProperty) => {
-                            console.log(recentProperty);
+                            // console.log(recentProperty);
                             //Null Coalescing Operator "??" If object on left is null --> Display object on right
                             return (
                                 <tr>
