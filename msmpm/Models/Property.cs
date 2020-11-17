@@ -107,8 +107,11 @@ namespace MSMBackend.Models
                 }
             }
 
-            avg /= div;
-            return avg;
+            if (avg == 0)
+            {
+                return 0;
+            }
+            return avg / div;
         }
 
 
