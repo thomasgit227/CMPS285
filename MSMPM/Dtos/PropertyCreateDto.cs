@@ -19,7 +19,7 @@ namespace MSMBackend.Dtos
         //public string Username { get; set; }
 
         
-        public string ImageURL { get; set; }
+        
         [Required]
         public Boolean Utilities { get; set; }
 

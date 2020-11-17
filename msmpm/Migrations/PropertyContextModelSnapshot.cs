@@ -164,12 +164,7 @@ namespace MSMBackend.Migrations
                     b.Property<int>("HVAC")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImageURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

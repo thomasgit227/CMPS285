@@ -17,15 +17,15 @@ namespace MSMBackend.Models
         [MaxLength(250)]
         public string Name { get; set; }
 
-        [Required]
+        
         public string Location { get; set; }
 
         //[Required]
         //public string Username { get; set; }
 
-        [Required]
+        
 
-        public string ImageURL { get; set; }
+        //public string ImageURL { get; set; }
 
         [Required]
         public Boolean Utilities { get; set; }

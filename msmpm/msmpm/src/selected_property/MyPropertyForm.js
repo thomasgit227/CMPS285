@@ -197,7 +197,7 @@ export default function MyPropertyForm(props) {
     const [hvac, setHvac] = useState(null);
     const [propertyLocation, setPropertyLocation] = useState(null);
     const [propertyName, setPropertyName] = useState(null);
-    const [ImageURL, setImageURL] = useState(null);
+    //const [ImageURL, setImageURL] = useState(null);
 
     const [electrical, setElectrical] = useState(null);
 
@@ -358,7 +358,7 @@ export default function MyPropertyForm(props) {
                                 Piers & Footlings
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => paint(0)} active={piers === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setPiers(0)} active={piers === 0}>∅</Button>
                                 <Button color="secondary" onClick={() => setPiers(1)} active={piers === 1}>1</Button>
                                 <Button color="secondary" onClick={() => setPiers(3)} active={piers === 3}>3</Button>
                                 <Button color="secondary" onClick={() => setPiers(5)} active={piers === 5}>5</Button>
@@ -529,7 +529,7 @@ export default function MyPropertyForm(props) {
                     <h6> Change Name / Location </h6>
                     <Input type="text" value={propertyName} onChange={(e) => setPropertyName(e.target.value)} placeholder = "property name"/>
                     <Input type="text" value={propertyLocation} onChange={(e) => setPropertyLocation(e.target.value)} placeholder = "location"/>
-                    <Input type="text" value={ImageURL} onChange={(e) => setImageURL(e.target.value)} placeholder = "image URL"/>
+                    {/*<Input type="text" value={ImageURL} onChange={(e) => setImageURL(e.target.value)} placeholder = "image URL"/>*/}
                 </FormGroup>
             }
         </Form>
