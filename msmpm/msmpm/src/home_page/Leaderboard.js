@@ -56,13 +56,13 @@ export default function Leadership() {
                 { order == "ascending" ?
                     rows.map( (row) => (
                         <ListGroupItem className = "tableinfo">
-                            <NavLink tag={Link} to={'/properties/myproperty/' + row.id} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink>
+                            <NavLink tag={Link} to={'/properties/myproperty/' + row.id + '/'} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink>
                         </ListGroupItem>
                     )) 
                     : 
                     rows.map( (row) => (
                         <ListGroupItem className = "tableinfo">
-                            <NavLink tag={Link} to={'/properties/myproperty/' + row.id} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink>
+                            <NavLink tag={Link} to={'/properties/myproperty/' + row.id + '/'} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink>
                         </ListGroupItem>
                     )).reverse()
                 }

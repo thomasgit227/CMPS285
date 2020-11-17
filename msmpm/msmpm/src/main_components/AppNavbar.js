@@ -25,6 +25,8 @@ export default function AppNavbar() {
       sessionStorage.username = "Guest";
     };
 
+    const [loggingOut, setLoggingOut] = useState(false);
+
     return (
       
         <div>
@@ -57,7 +59,7 @@ export default function AppNavbar() {
                 <DropdownItem>
                   <Button onClick={logout}>
                     Log out
-                    <Redirect to = "/home/"/>
+                    {loggingOut ? <Redirect to = "/home/"/> : null}
                   </Button>
                 </DropdownItem>
 
