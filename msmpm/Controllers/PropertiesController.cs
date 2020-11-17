@@ -114,17 +114,28 @@ namespace MSMBackend.Controllers
         {
             var propertyModel = _mapper.Map<Property>(propertyCreateDto);
 
-            _repository.CreateProperty(propertyModel);
-
-            _repository.SaveChanges();
-
             propertyModel.Update();
+
+            _repository.CreateProperty(propertyModel);
 
             _repository.SaveChanges();
 
             var propertyReadDto = _mapper.Map<PropertyReadDto>(propertyModel);
 
             return CreatedAtRoute(nameof(GetPropertyById), new { Id = propertyReadDto.Id }, propertyReadDto);
+        }
+
+        //POST api/properties/multiple
+        [EnableCors("AllowAll")]
+        [HttpPost("multiple", Name = "CreateMultipleProperties")]
+        public ActionResult<PropertyReadDto> CreateMultipleProperties(IEnumerable<PropertyCreateDto> propertyList)
+        {
+            foreach(PropertyCreateDto p in propertyList)
+            {
+                CreateProperty(p);
+            }
+
+            return Ok();
         }
 
         //PUT api/commands/{id}
@@ -145,7 +156,7 @@ namespace MSMBackend.Controllers
 
             _repository.SaveChanges();
 
-            return NoContent();
+            return Ok(propertyModelFromRepo);
         }
 
         //PATCH api/commands{id}

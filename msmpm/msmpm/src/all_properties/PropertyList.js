@@ -9,11 +9,13 @@ import {
     Link,
 } from 'react-router-dom'; 
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 export default function PropertyList() {
-
     
-
+    
+    const history = useHistory();
+    
     //If status code equals 200 remove the 
     const handleDelete = async (id) => {
         let res = await axios.delete(`https://localhost:44378/api/Properties/${id}`);
@@ -65,8 +67,9 @@ export default function PropertyList() {
 
     console.log(tableInfo);
     return (
-        <div className = 'fulllist'>
-            <Table>
+        <div>
+
+            <Table className='fulllist'>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -76,13 +79,17 @@ export default function PropertyList() {
                 </thead>
                 {rows.map( (row) => (
                     <tbody className = "tableinfo">
-                        <th><NavLink tag={Link} to={'myproperty/' + row.id} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink></th>
+                        <th><NavLink tag={Link} to={'myproperty/' + row.id + '/'} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink></th>
                         <th>{row.location}</th>
                         <th>{row.id}</th>
                         <th><Button color="primary" onClick={() => handleDelete(row.id)}> Delete </Button></th>
                     </tbody>
                 ))}
             </Table>
+
+            <Button color = 'success'  className = 'addbutton'  tag={Link} to = "new/"> 
+                Add
+            </Button>
         </div>
     );
 }

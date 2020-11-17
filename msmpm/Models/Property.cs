@@ -17,15 +17,15 @@ namespace MSMBackend.Models
         [MaxLength(250)]
         public string Name { get; set; }
 
-        [Required]
+        
         public string Location { get; set; }
 
         //[Required]
         //public string Username { get; set; }
 
-        [Required]
+        
 
-        public string ImageURL { get; set; }
+        //public string ImageURL { get; set; }
 
         [Required]
         public Boolean Utilities { get; set; }
@@ -43,6 +43,9 @@ namespace MSMBackend.Models
 
         [Required]
         public int Framework { get; set; }
+
+        [Required]
+        public int Paint { get; set; }
 
         [Required]
         public int Piers { get; set; }
@@ -87,10 +90,11 @@ namespace MSMBackend.Models
         //Average method if we decide to implement it in the Property class and not calculate it through the Repo
         public int Average()
         {
-            int[] attributes = { Roof , ExtWalls , ExtOpenings , Framework , Piers ,
+            int[] attributes = { Roof , ExtWalls , ExtOpenings , Framework , Paint, Piers ,
             Chimney , Door , Windows , Shutters , Flooring, Electrical , Plumbing , Sewer , HVAC };
 
-            int avg = 0, div = 0;
+            int avg = 0;
+            int div = 1;
 
             //We ignore values if they are equal to zero
             for(int i = 0; i < attributes.Length; i++)
@@ -98,13 +102,19 @@ namespace MSMBackend.Models
                 int a = attributes[i];
                 if (a != 0)
                 {
+                    if (avg > 0)
+                    {
+                        div++;
+                    }
                     avg += a;
-                    div++;
                 }
             }
 
-            avg /= div;
-            return avg;
+            if (avg == 0)
+            {
+                return 0;
+            }
+            return avg / div;
         }
 
 

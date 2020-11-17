@@ -8,22 +8,9 @@ namespace MSMBackend.Dtos
 {
     public class PropertyUpdateDto
     {
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Location { get; set; }
-
-        //[Required]
-        //public string Username { get; set; }
-
-        [Required]
-        public string ImageURL { get; set; }
 
         [Required]
         public Boolean Utilities { get; set; }
-
-        //public string MSMID { get; set; }
-
         [Required]
         public int Roof { get; set; }
         [Required]

@@ -57,11 +57,6 @@ namespace MSMBackend.Data
         public void UpdateProperty(Property property)
         {
             //Nothing DB Context does this for us
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
-            property.Update();
         }
     }
 }
