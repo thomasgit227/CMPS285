@@ -1,6 +1,6 @@
 import React, {
-    useState,
-    useEffect 
+    useEffect,
+    useState 
 } from 'react';
 import axios from 'axios';
 import './Selected_Property.css';
@@ -13,18 +13,13 @@ import {
     Modal, 
     ModalHeader, 
     ModalBody, 
-    ModalFooter,
-    Input 
+    ModalFooter 
 } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 
 
-//TODO
-//MAKE A TRY CATCH FOR A TOAST ON SUBMIT
-
 export default function MyPropertyForm() {
 
-    const [redirect, setRedirect] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [utlState, setUtilState] = useState('No Utilities');
     const [modal, setModal] = useState(false);
@@ -39,194 +34,80 @@ export default function MyPropertyForm() {
     }
 
     const [submitted, setSubmitted] = useState(false);
-    const toggleSubmitModal = () => {
+    const submitForm = () => {
+        axios.put('/api/Properties/' + sessionStorage.getItem("id"), {
+            "name": name,
+            "location": location,
+            "imageURL": "string",
+            "utilities": true,
+            "roof": roof,
+            "extWalls": exterior,
+            "extOpenings": openings, //TODO add paint
+            "framework": framework,
+            "piers": piers,
+            "chimney": chimneys,
+            "door": doors,
+            "windows": windows,
+            "shutters": shutters,
+            "flooring": floor,
+            "electrical": electrical,
+            "plumbing": plumbing,
+            "sewer": sewage,
+            "hvac": HVAC,
+        })
+        
         setSubmitted(true);
     }
 
-
-    // TODO:
-    //WHENEVER U HIT SUBMIT DO A TOAST
-    //ALSO CLOSE MODAL
-
-    const submitForm = async () => {
-        setRedirect(true);
-        let dataBody = {
-            Roof: roofSelected,
-            ExtWalls: extSelected,
-            ExtOpenings: opnsSelected,
-            Framework: fwSelected,
-            Piers: pfSelected,
-            Chimney: chimSelected,
-            Door: doorSelected,
-            Windows: windSelected,
-            Shutters: shutSelected,
-            Flooring: floorSelected,
-            Electrical: elecSelected,
-            Plumbing: plumbSelected,
-            Sewer: sewSelected,
-            HVAC: hvacSelected,
-            Location: propertyLocation,
-            Name: propertyName,
-        }; //Left is side on server and right is state sending it
-        let res = await axios.post("https://localhost:44378/api/Properties", dataBody);
-        console.log(res);
-        toggleSubmitModal();
-    }
-    
-
-
-    // MAKE ANOTHER GET REQUEST TO CONTROLLER FOR 
-
-    //Make
-
-    //Saving the state of the values on the buttons
-    const [unsavedChanges, setChanges] = useState();
-    
-
-
-    // Things to try to save button values to session storage
-    // On componenet unmount grab all values and save to storage
-    // Anytime value is changed pass a callback function
-
     //All
-    const [roofSelected, roofSetSelected] = useState(null);
+    const[name, setName] = useState(null);
+    const[location, setLocation] = useState(null);
 
-    const [extSelected, extSetSelected] = useState(null);
-    const [opnsSelected, opnsSetSelected] = useState(null);
-    const [fwSelected, fwSetSelected] = useState(null);
-    const [paintSelected, paintSetSelected] = useState(null);
-    const [pfSelected, pfSetSelected] = useState(null);
-    const [chimSelected, chimSetSelected] = useState(null);
-    const [doorSelected, doorSetSelected] = useState(null);
-    const [windSelected, windSetSelected] = useState(null);
-    const [shutSelected, shutSetSelected] = useState(null);
-    const [floorSelected, floorSetSelected] = useState(null);
+    const [roof, setRoof] = useState(null);
+    const [exterior, setExterior] = useState(null);
+    const [openings, setOpenings] = useState(null);
+    const [framework, setFramework] = useState(null);
+    const [paint, setPaint] = useState(null);
+    const [piers, setPiers] = useState(null);
+    const [chimneys, setChimneys] = useState(null);
+    const [doors, setDoors] = useState(null);
+    const [windows, setWindows] = useState(null);
+    const [shutters, setShutters] = useState(null);
+    const [floor, setFloor] = useState(null);
     //Utility Only
-    const [elecSelected, elecSetSelected] = useState(null);
-    const [plumbSelected, plumbSetSelected] = useState(null);
-    const [sewSelected, sewSetSelected] = useState(null);
-    const [hvacSelected, hvacSetSelected] = useState(null);
-    const [propertyLocation, setLocation] = useState(null);
-    const [propertyName, setName] = useState(null);
-
-    const [FLAGBAG, setFLAGBAG] = useState(false);
-
-    useEffect(() => {
-        if(FLAGBAG === false){
-            setFLAGBAG(true);
-        }
-        else{
-            var changes = { //var grabbing all of the values of current state
-                            // making an object of state to store in session
-                roofSelected,
-                extSelected,
-                opnsSelected,
-                fwSelected,
-                paintSelected,
-                pfSelected,
-                chimSelected,
-                doorSelected,
-                windSelected,
-                shutSelected,
-                floorSelected,
-                elecSelected,
-                plumbSelected,
-                sewSelected,
-                hvacSelected
-            };
-
-            console.log(changes);
-            
-            sessionStorage.changes = JSON.stringify(changes);
-
-            console.log(sessionStorage);
-        }
-    }, [
-        roofSelected,
-        extSelected,
-        opnsSelected,
-        fwSelected,
-        paintSelected,
-        pfSelected,
-        chimSelected,
-        doorSelected,
-        windSelected,
-        shutSelected,
-        floorSelected,
-        elecSelected,
-        plumbSelected,
-        sewSelected,
-        hvacSelected]);
-
-    useEffect(() => {
-        //Grabbing value and setting state
-        var changes = JSON.parse(sessionStorage.getItem("changes"));
-        //This one is calling ternary inside roof selected setting the state no matter what 
-        //but we dont wanna set state no matter what cuz thats big dum 
-        // if(changes != null){    // ?. means dont throw if it is null
-        //     roofSetSelected(changes?.roofSelected != null ? changes.roofSelected : roofSelected)
-        // }
-
-        if(changes != null){
-            if(changes.roofSelected != null){
-                roofSetSelected(changes.roofSelected);
-            }
-            if(changes.extSelected != null){
-                extSetSelected(changes.extSelected);
-            }
-            if(changes.opnsSelected != null){
-                opnsSetSelected(changes.opnsSelected);
-            }
-            if(changes.fwSelected != null){
-                fwSetSelected(changes.fwSelected);
-            }
-            if(changes.paintSelected != null){
-                paintSetSelected(changes.paintSelected);
-            }
-            if(changes.pfSelected != null){
-                pfSetSelected(changes.pfSelected);
-            }
-            if(changes.chimSelected != null){
-                chimSetSelected(changes.chimSelected);
-            }
-            if(changes.doorSelected != null){
-                doorSetSelected(changes.doorSelected);
-            }
-            if(changes.windSelected != null){
-                windSetSelected(changes.windSelected);
-            }
-            if(changes.shutSelected != null){
-                shutSetSelected(changes.shutSelected);
-            }
-            if(changes.floorSelected != null){
-                floorSetSelected(changes.floorSelected);
-            }
-            if(changes.elecSelected != null){
-                elecSetSelected(changes.elecSelected);
-            }
-            if(changes.plumbSelected != null){
-                plumbSetSelected(changes.plumbSelected);
-            }
-            if(changes.sewSelected != null){
-                sewSetSelected(changes.sewSelected);
-            }
-            if(changes.hvacSelected != null){
-                hvacSetSelected(changes.hvacSelected);
-            }
-        }
-    }, //Eeverytime the dependency gets updated this UseEffect gets called!!!
-        // So this makes useffect essentially a component did mount 
-    []);
+    const [electrical, setElectrical] = useState(null);
+    const [plumbing, setPlumbing] = useState(null);
+    const [sewage, setSewage] = useState(null);
+    const [HVAC, setHVAC] = useState(null);
 
 
-    // SET LABELS ON INPUTS
-    //TODO: MAKE THE INPUT LABELS NOT UGLY
+    useEffect(()=>{
+        axios.get('/api/Properties/' + sessionStorage.getItem("id"))
+        .then((r) => {
+            setName(r.data.name);
+            setLocation(r.data.location);
+
+            setRoof(r.data.roof);
+            setExterior(r.data.extWalls);
+            setOpenings(r.data.extOpenings);
+            setFramework(r.data.framework);
+            setPaint(r.data.paint);
+            setPiers(r.data.piers);
+            setChimneys(r.data.chimney);
+            setDoors(r.data.door);
+            setWindows(r.data.windows);
+            setShutters(r.data.shutters);
+            setFloor(r.data.flooring);
+            setElectrical(r.data.electrical);
+            setPlumbing(r.data.plumbing);
+            setSewage(r.data.sewer);
+            setHVAC(r.data.hvac);
+        })
+    }, [])
     
     return (
             <Form>
-                {
-                redirect ? <Redirect to = "/properties/"/> : null
-                }
+                {submitted && sessionStorage.getItem("isLoggedIn") == "true" ? <Redirect to = "/properties/"/> : null}
                 <FormGroup>
                     <div className = 'propertyform_one'>
                         <div>
@@ -234,10 +115,10 @@ export default function MyPropertyForm() {
                                 Roof
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => roofSetSelected(1)} active={roofSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => roofSetSelected(3)} active={roofSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => roofSetSelected(5)} active={roofSelected === 5}>5</Button>
-                                <Button color="secondary" onClick={() => roofSetSelected(7)} active={roofSelected === 7}>7</Button>
+                                <Button color="secondary" onClick={() => setRoof(1)} active={roof === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setRoof(3)} active={roof === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setRoof(5)} active={roof === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setRoof(7)} active={roof === 7}>7</Button>
                             </ButtonGroup>
                             <br/>
                         </div>
@@ -246,16 +127,12 @@ export default function MyPropertyForm() {
                             <br/>
                             <h6>
                                 Exterior Walls
-                            </h6> 
+                            </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => extSetSelected(0)} active={extSelected === 0}>∅</Button>  
-                                {// A callback function is a parameter that you pass to a function and then that function calls it after you finish whatever ur doing
-                                // 
-                                // In JS you can passs function as parameters (CallBack functions)
-                                }
-                                <Button color="secondary" onClick={() => extSetSelected(1)} active={extSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => extSetSelected(3)} active={extSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => extSetSelected(5)} active={extSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setExterior(0)} active={exterior === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setExterior(1)} active={exterior === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setExterior(3)} active={exterior === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setExterior(5)} active={exterior === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div>
@@ -266,10 +143,10 @@ export default function MyPropertyForm() {
                                 Openings
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => opnsSetSelected(0)} active={opnsSelected === 0}>∅</Button>
-                                <Button color="secondary" onClick={() => opnsSetSelected(1)} active={opnsSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => opnsSetSelected(3)} active={opnsSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => opnsSetSelected(5)} active={opnsSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setOpenings(0)} active={openings === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setOpenings(1)} active={openings === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setOpenings(3)} active={openings === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setOpenings(5)} active={openings === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div>
@@ -280,10 +157,10 @@ export default function MyPropertyForm() {
                                 Framework
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => fwSetSelected(0)} active={fwSelected === 0}>∅</Button>
-                                <Button color="secondary" onClick={() => fwSetSelected(1)} active={fwSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => fwSetSelected(3)} active={fwSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => fwSetSelected(5)} active={fwSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setFramework(0)} active={framework === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setFramework(1)} active={framework === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setFramework(3)} active={framework === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setFramework(5)} active={framework === 5}>5</Button>
                             </ButtonGroup>
                         </div>
 
@@ -295,10 +172,10 @@ export default function MyPropertyForm() {
                                 Paint
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => paintSetSelected(0)} active={paintSelected === 0}>∅</Button>
-                                <Button color="secondary" onClick={() => paintSetSelected(1)} active={paintSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => paintSetSelected(3)} active={paintSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => paintSetSelected(5)} active={paintSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setPaint(0)} active={paint === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setPaint(1)} active={paint === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setPaint(3)} active={paint === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setPaint(5)} active={paint === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div>
@@ -309,10 +186,10 @@ export default function MyPropertyForm() {
                                 Piers & Footlings
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => paintSelected(0)} active={pfSelected === 0}>∅</Button>
-                                <Button color="secondary" onClick={() => pfSetSelected(1)} active={pfSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => pfSetSelected(3)} active={pfSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => pfSetSelected(5)} active={pfSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setPiers(0)} active={piers === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setPiers(1)} active={piers === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setPiers(3)} active={piers === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setPiers(5)} active={piers === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div> 
@@ -323,10 +200,10 @@ export default function MyPropertyForm() {
                                 Chimneys
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => chimSetSelected(0)} active={chimSelected === 0}>∅</Button>
-                                <Button color="secondary" onClick={() => chimSetSelected(1)} active={chimSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => chimSetSelected(3)} active={chimSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => chimSetSelected(5)} active={chimSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setChimneys(0)} active={chimneys === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setChimneys(1)} active={chimneys === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setChimneys(3)} active={chimneys === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setChimneys(5)} active={chimneys === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div> 
@@ -337,10 +214,10 @@ export default function MyPropertyForm() {
                                 Doors
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => doorSetSelected(0)} active={doorSelected === 0}>∅</Button>
-                                <Button color="secondary" onClick={() => doorSetSelected(1)} active={doorSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => doorSetSelected(3)} active={doorSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => doorSetSelected(5)} active={doorSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setDoors(0)} active={doors === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setDoors(1)} active={doors === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setDoors(3)} active={doors === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setDoors(5)} active={doors === 5}>5</Button>
                             </ButtonGroup>
                         </div> 
 
@@ -352,10 +229,10 @@ export default function MyPropertyForm() {
                                 Windows
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => windSetSelected(0)} active={windSelected === 0}>∅</Button>
-                                <Button color="secondary" onClick={() => windSetSelected(1)} active={windSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => windSetSelected(3)} active={windSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => windSetSelected(5)} active={windSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setWindows(0)} active={windows === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setWindows(1)} active={windows === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setWindows(3)} active={windows === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setWindows(5)} active={windows === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div> 
@@ -366,10 +243,10 @@ export default function MyPropertyForm() {
                                 Shutters
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => shutSetSelected(0)} active={shutSelected === 0}>∅</Button>
-                                <Button color="secondary" onClick={() => shutSetSelected(1)} active={shutSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => shutSetSelected(3)} active={shutSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => shutSetSelected(5)} active={shutSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setShutters(0)} active={shutters === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setShutters(1)} active={shutters === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setShutters(3)} active={shutters === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setShutters(5)} active={shutters === 5}>5</Button>
                             </ButtonGroup>
                             <br/>
                         </div> 
@@ -380,10 +257,10 @@ export default function MyPropertyForm() {
                                 Flooring
                             </h6>
                             <ButtonGroup>
-                                <Button color="secondary" onClick={() => floorSetSelected(0)} active={floorSelected === 0}>∅</Button>
-                                <Button color="secondary" onClick={() => floorSetSelected(1)} active={floorSelected === 1}>1</Button>
-                                <Button color="secondary" onClick={() => floorSetSelected(3)} active={floorSelected === 3}>3</Button>
-                                <Button color="secondary" onClick={() => floorSetSelected(5)} active={floorSelected === 5}>5</Button>
+                                <Button color="secondary" onClick={() => setFloor(0)} active={floor === 0}>∅</Button>
+                                <Button color="secondary" onClick={() => setFloor(1)} active={floor === 1}>1</Button>
+                                <Button color="secondary" onClick={() => setFloor(3)} active={floor === 3}>3</Button>
+                                <Button color="secondary" onClick={() => setFloor(5)} active={floor === 5}>5</Button>
                             </ButtonGroup>
                         </div>
                     </div>
@@ -401,10 +278,10 @@ export default function MyPropertyForm() {
                                     Electrical
                                 </h6>
                                 <ButtonGroup>
-                                    <Button color="secondary" onClick={() => elecSetSelected(0)} active={elecSelected === 0}>∅</Button>
-                                    <Button color="secondary" onClick={() => elecSetSelected(1)} active={elecSelected === 1}>1</Button>
-                                    <Button color="secondary" onClick={() => elecSetSelected(3)} active={elecSelected === 3}>3</Button>
-                                    <Button color="secondary" onClick={() => elecSetSelected(5)} active={elecSelected === 5}>5</Button>
+                                    <Button color="secondary" onClick={() => setElectrical(0)} active={electrical === 0}>∅</Button>
+                                    <Button color="secondary" onClick={() => setElectrical(1)} active={electrical === 1}>1</Button>
+                                    <Button color="secondary" onClick={() => setElectrical(3)} active={electrical === 3}>3</Button>
+                                    <Button color="secondary" onClick={() => setElectrical(5)} active={electrical === 5}>5</Button>
                                 </ButtonGroup>
                                 <br/>
                             </div>
@@ -415,10 +292,10 @@ export default function MyPropertyForm() {
                                     Plumbing
                                 </h6>
                                 <ButtonGroup>
-                                    <Button color="secondary" onClick={() => plumbSetSelected(0)} active={plumbSelected === 0}>∅</Button>
-                                    <Button color="secondary" onClick={() => plumbSetSelected(1)} active={plumbSelected === 1}>1</Button>
-                                    <Button color="secondary" onClick={() => plumbSetSelected(3)} active={plumbSelected === 3}>3</Button>
-                                    <Button color="secondary" onClick={() => plumbSetSelected(5)} active={plumbSelected === 5}>5</Button>
+                                    <Button color="secondary" onClick={() => setPlumbing(0)} active={plumbing === 0}>∅</Button>
+                                    <Button color="secondary" onClick={() => setPlumbing(1)} active={plumbing === 1}>1</Button>
+                                    <Button color="secondary" onClick={() => setPlumbing(3)} active={plumbing === 3}>3</Button>
+                                    <Button color="secondary" onClick={() => setPlumbing(5)} active={plumbing === 5}>5</Button>
                                 </ButtonGroup>
                                 <br/>
                             </div>
@@ -429,10 +306,10 @@ export default function MyPropertyForm() {
                                     Sewage
                                 </h6>
                                 <ButtonGroup>
-                                    <Button color="secondary" onClick={() => sewSetSelected(0)} active={sewSelected === 0}>∅</Button>
-                                    <Button color="secondary" onClick={() => sewSetSelected(1)} active={sewSelected === 1}>1</Button>
-                                    <Button color="secondary" onClick={() => sewSetSelected(3)} active={sewSelected === 3}>3</Button>
-                                    <Button color="secondary" onClick={() => sewSetSelected(5)} active={sewSelected === 5}>5</Button>
+                                    <Button color="secondary" onClick={() => setSewage(0)} active={sewage === 0}>∅</Button>
+                                    <Button color="secondary" onClick={() => setSewage(1)} active={sewage === 1}>1</Button>
+                                    <Button color="secondary" onClick={() => setSewage(3)} active={sewage === 3}>3</Button>
+                                    <Button color="secondary" onClick={() => setSewage(5)} active={sewage === 5}>5</Button>
                                 </ButtonGroup>
                                 <br/>
                             </div>
@@ -443,14 +320,13 @@ export default function MyPropertyForm() {
                                     HVAC
                                 </h6>
                                 <ButtonGroup>
-                                    <Button color="secondary" onClick={() => hvacSetSelected(0)} active={hvacSelected === 0}>∅</Button>
-                                    <Button color="secondary" onClick={() => hvacSetSelected(1)} active={hvacSelected === 1}>1</Button>
-                                    <Button color="secondary" onClick={() => hvacSetSelected(3)} active={hvacSelected === 3}>3</Button>
-                                    <Button color="secondary" onClick={() => hvacSetSelected(5)} active={hvacSelected === 5}>5</Button>
+                                    <Button color="secondary" onClick={() => setHVAC(0)} active={HVAC === 0}>∅</Button>
+                                    <Button color="secondary" onClick={() => setHVAC(1)} active={HVAC === 1}>1</Button>
+                                    <Button color="secondary" onClick={() => setHVAC(3)} active={HVAC === 3}>3</Button>
+                                    <Button color="secondary" onClick={() => setHVAC(5)} active={HVAC === 5}>5</Button>
                                 </ButtonGroup>
                             </div>
                         </FormGroup>
-
                     </Form>
                 </Collapse>
             </div>
@@ -467,19 +343,12 @@ export default function MyPropertyForm() {
                     }
                 </ModalBody>
                 <ModalFooter>
-                {/* {sessionStorage.getItem("isLoggedIn") == "true" ? //TODO check AuthO */}
-                    <Button block color="success" onClick={submitForm}>Submit</Button>
-                     {/* : null} */}
+                {sessionStorage.getItem("isLoggedIn") == "true" ? //TODO check AuthO
+                    <Button block color="success" onClick={submitForm}>Submit</Button> : null}
                     <Button block color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
             </div>
-
-            <FormGroup className = 'propertyform_texts'>
-                <h6> Change Name / Location </h6>
-                <Input type="text" value={propertyName} onChange={(e) => setName(e.target.value)} placeholder = "property name"/>
-                <Input type="text" value={propertyLocation} onChange={(e) => setLocation(e.target.value)} placeholder = "location"/>
-            </FormGroup>
         </Form>
     );
 }
