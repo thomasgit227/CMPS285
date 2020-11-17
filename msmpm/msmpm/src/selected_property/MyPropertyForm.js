@@ -178,43 +178,43 @@ export default function MyPropertyForm() {
                 extSetSelected(changes.extSelected);
             }
             if(changes.opnsSelected != null){
-            fwSetSelected(changes.opnsSelected);
+                opnsSetSelected(changes.opnsSelected);
             }
             if(changes.fwSelected != null){
-            paintSetSelected(changes.fwSelected);
+                fwSetSelected(changes.fwSelected);
             }
             if(changes.paintSelected != null){
-            pfSetSelected(changes.paintSelected);
+                paintSetSelected(changes.paintSelected);
             }
             if(changes.pfSelected != null){
-            chimSetSelected(changes.pfSelected);
+                pfSetSelected(changes.pfSelected);
             }
             if(changes.chimSelected != null){
-            doorSetSelected(changes.chimSelected);
+                chimSetSelected(changes.chimSelected);
             }
             if(changes.doorSelected != null){
-            windSetSelected(changes.doorSelected);
+                doorSetSelected(changes.doorSelected);
             }
             if(changes.windSelected != null){
-            shutSetSelected(changes.windSelected);
+                windSetSelected(changes.windSelected);
             }
             if(changes.shutSelected != null){
-            shutSetSelected(changes.shutSelected);
+                shutSetSelected(changes.shutSelected);
             }
             if(changes.floorSelected != null){
-            floorSetSelected(changes.floorSelected);
+                floorSetSelected(changes.floorSelected);
             }
             if(changes.elecSelected != null){
-                roofSetSelected(changes.elecSelected);
+                elecSetSelected(changes.elecSelected);
             }
             if(changes.plumbSelected != null){
-                roofSetSelected(changes.plumbSelected);
+                plumbSetSelected(changes.plumbSelected);
             }
             if(changes.sewSelected != null){
-                roofSetSelected(changes.sewSelected);
+                sewSetSelected(changes.sewSelected);
             }
             if(changes.hvacSelected != null){
-                roofSetSelected(changes.hvacSelected);
+                hvacSetSelected(changes.hvacSelected);
             }
         }
     }, //Eeverytime the dependency gets updated this UseEffect gets called!!!
