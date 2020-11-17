@@ -31,7 +31,9 @@ namespace MSMBackend.Data
         {
             List<Property> sorted = props.ToList();
 
-            sorted.Sort(new Comparison<Property>((x, y) => y.CompareAverage(x)));
+            sorted.OrderBy(x => x.Average());
+
+            sorted.Reverse();
 
             return sorted;
         }

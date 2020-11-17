@@ -90,7 +90,8 @@ namespace MSMBackend.Models
             int[] attributes = { Roof , ExtWalls , ExtOpenings , Framework , Piers ,
             Chimney , Door , Windows , Shutters , Flooring, Electrical , Plumbing , Sewer , HVAC };
 
-            int avg = 0, div = 0;
+            int avg = 0;
+            int div = 1;
 
             //We ignore values if they are equal to zero
             for(int i = 0; i < attributes.Length; i++)
@@ -98,13 +99,19 @@ namespace MSMBackend.Models
                 int a = attributes[i];
                 if (a != 0)
                 {
+                    if (avg > 0)
+                    {
+                        div++;
+                    }
                     avg += a;
-                    div++;
                 }
             }
 
-            avg /= div;
-            return avg;
+            if (avg == 0)
+            {
+                return 0;
+            }
+            return avg / div;
         }
 
 
