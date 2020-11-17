@@ -24,6 +24,7 @@ import { Redirect } from 'react-router-dom';
 
 export default function MyPropertyForm() {
 
+    const [redirect, setRedirect] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [utlState, setUtilState] = useState('No Utilities');
     const [modal, setModal] = useState(false);
@@ -48,6 +49,8 @@ export default function MyPropertyForm() {
     //ALSO CLOSE MODAL
 
     const submitForm = async () => {
+        setRedirect(true);
+
         let dataBody = {
             Roof: roofSelected,
             ExtWalls: extSelected,
@@ -70,7 +73,6 @@ export default function MyPropertyForm() {
         let res = await axios.post("https://localhost:44378/api/Properties", dataBody);
         console.log(res);
         toggleSubmitModal();
-
     }
     
 
@@ -227,7 +229,7 @@ export default function MyPropertyForm() {
     return (
             <Form>
                 {
-                //submitted && sessionStorage.getItem("isLoggedIn") == "true" ? <Redirect to = "/properties/"/> : null
+                redirect ? <Redirect to = "/properties/"/> : null
                 }
                 <FormGroup>
                     <div className = 'propertyform_one'>

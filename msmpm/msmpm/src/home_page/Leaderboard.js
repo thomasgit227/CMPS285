@@ -28,7 +28,7 @@ export default function Leadership() {
     });
 
     useEffect(() => {
-         axios.get("/api/Properties")
+        axios.get("/api/Properties")
         .then( (res) =>{
             setTableInfo( (table) => {
                 const callInfo = {...table};
@@ -45,6 +45,7 @@ export default function Leadership() {
     const putIDInSession = (id) => {
         sessionStorage.setItem("id", id)
     }
+
     return (
             <div>
 
@@ -62,7 +63,7 @@ export default function Leadership() {
                 </ListGroup>
 
                 <ButtonGroup className = "orderbuttons">
-                    <Button onClick = {() => setOrder("ascending"), rows.reverse}> ▲ </Button>
+                    <Button onClick = {() => rows.sort}> ▲ </Button>
                     <Button onClick = {() => setOrder("descending")}> ▼ </Button>
                 </ButtonGroup>
             </div>
