@@ -15,7 +15,7 @@ import axios from 'axios';
 
 export default function Leadership() {
 
-    const [order, setOrder] = useState("descending");
+    const [order, setOrder] = useState("ascending");
 
     const [tableInfo,setTableInfo] = useState({
         columns: [{

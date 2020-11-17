@@ -30,7 +30,7 @@ function App() {
 
           <Route exact path="/test/"> <Test/> </Route>
 
-          <Route> <Redirect to = "/home"> </Redirect> </Route>
+          {/* <Route> <Redirect to = "/home"> </Redirect> </Route> */}
             
         </Switch>
       </BrowserRouter>
