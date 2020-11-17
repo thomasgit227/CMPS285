@@ -50,7 +50,6 @@ export default function MyPropertyForm() {
 
     const submitForm = async () => {
         setRedirect(true);
-
         let dataBody = {
             Roof: roofSelected,
             ExtWalls: extSelected,
@@ -471,8 +470,9 @@ export default function MyPropertyForm() {
                     }
                 </ModalBody>
                 <ModalFooter>
-                {sessionStorage.getItem("isLoggedIn") == "true" ? //TODO check AuthO
-                    <Button block color="success" onClick={submitForm}>Submit</Button> : null}
+                {/* {sessionStorage.getItem("isLoggedIn") == "true" ? //TODO check AuthO */}
+                    <Button block color="success" onClick={submitForm}>Submit</Button>
+                     {/* : null} */}
                     <Button block color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
