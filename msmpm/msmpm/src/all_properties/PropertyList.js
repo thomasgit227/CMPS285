@@ -12,7 +12,11 @@ import axios from 'axios';
 
 export default function PropertyList() {
 
-    
+
+
+    const handleCreate = () => {
+
+    }
 
     //If status code equals 200 remove the 
     const handleDelete = async (id) => {
@@ -65,7 +69,8 @@ export default function PropertyList() {
 
     console.log(tableInfo);
     return (
-        <div className = 'fulllist'>
+        <div className='fulllist'>
+            <Button onClick={ () => handleCreate()}> Add Property </Button>
             <Table>
                 <thead>
                     <tr>

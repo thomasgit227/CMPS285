@@ -57,7 +57,7 @@ export default function Leadership() {
                 {
                     rows.map( (row) => (
                         <ListGroupItem className = "tableinfo">
-                            <NavLink tag={Link} to={'/properties/myproperty/' + row.id} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink>
+                            <NavLink tag={Link} to={'/properties/myproperty/' + row.id + '/'} onClick={() => putIDInSession(row.id)}>{row.name}</NavLink>
                         </ListGroupItem>
                     ))}
                 </ListGroup>

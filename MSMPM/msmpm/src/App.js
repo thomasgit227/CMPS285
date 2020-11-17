@@ -22,7 +22,9 @@ function App() {
             
           <Route exact path="/properties/"> <Properties/> </Route>
 
-          <Route path="/properties/myproperty/:id"> <MyProperty/> </Route>
+          <Route path="/properties/myproperty/:id" children={ <MyProperty formType="EditForm" />} />  
+
+          <Route path="/properties/createProperty" children={ <MyProperty formType="CreateForm" /> } />
 
           <Route exact path="/search/"> <Template/> </Route>
 

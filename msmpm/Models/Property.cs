@@ -45,6 +45,9 @@ namespace MSMBackend.Models
         public int Framework { get; set; }
 
         [Required]
+        public int Paint { get; set; }
+
+        [Required]
         public int Piers { get; set; }
 
         [Required]
@@ -87,7 +90,7 @@ namespace MSMBackend.Models
         //Average method if we decide to implement it in the Property class and not calculate it through the Repo
         public int Average()
         {
-            int[] attributes = { Roof , ExtWalls , ExtOpenings , Framework , Piers ,
+            int[] attributes = { Roof , ExtWalls , ExtOpenings , Framework , Paint, Piers ,
             Chimney , Door , Windows , Shutters , Flooring, Electrical , Plumbing , Sewer , HVAC };
 
             int avg = 0;

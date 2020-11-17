@@ -6,26 +6,31 @@ import MyPropertyForm from './MyPropertyForm';
 import MyPropertyName from './MyPropertyName';
 import { Col, Container, Row } from 'reactstrap';
 
-export default function MyProperty() {
+export default function MyProperty(props) {
     return (
         <Container className = 'myproperty'>
-            <Row>
-                <Col size = 'md'>
-                    <MyPropertyName/>
-                </Col>
-            </Row>
+
+            {props.formType === "EditForm" &&
+                <Row>
+                    <Col size = 'md'>
+                        <MyPropertyName/>
+                    </Col>
+                </Row>
+            }
             
             <Row>
-                <Col size = "lg">
-                    <MyPropertyForm/>
+                <Col size="lg">
+                    <MyPropertyForm formType={props.formType} />
                 </Col>
             </Row>
 
-            <Row>
-                <Col>
-                    <PropertyImage/> 
-                </Col>
-            </Row>
+            {props.formType === "EditForm" &&
+                <Row>
+                    <Col>
+                        <PropertyImage/> 
+                    </Col>
+                </Row>
+            }
         </Container>
     );
 }

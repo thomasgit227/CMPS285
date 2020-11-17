@@ -177,6 +177,9 @@ namespace MSMBackend.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
+                    b.Property<int>("Paint")
+                        .HasColumnType("int");
+
                     b.Property<int>("Piers")
                         .HasColumnType("int");
 
