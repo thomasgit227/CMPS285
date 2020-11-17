@@ -16,7 +16,7 @@ import {
     ModalFooter,
     Input 
 } from 'reactstrap';
-import { Redirect, useParams } from 'react-router-dom';
+import { Redirect, useParams, useHistory } from 'react-router-dom';
 
 
 //TODO
@@ -27,7 +27,7 @@ import { Redirect, useParams } from 'react-router-dom';
 export default function MyPropertyForm(props) {
 
     const { id } = useParams();
-
+    const history = useHistory();
     const [redirect, setRedirect] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [utlState, setUtilState] = useState('No Utilities');
@@ -128,6 +128,9 @@ export default function MyPropertyForm(props) {
         if(props.formType === "CreateForm"){
             let res = await axios.post("https://localhost:44378/api/Properties", dataBody);
             console.log(res);
+            if(res.data.id !== null) {
+                history.push(`properties/myproperty/${res.data.id}`);
+            }
         }
         if(props.formType === "EditForm"){ 
             let res = await axios.put(`https://localhost:44378/api/Properties/${id}`, dataBody);

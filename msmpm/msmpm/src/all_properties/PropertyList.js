@@ -9,13 +9,15 @@ import {
     Link,
 } from 'react-router-dom'; 
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 export default function PropertyList() {
-
-
-
+    
+    
+    const history = useHistory();
+    
     const handleCreate = () => {
-
+        history.push("/properties/createProperty");
     }
 
     //If status code equals 200 remove the 
