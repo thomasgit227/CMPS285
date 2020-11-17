@@ -15,7 +15,7 @@ import {
     ModalBody, 
     ModalFooter 
 } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams, useHistory } from 'react-router-dom';
 
 
 export default function MyPropertyForm() {
@@ -27,7 +27,7 @@ export default function MyPropertyForm() {
     const toggle = () => setModal(!modal);
 
     const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={toggle}>&times;</button>;
-   
+
     const toggleUtil = () => {
         setIsOpen(!isOpen);
         setUtilState(isOpen ? 'No Utilities' : 'Has Utilities');

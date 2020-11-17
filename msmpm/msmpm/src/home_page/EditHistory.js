@@ -43,10 +43,11 @@ export default function EditHistory() {
                         recentProperties.map((recentProperty) => {
                             // console.log(recentProperty);
                             //Null Coalescing Operator "??" If object on left is null --> Display object on right
+                            let convertedDate = new Date(recentProperty.created);
                             return (
                                 <tr>
                                     <td>{recentProperty.name}</td>
-                                    <td>{recentProperty.created}</td>
+                                    <td>{convertedDate.toUTCString()}</td>
                                     <td>{recentProperty.UsersId??"Anonymous"}</td> 
                                 </tr>
                             );

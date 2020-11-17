@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MSMBackend.Migrations
 {
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,13 +55,13 @@ namespace MSMBackend.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
-                    Location = table.Column<string>(nullable: false),
-                    ImageURL = table.Column<string>(nullable: false),
+                    Location = table.Column<string>(nullable: true),
                     Utilities = table.Column<bool>(nullable: false),
                     Roof = table.Column<int>(nullable: false),
                     ExtWalls = table.Column<int>(nullable: false),
                     ExtOpenings = table.Column<int>(nullable: false),
                     Framework = table.Column<int>(nullable: false),
+                    Paint = table.Column<int>(nullable: false),
                     Piers = table.Column<int>(nullable: false),
                     Chimney = table.Column<int>(nullable: false),
                     Door = table.Column<int>(nullable: false),

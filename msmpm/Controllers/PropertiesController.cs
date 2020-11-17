@@ -156,7 +156,7 @@ namespace MSMBackend.Controllers
 
             _repository.SaveChanges();
 
-            return NoContent();
+            return Ok(propertyModelFromRepo);
         }
 
         //PATCH api/commands{id}

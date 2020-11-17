@@ -19,7 +19,7 @@ namespace MSMBackend.Dtos
         //public string Username { get; set; }
 
         
-        public string ImageURL { get; set; }
+        
         [Required]
         public Boolean Utilities { get; set; }
 
@@ -33,6 +33,10 @@ namespace MSMBackend.Dtos
         public int ExtOpenings { get; set; }
         [Required]
         public int Framework { get; set; }
+
+        [Required]
+        public int Paint { get; set; }
+
         [Required]
         public int Piers { get; set; }
         [Required]
