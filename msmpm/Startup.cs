@@ -166,9 +166,9 @@ namespace MSMBackend
 
         private static async Task CreateUser(UserManager<User> userManager, string username, string role, string password)
         {
-            //const string passwordForEveryone = "Password123!";
+            const string passwordFor = "Password123!";
             var user = new User { UserName = username };
-            await userManager.CreateAsync(user, password);
+            await userManager.CreateAsync(user, passwordFor);
             await userManager.AddToRoleAsync(user, role);
         }
 
