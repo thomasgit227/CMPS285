@@ -34,7 +34,6 @@ export default function LoginForm() {
     return (
 
         <div>
-
             <Form className = 'loginform'>
                 <FormGroup>
                     <Label>Username:</Label>
@@ -43,6 +42,7 @@ export default function LoginForm() {
                     <Label>Password:</Label>
                     <Input type="password" name="password" id="password" onChange={(e) => {setPassword(e.target.value)}} placeholder="Password" />
                 </FormGroup>
+                
                 <FormGroup>
                     <Button className = 'loginbutton' block onClick = {login}>Login</Button>
                 </FormGroup>
