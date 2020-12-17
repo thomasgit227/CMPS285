@@ -6,11 +6,16 @@ import {
 } from 'reactstrap';
 import EditHistory from './EditHistory';
 import Leaderboard from './Leaderboard';
-import Test from './Test';
+import NoAccess from '../main_components/NoAccess';
 
 export default function Home() {
     return (
         <div className = 'home'>
+            {
+            sessionStorage.getItem("isLoggedIn") !== "true" //TODO check for role
+            ?
+            <NoAccess/>
+            :
             <Row>
                 <Col>
                     <Leaderboard/>
@@ -19,6 +24,7 @@ export default function Home() {
                     <EditHistory/>
                 </Col>
             </Row>
+            }
         </div>
     );
 }
